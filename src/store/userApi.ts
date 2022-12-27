@@ -10,9 +10,17 @@ export const userApi = createApi({
         query: () => ( {
           url: `/users`
         } )
+      }),
+
+      fetchDeleteUser: build.mutation({
+        query: (user) => ( {
+          url: `/users/`,
+          method: 'POST',
+          user
+        } )
       })
   })
 
 })
 
-export const {useFetchAllUsersQuery} = userApi
+export const {useFetchAllUsersQuery, useFetchDeleteUserMutation} = userApi

@@ -1,24 +1,17 @@
 {
-  "users": [
+  "users": [],
+  "posts": [
     {
-      "id": 1,
-      "name": "fewfew",
-      "password": "few"
+      "post": "cdvdsv",
+      "id": 1
     },
     {
-      "name": "few",
-      "password": "few",
-      "id": 4
+      "post": " xz xz ",
+      "id": 2
     },
     {
-      "name": "few",
-      "password": "few",
-      "id": 5
-    },
-    {
-      "name": "few",
-      "password": "few",
-      "id": 5
+      "post": "",
+      "id": 3
     }
   ]
 }

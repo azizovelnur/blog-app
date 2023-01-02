@@ -100,3 +100,21 @@ export interface IOwner {
   type: string
   site_admin: boolean
 }
+
+
+//user
+export interface IUser {
+  _id: string
+  name: string
+  email: string
+  passwordHash: string
+}
+
+//post
+export interface IPost {
+  _id: string
+  title: string
+  text: string
+  viewsCount: number
+  user: string
+}

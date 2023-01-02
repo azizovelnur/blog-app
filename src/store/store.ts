@@ -1,16 +1,16 @@
 import {configureStore} from "@reduxjs/toolkit";
-import {userApi} from "./userApi";
 import {githubApi} from "./github/githubApi";
 import {postsApi} from "./posts/postsApi";
+import {loginApi} from "./login/loginApi";
 
 
 export const store = configureStore({
   reducer: {
-    [userApi.reducerPath]: userApi.reducer,
     [githubApi.reducerPath]: githubApi.reducer,
-    [postsApi.reducerPath]: postsApi.reducer
+    [postsApi.reducerPath]: postsApi.reducer,
+    [loginApi.reducerPath]: loginApi.reducer
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(userApi.middleware, githubApi.middleware, postsApi.middleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(githubApi.middleware, postsApi.middleware, loginApi.middleware),
 })
 
 // export type RootState = ReturnType<typeof store.getState>

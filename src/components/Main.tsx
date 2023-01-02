@@ -5,19 +5,20 @@ const Main: FC = () => {
 
 
   const [newPost, setNewPost] = useState('')
-  console.log(newPost)
   const {isLoading, isError, data: postsData} = useFetchPostsQuery(null)
   const [addPost, {isSuccess}] = useFetchCreatePostMutation()
   const [removePost] = useFetchDeletePostMutation()
+
+  console.log(postsData)
 
   const createPost = async () => {
      await addPost({post: newPost}).unwrap()
     setNewPost('')
   }
 
-  const deletePost = async (id: number) => {
-    console.log(typeof id)
-    await removePost(id).unwrap()
+  const deletePost = async (_id: number) => {
+    console.log(_id)
+    await removePost(_id).unwrap()
   }
 
   return (
@@ -36,10 +37,12 @@ const Main: FC = () => {
 
 
       {
-        postsData?.map((obj: any) =>
-          <div className={'w-[400px] h-[100px] border-[2px] border-indigo-900'}>
-            <div>{obj.post}</div>
-            <button onClick={() => deletePost(obj.id)}>delete</button>
+        postsData?.map((obj: any, index: number) =>
+          <div key={index} className={'w-[400px] h-[100px] border-[2px] border-indigo-900'}>
+            <div>{obj.title}</div>
+            <div>{obj.text}</div>
+            <div>{obj.user.name}</div>
+            <button onClick={() => deletePost(obj._id)}>delete</button>
           </div>
         )
       }

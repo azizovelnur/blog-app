@@ -21,17 +21,20 @@ const Header: FC = () => {
           </Link>
 
 
-          <div className={'flex justify-between w-[100px] items-center'}>
+          <div className={'flex justify-between w-[120px] items-center'}>
 
-            <div className={'bg-black text-white cursor-pointer rounded-[4px] p-[2px]'}>
+            <Link to={'/login'}><div className={'bg-black text-white cursor-pointer rounded-[4px] p-[2px]'}>
               Log In
-            </div>
+            </div></Link>
 
+           <Link to={'/register'}> <div className={'bg-black text-white cursor-pointer rounded-[4px] p-[2px]'}>
+              Register
+            </div></Link>
 
-            <div className={'flex justify-between w-[40px] h-[20px] hover:border-[1px] hover:border-black'}>
-              <FaUserAlt/>
-              <HiArrowDown/>
-            </div>
+            {/*<div className={'flex justify-between w-[40px] h-[20px] hover:border-[1px] hover:border-black'}>*/}
+            {/*  <FaUserAlt/>*/}
+            {/*  <HiArrowDown/>*/}
+            {/*</div>*/}
           </div>
         </div>
 

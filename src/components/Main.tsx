@@ -1,5 +1,6 @@
 import React, {FC, useState} from 'react';
-import {useFetchCreatePostMutation, useFetchDeletePostMutation, useFetchPostsQuery} from "../store/posts/postsApi";
+import {useFetchCreatePostMutation, useFetchDeletePostMutation, useFetchPostsQuery} from "../store/rtk/posts/postsApi";
+import {IPost} from "../models/models";
 
 const Main: FC = () => {
 
@@ -16,7 +17,7 @@ const Main: FC = () => {
     setNewPost('')
   }
 
-  const deletePost = async (_id: number) => {
+  const deletePost = async (_id: string) => {
     console.log(_id)
     await removePost(_id).unwrap()
   }
@@ -37,7 +38,7 @@ const Main: FC = () => {
 
 
       {
-        postsData?.map((obj: any, index: number) =>
+        postsData?.map((obj: IPost, index: number) =>
           <div key={index} className={'w-[400px] h-[100px] border-[2px] border-indigo-900'}>
             <div>{obj.title}</div>
             <div>{obj.text}</div>

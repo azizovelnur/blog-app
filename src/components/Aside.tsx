@@ -1,5 +1,5 @@
 import React, {FC, useEffect} from 'react';
-import {useSetReposQuery} from "../store/github/githubApi";
+import {useSetReposQuery} from "../store/rtk/github/githubApi";
 import {SiJavascript, SiSass, SiTypescript} from "react-icons/si";
 
 const Aside: FC = () => {

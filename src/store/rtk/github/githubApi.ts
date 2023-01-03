@@ -1,5 +1,5 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import {IRepo} from "../../models/models";
+import {IRepo} from "../../../models/models";
 
 
 export const githubApi = createApi({

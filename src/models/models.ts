@@ -108,6 +108,7 @@ export interface IUser {
   name: string
   email: string
   passwordHash: string
+  token: string
 }
 
 //post
@@ -116,5 +117,21 @@ export interface IPost {
   title: string
   text: string
   viewsCount: number
-  user: string
+  user: IUser
+}
+
+export interface ILogin {
+  email: string,
+  password: string
+}
+export enum Status {
+  LOADING = 'loading',
+  LOADED = 'loaded',
+  ERROR = 'error',
+}
+
+
+export interface IUserState {
+  data: IUser | null,
+  status: Status
 }

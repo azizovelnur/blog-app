@@ -3,8 +3,19 @@ import {Link} from "react-router-dom";
 import {GoMarkGithub} from "react-icons/go";
 import {FaUserAlt} from "react-icons/fa";
 import {HiArrowDown} from "react-icons/hi";
+import {useDispatch, useSelector} from "react-redux";
+import {isAuthSelector, logout} from "../store/async/login/loginSlice";
 
 const Header: FC = () => {
+
+  const isAuth = useSelector(isAuthSelector)
+  const dispatch = useDispatch()
+
+  const onClicklogOut = () => {
+    dispatch(logout())
+    localStorage.removeItem('token')
+  }
+
   return (
 
     <header className={'headerGrid fixed w-full text-[16px] bg-[#fff] text-[#000] border-b-[1px] border-b-[#e0e0e0]'}>
@@ -23,13 +34,23 @@ const Header: FC = () => {
 
           <div className={'flex justify-between w-[120px] items-center'}>
 
-            <Link to={'/login'}><div className={'bg-black text-white cursor-pointer rounded-[4px] p-[2px]'}>
-              Log In
-            </div></Link>
+            {
+              isAuth ?
+                  <button onClick={() => onClicklogOut()} className={'bg-black text-white cursor-pointer rounded-[4px] p-[2px]'}>
+                      Log Out
+                  </button>
+                :
+                <Link to={'/login'}>
+                  <div className={'bg-black text-white cursor-pointer rounded-[4px] p-[2px]'}>
+                    <span>Log In</span>
+                  </div>
+                </Link>
+            }
 
-           <Link to={'/register'}> <div className={'bg-black text-white cursor-pointer rounded-[4px] p-[2px]'}>
-              Register
-            </div></Link>
+
+            {/*<Link to={'/register'}> <div className={'bg-black text-white cursor-pointer rounded-[4px] p-[2px]'}>*/}
+            {/*   <span>Register</span>*/}
+            {/* </div></Link>*/}
 
             {/*<div className={'flex justify-between w-[40px] h-[20px] hover:border-[1px] hover:border-black'}>*/}
             {/*  <FaUserAlt/>*/}

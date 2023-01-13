@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import React, { Dispatch, FC, SetStateAction } from "react"
 import { useForm } from "react-hook-form"
 import { Navigate } from "react-router-dom"
 import { ILogin } from "../../models/models"
@@ -6,7 +6,12 @@ import { fetchLogin, isAuthSelector } from "../../store/async/login/loginSlice"
 import { useAppDispatch } from "../../store/store"
 import { useSelector } from "react-redux"
 
-const Login: FC = () => {
+interface IProps {
+  active: Boolean
+  setActive: Dispatch<SetStateAction<Boolean>>
+}
+
+const Login: FC<IProps> = ({ active, setActive }) => {
   const isAuth = useSelector(isAuthSelector)
   console.log(isAuth)
 
@@ -21,6 +26,7 @@ const Login: FC = () => {
   })
 
   const onSubmit = async (values: ILogin) => {
+    setActive(false)
     const userData = await dispatch(fetchLogin(values))
 
     if (!userData.payload) {

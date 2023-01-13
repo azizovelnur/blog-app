@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import React, { Dispatch, FC, SetStateAction } from "react"
 import { useForm } from "react-hook-form"
 import { Navigate } from "react-router-dom"
 import { IRegistration } from "../../models/models"
@@ -9,7 +9,11 @@ import {
 import { useAppDispatch } from "../../store/store"
 import { useSelector } from "react-redux"
 
-const Registration: FC = () => {
+interface IProps {
+  active: Boolean
+  setActive: Dispatch<SetStateAction<Boolean>>
+}
+const Registration: FC<IProps> = ({ active, setActive }) => {
   const isRegistration = useSelector(isAuthRegistration)
 
   const dispatch = useAppDispatch()
@@ -24,6 +28,7 @@ const Registration: FC = () => {
   })
 
   const onSubmit = async (values: IRegistration) => {
+    setActive(false)
     const userData = await dispatch(fetchRegistration(values))
 
     if (!userData.payload) {
@@ -64,4 +69,4 @@ const Registration: FC = () => {
   )
 }
 
-export default Registration
+export { Registration }

@@ -5,16 +5,31 @@ import { isAuthSelector, logout } from "../../store/async/login/loginSlice"
 import { Profile } from "./Profile"
 import { Modal } from "../Modal/Modal"
 import { Login } from "../Login/Login"
+import { Registration } from "../Registration/Registration"
 
 const Header: FC = () => {
   const isAuth = useSelector(isAuthSelector)
   const dispatch = useDispatch()
 
   const [modalActive, setModalActive] = useState<Boolean>(false)
+  const [loginActive, setLoginActive] = useState<Boolean>(false)
+  const [registrationActive, setRegistationActive] = useState<Boolean>(false)
 
   const onClicklogOut = () => {
     dispatch(logout())
     localStorage.removeItem("token")
+  }
+
+  const onClickRegistration = () => {
+    setLoginActive(false)
+    setRegistationActive(true)
+    setModalActive(true)
+  }
+
+  const onClickLogin = () => {
+    setRegistationActive(false)
+    setLoginActive(true)
+    setModalActive(true)
   }
 
   return (
@@ -49,7 +64,7 @@ const Header: FC = () => {
               </button>
             ) : (
               <div
-                onClick={() => setModalActive(true)}
+                onClick={() => onClickLogin()}
                 className={
                   "bg-black text-white cursor-pointer h-[30px] rounded-[4px] p-[2px]"
                 }
@@ -60,6 +75,7 @@ const Header: FC = () => {
 
             {!isAuth && (
               <div
+                onClick={() => onClickRegistration()}
                 className={
                   "bg-black text-white cursor-pointer h-[30px] rounded-[4px] p-[2px]"
                 }
@@ -69,7 +85,12 @@ const Header: FC = () => {
             )}
 
             <Modal active={modalActive} setActive={setModalActive}>
-              <Login />
+              {loginActive && (
+                <Login active={modalActive} setActive={setModalActive} />
+              )}
+              {registrationActive && (
+                <Registration active={modalActive} setActive={setModalActive} />
+              )}
             </Modal>
 
             <Profile />

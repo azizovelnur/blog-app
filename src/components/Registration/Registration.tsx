@@ -1,18 +1,18 @@
-import React, { FC } from "react";
-import { useForm } from "react-hook-form";
-import { Navigate } from "react-router-dom";
-import { IRegistration } from "../models/models";
+import React, { FC } from "react"
+import { useForm } from "react-hook-form"
+import { Navigate } from "react-router-dom"
+import { IRegistration } from "../../models/models"
 import {
   fetchRegistration,
   isAuthRegistration,
-} from "../store/async/login/loginSlice";
-import { useAppDispatch } from "../store/store";
-import { useSelector } from "react-redux";
+} from "../../store/async/login/loginSlice"
+import { useAppDispatch } from "../../store/store"
+import { useSelector } from "react-redux"
 
 const Registration: FC = () => {
-  const isRegistration = useSelector(isAuthRegistration);
+  const isRegistration = useSelector(isAuthRegistration)
 
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
 
   const { register, handleSubmit } = useForm<IRegistration>({
     defaultValues: {
@@ -21,22 +21,22 @@ const Registration: FC = () => {
       password: "t",
     },
     mode: "onChange",
-  });
+  })
 
   const onSubmit = async (values: IRegistration) => {
-    const userData = await dispatch(fetchRegistration(values));
+    const userData = await dispatch(fetchRegistration(values))
 
     if (!userData.payload) {
-      return alert("login error");
+      return alert("login error")
     }
 
     if (userData.payload.token) {
-      localStorage.setItem("token", userData.payload.token);
+      localStorage.setItem("token", userData.payload.token)
     }
-  };
+  }
 
   if (isRegistration) {
-    return <Navigate to={"/"} />;
+    return <Navigate to={"/"} />
   }
 
   return (
@@ -61,7 +61,7 @@ const Registration: FC = () => {
         <button type="submit">Submit</button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default Registration;
+export default Registration

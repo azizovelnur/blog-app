@@ -1,30 +1,26 @@
-import React, { useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
-import { Layout } from "./components/Layout";
-import { Main } from "./components/Main";
-import Registration from "./pages/Registration";
-import Login from "./pages/Login";
-import { fetchAuthMe } from "./store/async/login/loginSlice";
-import { useAppDispatch } from "./store/store";
+import React, { useEffect } from "react"
+import { Route, Routes } from "react-router-dom"
+import { Layout } from "./components/Layout/Layout"
+import { Home } from "./pages/Home/Home"
+import Registration from "./components/Registration/Registration"
+import { Login } from "./components/Login/Login"
+import { fetchAuthMe } from "./store/async/login/loginSlice"
+import { useAppDispatch } from "./store/store"
 
 function App() {
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(fetchAuthMe());
-  }, []);
+    dispatch(fetchAuthMe())
+  }, [])
 
   return (
-    <div>
-      <Routes>
-        <Route path={"/"} element={<Layout />}>
-          <Route index element={<Main />} />
-          <Route path={"/login"} element={<Login />} />
-          <Route path={"/register"} element={<Registration />} />
-        </Route>
-      </Routes>
-    </div>
-  );
+    <Routes>
+      <Route path={"/"} element={<Layout />}>
+        <Route index element={<Home />} />
+      </Route>
+    </Routes>
+  )
 }
 
-export default App;
+export default App

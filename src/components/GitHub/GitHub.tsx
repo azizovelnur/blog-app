@@ -11,7 +11,12 @@ const GitHub: FC = () => {
 
       <div>
         {data?.map((obj) => (
-          <div key={obj.id} className={"border-black border-[1px] mb-[20px]"}>
+          <div
+            key={obj.id}
+            className={
+              "mb-[20px] rounded-[10px] shadow-[0px_4px_20px_4px_rgba(119,53,136,0.459)]"
+            }
+          >
             <div>{obj.full_name}</div>
             <div>{obj.forks}</div>
             <div>{obj.watchers}</div>

@@ -35,7 +35,7 @@ const Header: FC = () => {
   return (
     <header
       className={
-        "headerGrid fixed w-full text-[16px] bg-[#fff] text-[#000] border-b-[1px] border-b-[#e0e0e0]"
+        "headerGrid z-50 fixed w-full text-[16px] bg-[#1b1a2ea9] backdrop-blur-lg"
       }
     >
       <div className={"container mx-auto max-w-[1480px]"}>

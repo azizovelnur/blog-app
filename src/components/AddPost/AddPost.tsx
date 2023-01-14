@@ -1,14 +1,15 @@
 import React, { FC, useState } from "react"
 import { useSelector } from "react-redux"
 import { Modal } from "../Modal/Modal"
-import { TCreatePost } from "../../models/models"
+import { TPost } from "../../models/models"
 import { isAuthSelector } from "../../store/async/login/loginSlice"
 import { useFetchCreatePostMutation } from "../../store/rtk/posts/postsApi"
+import { IoCreate } from "react-icons/io5"
 
 const AddPost: FC = () => {
   const [addPost, { isSuccess }] = useFetchCreatePostMutation()
   const isAuth = useSelector(isAuthSelector)
-  const [newPost, setNewPost] = useState<TCreatePost>({
+  const [newPost, setNewPost] = useState<TPost>({
     title: "",
     text: "",
   })
@@ -38,9 +39,9 @@ const AddPost: FC = () => {
         <>
           <button
             onClick={() => onClickCreatePost()}
-            className="fixed top-[100px] right-[100px] bg-black text-white"
+            className="fixed top-[100px] right-[100px]"
           >
-            Create Post
+            <IoCreate size={"40"} />
           </button>
           <Modal active={active} setActive={setActive}>
             <div className={"flex flex-col justify-between"}>

@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
 export const postsApi = createApi({
   reducerPath: "postsApi",
@@ -7,7 +7,7 @@ export const postsApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:5000",
     prepareHeaders: (headers) => {
-      headers.set("Authorization", `${localStorage.getItem("token")}`);
+      headers.set("Authorization", `${localStorage.getItem("token")}`)
     },
   }),
   endpoints: (build) => ({
@@ -31,7 +31,20 @@ export const postsApi = createApi({
           url: `/posts`,
           method: "POST",
           body: post,
-        };
+        }
+      },
+      invalidatesTags: [{ type: "Posts", id: "LIST" }],
+    }),
+
+    fetchUpdatePost: build.mutation({
+      query: (post) => {
+        const postId = post._id
+        delete post._id
+        return {
+          url: `/posts/${postId}`,
+          method: "PATCH",
+          body: post,
+        }
       },
       invalidatesTags: [{ type: "Posts", id: "LIST" }],
     }),
@@ -41,15 +54,16 @@ export const postsApi = createApi({
         return {
           url: `/posts/${_id}`,
           method: "DELETE",
-        };
+        }
       },
       invalidatesTags: [{ type: "Posts", id: "LIST" }],
     }),
   }),
-});
+})
 
 export const {
   useFetchPostsQuery,
   useFetchCreatePostMutation,
+  useFetchUpdatePostMutation,
   useFetchDeletePostMutation,
-} = postsApi;
+} = postsApi

@@ -20,15 +20,20 @@ const Modal: FC<IProps> = ({ active, setActive, children }) => {
         onClick={(e) => e.stopPropagation()}
         className={
           active
-            ? "relative scale-100 p-[20px] rounded-[12px] bg-white  w-[25vw]"
-            : "relative scale-50 duration-200 p-[20px] rounded-[12px] bg-white w-[25vw]"
+            ? "relative scale-100 p-[20px] rounded-[12px]  backdrop-blur-lg shadow-[0px_4px_20px_4px_rgba(119,53,136,0.459)] w-[25vw]"
+            : "relative scale-50 duration-200 p-[20px] rounded-[12px] backdrop-blur-lg shadow-[0px_4px_20px_4px_rgba(119,53,136,0.459)] w-[25vw]"
         }
       >
         <button
           onClick={() => setActive(false)}
           className="absolute right-[-50px] top-[-30px] bg-gray text-yellow-300"
         >
-          <GrClose className="h-[20px] w-[20px]" />
+          <GrClose
+            className="text-white"
+            color="white"
+            fill="white"
+            size={"20px"}
+          />
         </button>
         {children}
       </div>

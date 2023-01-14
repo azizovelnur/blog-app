@@ -38,9 +38,9 @@ const Login: FC<IProps> = ({ active, setActive }) => {
     }
   }
 
-  if (isAuth) {
-    return <Navigate to={"/"} />
-  }
+  // if (isAuth) {
+  //   return <Navigate to={"/"} />
+  // }
 
   return (
     <div>

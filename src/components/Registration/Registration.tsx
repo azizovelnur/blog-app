@@ -40,9 +40,9 @@ const Registration: FC<IProps> = ({ active, setActive }) => {
     }
   }
 
-  if (isRegistration) {
-    return <Navigate to={"/"} />
-  }
+  // if (isRegistration) {
+  //   return <Navigate to={"/"} />
+  // }
 
   return (
     <div>

@@ -6,6 +6,7 @@ import {
   useFetchPostsQuery,
 } from "../../store/rtk/posts/postsApi"
 import { IPost } from "../../models/models"
+import { Link } from "react-router-dom"
 
 const Post = () => {
   const { isLoading, isError, data: postsData } = useFetchPostsQuery(null)
@@ -17,22 +18,29 @@ const Post = () => {
     await removePost(_id).unwrap()
   }
   return (
-    <div>
+    <>
       {postsData?.map((obj: IPost, index: number) => (
         <div
           key={index}
-          className={"w-[400px] h-[100px] border-[2px] border-indigo-900"}
+          className={
+            "mx-auto w-[600px] h-[400px] mb-[70px] rounded-[10px] bg-gray-500 shadow-cyan-500/50"
+          }
         >
-          <div>{obj.title}</div>
+          <div>
+            <h1 className="text-[30px] font-bold">{obj.title}</h1>
+          </div>
           <div>{obj.text}</div>
           <div>{obj.user.name}</div>
+          <div>{obj.viewsCount}</div>
 
           {obj.user._id === userData?._id && (
             <button onClick={() => deletePost(obj._id)}>delete</button>
           )}
+
+          <button className="bg-orange-600">click me</button>
         </div>
       ))}
-    </div>
+    </>
   )
 }
 

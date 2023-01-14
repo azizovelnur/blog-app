@@ -45,25 +45,50 @@ const Registration: FC<IProps> = ({ active, setActive }) => {
   }
 
   return (
-    <div className={"mainGrid"}>
-      <div>Registration</div>
+    <div>
+      <div className="text-center mb-5 font-black text-2xl">Registration</div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <input
-          placeholder={"name"}
-          type="text"
-          {...register("name", { required: "need your name" })}
-        />
-        <input
-          placeholder={"email"}
-          type="email"
-          {...register("email", { required: "need your email" })}
-        />
-        <input
-          placeholder={"password"}
-          type="text"
-          {...register("password", { required: "need your password" })}
-        />
-        <button type="submit">Submit</button>
+        <div className="flex flex-col justify-between">
+          <div>
+            <div className="font-bold text-base">Name</div>
+            <input
+              className={
+                "rounded-[4px] w-full mb-10 border-fuchsia-700 border-4 outline-none p-2"
+              }
+              placeholder={"name"}
+              type="text"
+              {...register("name", { required: "need your name" })}
+            />
+          </div>
+          <div>
+            <div className="font-bold text-base">Email</div>
+            <input
+              placeholder={"email"}
+              className={
+                "rounded-[4px] w-full mb-10 border-fuchsia-700 border-4 outline-none p-2"
+              }
+              type="email"
+              {...register("email", { required: "need your email" })}
+            />
+          </div>
+          <div>
+            <div className="font-bold text-base">Password</div>
+            <input
+              className={
+                "rounded-[4px] w-full mb-10 border-fuchsia-700 border-4 outline-none p-2"
+              }
+              placeholder={"password"}
+              type="text"
+              {...register("password", { required: "need your password" })}
+            />
+          </div>
+          <button
+            className={"bg-black text-white rounded-[10px] h-8 w-2/3 mx-auto"}
+            type="submit"
+          >
+            Submit
+          </button>
+        </div>
       </form>
     </div>
   )

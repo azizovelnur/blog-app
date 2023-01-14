@@ -20,8 +20,8 @@ const Modal: FC<IProps> = ({ active, setActive, children }) => {
         onClick={(e) => e.stopPropagation()}
         className={
           active
-            ? "relative scale-100 p-[20px] rounded-[12px] bg-white h-[200px] w-[400px]"
-            : "relative scale-50 duration-200 p-[20px] rounded-[12px] bg-white h-[200px] w-[400px]"
+            ? "relative scale-100 p-[20px] rounded-[12px] bg-white  w-[25vw]"
+            : "relative scale-50 duration-200 p-[20px] rounded-[12px] bg-white w-[25vw]"
         }
       >
         <button

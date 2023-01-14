@@ -6,11 +6,7 @@ const GitHub: FC = () => {
   const { isLoading, isError, data } = useSetReposQuery(null)
 
   return (
-    <aside
-      className={
-        "asideGrid border-indigo-900 border-solid border-[10px] overflow-y-scroll"
-      }
-    >
+    <aside className={"asideGrid overflow-y-scroll"}>
       <div>My Projects</div>
 
       <div>

@@ -57,7 +57,7 @@ const Header: FC = () => {
               <button
                 onClick={() => onClicklogOut()}
                 className={
-                  "bg-black text-white cursor-pointer rounded-[4px] p-[2px]"
+                  "text-white h-[30px] cursor-pointer rounded-[4px] p-[2px]"
                 }
               >
                 Log Out
@@ -66,7 +66,7 @@ const Header: FC = () => {
               <div
                 onClick={() => onClickLogin()}
                 className={
-                  "bg-black text-white cursor-pointer h-[30px] rounded-[4px] p-[2px]"
+                  "text-white cursor-pointer h-[30px] rounded-[4px] p-[2px]"
                 }
               >
                 <span>Log In</span>
@@ -77,7 +77,7 @@ const Header: FC = () => {
               <div
                 onClick={() => onClickRegistration()}
                 className={
-                  "bg-black text-white cursor-pointer h-[30px] rounded-[4px] p-[2px]"
+                  "text-white cursor-pointer h-[30px] rounded-[4px] p-[2px]"
                 }
               >
                 <span>Register</span>

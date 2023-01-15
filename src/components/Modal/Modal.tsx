@@ -1,5 +1,9 @@
 import React, { Dispatch, FC, SetStateAction } from "react"
-import { GrClose } from "react-icons/gr"
+import { MdClose } from "react-icons/md"
+import {
+  ModalContentStyle,
+  ModalStyle,
+} from "../StyledComponents/StyledComponents"
 
 interface IProps {
   active: Boolean
@@ -9,35 +13,17 @@ interface IProps {
 
 const Modal: FC<IProps> = ({ active, setActive, children }) => {
   return (
-    <section
-      className={
-        active
-          ? "z-50 opacity-100 pointer-events-auto duration-200 h-[100vh] w-[100vw] bg-black/50 fixed top-0 left-0 flex items-center justify-center"
-          : "z-50 opacity-0 pointer-events-none duration-200 h-[100vh] w-[100vw] bg-black/50 fixed top-0 left-0 flex items-center justify-center"
-      }
-    >
-      <div
-        onClick={(e) => e.stopPropagation()}
-        className={
-          active
-            ? "relative scale-100 p-[20px] rounded-[12px]  backdrop-blur-lg shadow-[0px_4px_20px_4px_rgba(119,53,136,0.459)] w-[25vw]"
-            : "relative scale-50 duration-200 p-[20px] rounded-[12px] backdrop-blur-lg shadow-[0px_4px_20px_4px_rgba(119,53,136,0.459)] w-[25vw]"
-        }
-      >
+    <ModalStyle isActive={active}>
+      <ModalContentStyle isActive={active} onClick={(e) => e.stopPropagation()}>
         <button
           onClick={() => setActive(false)}
-          className="absolute right-[-50px] top-[-30px] bg-gray text-yellow-300"
+          className="absolute right-[-50px] top-[-30px]"
         >
-          <GrClose
-            className="text-white"
-            color="white"
-            fill="white"
-            size={"20px"}
-          />
+          <MdClose color="white" fill="white" size={"30px"} />
         </button>
         {children}
-      </div>
-    </section>
+      </ModalContentStyle>
+    </ModalStyle>
   )
 }
 

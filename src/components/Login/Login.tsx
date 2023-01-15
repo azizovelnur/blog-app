@@ -5,6 +5,7 @@ import { ILogin } from "../../models/models"
 import { fetchLogin, isAuthSelector } from "../../store/async/login/loginSlice"
 import { useAppDispatch } from "../../store/store"
 import { useSelector } from "react-redux"
+import { ModalButton, ModalInput } from "../StyledComponents/StyledComponents"
 
 interface IProps {
   active: Boolean
@@ -38,10 +39,6 @@ const Login: FC<IProps> = ({ active, setActive }) => {
     }
   }
 
-  // if (isAuth) {
-  //   return <Navigate to={"/"} />
-  // }
-
   return (
     <div>
       <div className="text-center mb-5 font-black text-2xl">Login</div>
@@ -49,10 +46,7 @@ const Login: FC<IProps> = ({ active, setActive }) => {
         <div className="flex flex-col justify-between">
           <div>
             <div className="font-bold text-base">Email</div>
-            <input
-              className={
-                "rounded-[4px] w-full mb-10 border-fuchsia-700 border-4 outline-none p-2"
-              }
+            <ModalInput
               placeholder={"email"}
               type="email"
               {...register("email", { required: "need your email" })}
@@ -60,21 +54,13 @@ const Login: FC<IProps> = ({ active, setActive }) => {
           </div>
           <div>
             <div className="font-bold text-base">Password</div>
-            <input
-              className={
-                "rounded-[4px] w-full mb-10 border-fuchsia-700 border-4 outline-none p-2"
-              }
+            <ModalInput
               placeholder={"password"}
               type="text"
               {...register("password", { required: "need your password" })}
             />
           </div>
-          <button
-            className={"bg-black text-white rounded-[10px] h-8 w-2/3 mx-auto"}
-            type={"submit"}
-          >
-            Submit
-          </button>
+          <ModalButton type={"submit"}>Submit</ModalButton>
         </div>
       </form>
     </div>

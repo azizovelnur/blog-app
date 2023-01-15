@@ -10,7 +10,7 @@ body {
 }
 
 .gridContainer {
-  background-color: #1b1a2ea9;
+  background-color: #131320a9;
   display: grid;
   grid-gap: 10px;
   grid-template-columns: minmax(200px, 400px) minmax(500px, 1fr);

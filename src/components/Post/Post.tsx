@@ -12,6 +12,11 @@ import { TbTrash } from "react-icons/tb"
 import { FiEdit2 } from "react-icons/fi"
 
 import { Modal } from "../Modal/Modal"
+import {
+  ModalButton,
+  ModalInput,
+  ModalTextArea,
+} from "../StyledComponents/StyledComponents"
 //error
 const Post = () => {
   const [active, setActive] = useState<Boolean>(false)
@@ -59,7 +64,7 @@ const Post = () => {
 
           {obj.user._id === userData?._id && (
             <>
-              <div className="absolute flex justify-between top-5 right-4 bg-black w-16 h-10 rounded-md fill-white text-white">
+              <div className="absolute flex justify-between top-5 right-4 w-16 h-10 rounded-md">
                 <button
                   onClick={() => {
                     setActive(true)
@@ -72,48 +77,36 @@ const Post = () => {
                   <TbTrash color="red" size={"30px"} />
                 </button>
               </div>
-              {active && (
-                <Modal active={active} setActive={setActive}>
-                  <div className={"flex flex-col justify-between"}>
-                    <div className="text-center mb-5 font-black text-2xl">
-                      Update Post
-                    </div>
-                    <div>
-                      <div className="font-bold text-base">Title</div>
-                      <input
-                        value={newPost.title}
-                        name={"title"}
-                        onChange={changeHandler}
-                        className={
-                          "rounded-[4px] w-full mb-10 border-fuchsia-700 border-4 outline-none p-2"
-                        }
-                        placeholder={"title"}
-                        type="text"
-                      />
-                    </div>
-                    <div>
-                      <div className="font-bold text-base">Text</div>
-                      <textarea
-                        className={
-                          "rounded-[4px] min-h-[100px] max-h-96 mb-4 w-full p-2 border-fuchsia-700 border-4 outline-none"
-                        }
-                        value={newPost.text}
-                        name={"text"}
-                        onChange={changeHandler}
-                        placeholder={"text..."}
-                      />
-                    </div>
-                    <button
-                      onClick={() => onClickUpdatePost(obj._id)}
-                      className={
-                        "bg-black text-white rounded-[10px] h-8 w-2/3 mx-auto"
-                      }
-                    >
-                      Update
-                    </button>
+
+              <Modal active={active} setActive={setActive}>
+                <div className={"flex flex-col justify-between"}>
+                  <div className="text-center mb-5 font-black text-2xl">
+                    Update Post
                   </div>
-                </Modal>
-              )}
+                  <div>
+                    <div className="font-bold text-base">Title</div>
+                    <ModalInput
+                      value={newPost.title}
+                      name={"title"}
+                      onChange={changeHandler}
+                      placeholder={"title"}
+                      type="text"
+                    />
+                  </div>
+                  <div>
+                    <div className="font-bold text-base">Text</div>
+                    <ModalTextArea
+                      value={newPost.text}
+                      name={"text"}
+                      onChange={changeHandler}
+                      placeholder={"text..."}
+                    />
+                  </div>
+                  <ModalButton onClick={() => onClickUpdatePost(obj._id)}>
+                    Update
+                  </ModalButton>
+                </div>
+              </Modal>
             </>
           )}
 

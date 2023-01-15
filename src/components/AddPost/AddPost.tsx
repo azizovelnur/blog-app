@@ -5,6 +5,11 @@ import { TPost } from "../../models/models"
 import { isAuthSelector } from "../../store/async/login/loginSlice"
 import { useFetchCreatePostMutation } from "../../store/rtk/posts/postsApi"
 import { IoCreate } from "react-icons/io5"
+import {
+  ModalButton,
+  ModalInput,
+  ModalTextArea,
+} from "../StyledComponents/StyledComponents"
 
 const AddPost: FC = () => {
   const [addPost, { isSuccess }] = useFetchCreatePostMutation()
@@ -50,37 +55,26 @@ const AddPost: FC = () => {
               </div>
               <div>
                 <div className="font-bold text-base">Title</div>
-                <input
+                <ModalInput
                   value={newPost.title}
                   name={"title"}
                   onChange={changeHandler}
-                  className={
-                    "rounded-[4px] w-full mb-10 border-fuchsia-700 border-4 outline-none p-2"
-                  }
                   placeholder={"title"}
                   type="text"
                 />
               </div>
               <div>
                 <div className="font-bold text-base">Text</div>
-                <textarea
-                  className={
-                    "rounded-[4px] min-h-[100px] max-h-96 mb-4 w-full p-2 border-fuchsia-700 border-4 outline-none"
-                  }
+                <ModalTextArea
                   value={newPost.text}
                   name={"text"}
                   onChange={changeHandler}
                   placeholder={"text..."}
                 />
               </div>
-              <button
-                onClick={() => createPost()}
-                className={
-                  "bg-black text-white rounded-[10px] h-8 w-2/3 mx-auto"
-                }
-              >
+              <ModalButton onClick={() => createPost()}>
                 Create Post
-              </button>
+              </ModalButton>
             </div>
           </Modal>
         </>

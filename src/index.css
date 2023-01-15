@@ -53,3 +53,22 @@ body {
   background: rgba(222, 130, 235, 0.911);
   border-radius: 12px;
 }
+
+/* child element blur */
+.headerBlur:before,
+.headerBlur .child:before {
+  backdrop-filter: blur(5px);
+  content: "";
+  z-index: -1;
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background-color: #1b1a2ea9;
+  left: 0;
+  top: 0;
+}
+
+.headerBlur {
+  position: fixed;
+}

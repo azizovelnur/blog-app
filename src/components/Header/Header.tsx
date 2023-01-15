@@ -1,24 +1,21 @@
 import React, { FC, useState } from "react"
 import { Link } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux"
-import { isAuthSelector, logout } from "../../store/async/login/loginSlice"
+import { useSelector } from "react-redux"
+import { isAuthSelector } from "../../store/async/login/loginSlice"
 import { Profile } from "./Profile"
 import { Modal } from "../Modal/Modal"
 import { Login } from "../Login/Login"
 import { Registration } from "../Registration/Registration"
+import { BiHome } from "react-icons/bi"
+import { FaBlog } from "react-icons/fa"
+import { GoProject } from "react-icons/go"
 
 const Header: FC = () => {
   const isAuth = useSelector(isAuthSelector)
-  const dispatch = useDispatch()
 
   const [modalActive, setModalActive] = useState<Boolean>(false)
   const [loginActive, setLoginActive] = useState<Boolean>(false)
   const [registrationActive, setRegistationActive] = useState<Boolean>(false)
-
-  const onClicklogOut = () => {
-    dispatch(logout())
-    localStorage.removeItem("token")
-  }
 
   const onClickRegistration = () => {
     setLoginActive(false)
@@ -33,18 +30,14 @@ const Header: FC = () => {
   }
 
   return (
-    <header
-      className={
-        "headerGrid z-50 fixed w-full text-[16px] bg-[#1b1a2ea9] backdrop-blur-lg"
-      }
-    >
+    <header className={"headerGrid z-50 fixed w-full text-[16px] headerBlur"}>
       <div className={"container mx-auto max-w-[1480px]"}>
         <div className={"flex justify-between items-center h-[50px]"}>
           <Link to={"/"}>
             <div className={"flex items-center"}>
               <h2
                 className={
-                  "text-[#fff] font-black bg-black text-[22px] rounded-[4px] px-[4px]"
+                  "text-[#fff] font-black text-[22px] rounded-[4px] px-[4px]"
                 }
               >
                 Portfolio
@@ -52,17 +45,31 @@ const Header: FC = () => {
             </div>
           </Link>
 
-          <div className={"flex justify-between w-[160px] items-center"}>
-            {isAuth ? (
-              <button
-                onClick={() => onClicklogOut()}
-                className={
-                  "text-white h-[30px] cursor-pointer rounded-[4px] p-[2px]"
-                }
-              >
-                Log Out
-              </button>
-            ) : (
+          <div className="flex justify-between items-center w-1/3">
+            <Link to={"/"}>
+              <div className="flex">
+                <BiHome size={"30px"} />
+                <div className="text-[24px] ml-[2px]">Home</div>
+              </div>
+            </Link>
+            <Link to={"#"}>
+              <div className="flex">
+                <FaBlog size={"30px"} />
+                <div className="text-[24px] ml-[2px]">Blog</div>
+              </div>
+            </Link>
+            <Link to={"#"}>
+              <div className="flex">
+                <GoProject size={"30px"} />
+                <div className="text-[24px] ml-[2px]">Projects</div>
+              </div>
+            </Link>
+          </div>
+
+          {isAuth ? (
+            <Profile />
+          ) : (
+            <div className="flex justify-between w-[140px] items-center">
               <div
                 onClick={() => onClickLogin()}
                 className={
@@ -71,9 +78,6 @@ const Header: FC = () => {
               >
                 <span>Log In</span>
               </div>
-            )}
-
-            {!isAuth && (
               <div
                 onClick={() => onClickRegistration()}
                 className={
@@ -82,19 +86,17 @@ const Header: FC = () => {
               >
                 <span>Register</span>
               </div>
+            </div>
+          )}
+
+          <Modal active={modalActive} setActive={setModalActive}>
+            {loginActive && (
+              <Login active={modalActive} setActive={setModalActive} />
             )}
-
-            <Modal active={modalActive} setActive={setModalActive}>
-              {loginActive && (
-                <Login active={modalActive} setActive={setModalActive} />
-              )}
-              {registrationActive && (
-                <Registration active={modalActive} setActive={setModalActive} />
-              )}
-            </Modal>
-
-            <Profile />
-          </div>
+            {registrationActive && (
+              <Registration active={modalActive} setActive={setModalActive} />
+            )}
+          </Modal>
         </div>
       </div>
     </header>

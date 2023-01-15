@@ -10,7 +10,6 @@ body {
 }
 
 .gridContainer {
-  background-color: #131320a9;
   display: grid;
   grid-gap: 10px;
   grid-template-columns: minmax(200px, 400px) minmax(500px, 1fr);
@@ -39,7 +38,7 @@ body {
 
 /* custom scroll */
 ::-webkit-scrollbar {
-  width: 0px;
+  width: 4px;
 }
 ::-webkit-scrollbar-track {
   background: #2d1950;

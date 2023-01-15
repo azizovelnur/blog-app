@@ -52,13 +52,13 @@ const Header: FC = () => {
                 <div className="text-[24px] ml-[2px]">Home</div>
               </div>
             </Link>
-            <Link to={"#"}>
+            <Link to={"/blog"}>
               <div className="flex">
                 <FaBlog size={"30px"} />
                 <div className="text-[24px] ml-[2px]">Blog</div>
               </div>
             </Link>
-            <Link to={"#"}>
+            <Link to={"/projects"}>
               <div className="flex">
                 <GoProject size={"30px"} />
                 <div className="text-[24px] ml-[2px]">Projects</div>

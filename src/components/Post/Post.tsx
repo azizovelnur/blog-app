@@ -17,9 +17,10 @@ import {
   ModalInput,
   ModalTextArea,
 } from "../StyledComponents/StyledComponents"
-//error
+
 const Post = () => {
   const [active, setActive] = useState<Boolean>(false)
+  const [id, setId] = useState<string>("")
   const { isLoading, isError, data: postsData } = useFetchPostsQuery(null)
   const [updatePost, { isSuccess }] = useFetchUpdatePostMutation()
   const [newPost, setNewPost] = useState<TPost>({
@@ -36,17 +37,31 @@ const Post = () => {
   const [removePost] = useFetchDeletePostMutation()
   const userData = useSelector(data)
 
+  const onCLickEdit = (objId: string) => {
+    const post = postsData?.filter(function (obj: any) {
+      return obj._id === objId
+    })
+    setNewPost({ title: post[0].title, text: post[0].text })
+    setActive(true)
+    setId(objId)
+  }
+
   const deletePost = async (_id: string) => {
     await removePost(_id).unwrap()
   }
   const onClickUpdatePost = async (_id: string) => {
-    console.log(_id)
     await updatePost({ ...newPost, _id }).unwrap()
-    setNewPost({ title: "", text: "" })
+    // setNewPost({ title: "", text: "" })
     setActive(false)
   }
   return (
     <>
+      <div className="flex justify-center mb-8">
+        <div className="flex justify-between w-[140px]">
+          <button>All</button>
+          <button>Saved</button>
+        </div>
+      </div>
       {postsData?.map((obj: IPost, index: number) => (
         <div
           key={index}
@@ -65,12 +80,7 @@ const Post = () => {
           {obj.user._id === userData?._id && (
             <>
               <div className="absolute flex justify-between top-5 right-4 w-16 h-10 rounded-md">
-                <button
-                  onClick={() => {
-                    setActive(true)
-                    console.log(obj._id)
-                  }}
-                >
+                <button onClick={() => onCLickEdit(obj._id)}>
                   <FiEdit2 color="white" size={"30px"} />
                 </button>
                 <button onClick={() => deletePost(obj._id)}>
@@ -102,7 +112,7 @@ const Post = () => {
                       placeholder={"text..."}
                     />
                   </div>
-                  <ModalButton onClick={() => onClickUpdatePost(obj._id)}>
+                  <ModalButton onClick={() => onClickUpdatePost(id)}>
                     Update
                   </ModalButton>
                 </div>

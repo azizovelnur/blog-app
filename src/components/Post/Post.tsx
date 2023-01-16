@@ -10,16 +10,20 @@ import { IPost, TPost } from "../../models/models"
 import { HiEye } from "react-icons/hi"
 import { TbTrash } from "react-icons/tb"
 import { FiEdit2 } from "react-icons/fi"
-
+import { BsFillBookmarkHeartFill } from "react-icons/bs"
+import { addItem, removeItem } from "../../store/postsSaved/postsSaved"
 import { Modal } from "../Modal/Modal"
 import {
   ModalButton,
   ModalInput,
   ModalTextArea,
 } from "../StyledComponents/StyledComponents"
+import { RootState, useAppDispatch } from "../../store/store"
 
 const Post = () => {
+  const { posts } = useSelector((state: RootState) => state.posts)
   const [active, setActive] = useState<Boolean>(false)
+  const [isSaved, setIsSaved] = useState<Boolean>(false)
   const [id, setId] = useState<string>("")
   const { isLoading, isError, data: postsData } = useFetchPostsQuery(null)
   const [updatePost, { isSuccess }] = useFetchUpdatePostMutation()
@@ -34,8 +38,13 @@ const Post = () => {
     })
   }
 
+  const dispatch = useAppDispatch()
   const [removePost] = useFetchDeletePostMutation()
   const userData = useSelector(data)
+
+  const onClickIsSaved = (objId: string) => {
+    setIsSaved(!isSaved)
+  }
 
   const onCLickEdit = (objId: string) => {
     const post = postsData?.filter(function (obj: any) {
@@ -54,14 +63,20 @@ const Post = () => {
     // setNewPost({ title: "", text: "" })
     setActive(false)
   }
+
+  const addItemToPostsSaved = (obj: any) => {
+    // const post = postsData?.filter(function (obj: any) {
+    //   return obj._id === id
+    // })
+    dispatch(addItem(obj))
+  }
+
+  const removeItemFromPostsSaved = (id: string) => {
+    dispatch(removeItem(id))
+  }
+
   return (
     <>
-      <div className="flex justify-center mb-8">
-        <div className="flex justify-between w-[140px]">
-          <button>All</button>
-          <button>Saved</button>
-        </div>
-      </div>
       {postsData?.map((obj: IPost, index: number) => (
         <div
           key={index}
@@ -76,6 +91,22 @@ const Post = () => {
           <div className="flex items-center w-[40px] text-[30px]">
             {obj.viewsCount} <HiEye />
           </div>
+
+          {posts.find((post: any) => post._id === obj._id) ? (
+            <button
+              onClick={() => removeItemFromPostsSaved(obj._id)}
+              className="absolute bottom-8 right-8"
+            >
+              <BsFillBookmarkHeartFill color="red" size={"30px"} />
+            </button>
+          ) : (
+            <button
+              onClick={() => addItemToPostsSaved(obj)}
+              className="absolute bottom-8 right-8"
+            >
+              <BsFillBookmarkHeartFill color="white" size={"30px"} />
+            </button>
+          )}
 
           {obj.user._id === userData?._id && (
             <>

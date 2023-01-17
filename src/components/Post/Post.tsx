@@ -19,6 +19,7 @@ import {
   ModalTextArea,
 } from "../StyledComponents/StyledComponents"
 import { RootState, useAppDispatch } from "../../store/store"
+import { Link } from "react-router-dom"
 
 const Post = () => {
   const { posts } = useSelector((state: RootState) => state.posts)
@@ -91,6 +92,10 @@ const Post = () => {
           <div className="flex items-center w-[40px] text-[30px]">
             {obj.viewsCount} <HiEye />
           </div>
+
+          <Link to={`/blog/${obj._id}`}>
+            <button className="bg-black">PostView</button>
+          </Link>
 
           {posts.find((post: any) => post._id === obj._id) ? (
             <button

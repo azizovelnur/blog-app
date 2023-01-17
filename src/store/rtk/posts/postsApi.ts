@@ -25,6 +25,12 @@ export const postsApi = createApi({
           : [{ type: "Posts", id: "LIST" }],
     }),
 
+    fetchOnePost: build.query({
+      query: (_id) => ({
+        url: `/posts/${_id}`,
+      }),
+    }),
+
     fetchCreatePost: build.mutation({
       query: (post) => {
         return {
@@ -63,6 +69,7 @@ export const postsApi = createApi({
 
 export const {
   useFetchPostsQuery,
+  useFetchOnePostQuery,
   useFetchCreatePostMutation,
   useFetchUpdatePostMutation,
   useFetchDeletePostMutation,

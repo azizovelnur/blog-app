@@ -4,6 +4,7 @@ import { Layout } from "./components/Layout/Layout"
 import { Blog } from "./pages/Blog/Blog"
 import { Home } from "./pages/Home/Home"
 import { Projects } from "./pages/Projects/Projects"
+import { ViewPost } from "./pages/ViewPost/ViewPost"
 import { fetchAuthMe } from "./store/async/login/loginSlice"
 import { useAppDispatch } from "./store/store"
 
@@ -19,6 +20,7 @@ function App() {
       <Route path={"/"} element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:id" element={<ViewPost />} />
         <Route path="/projects" element={<Projects />} />
       </Route>
     </Routes>

@@ -7,11 +7,10 @@ import { ParticlesBackground } from "../Particles/ParticlesBackground"
 export const Layout: FC = () => {
   return (
     <>
-      <div className={"gridContainer"}>
-        <ParticlesBackground />
-        <Header />
-        <Outlet />
-      </div>
+      <ParticlesBackground />
+      <Header />
+      <div className="h-[60px]"></div>
+      <Outlet />
     </>
   )
 }

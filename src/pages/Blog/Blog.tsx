@@ -18,8 +18,8 @@ const Blog: FC = () => {
   }
 
   return (
-    <>
-      <aside className={"asideGrid "}>
+    <div className="blogGridContainer">
+      <aside className={"asideGrid"}>
         <div className="flex justify-center">
           <div className="flex justify-around items-center backdrop-blur-[10px] rounded-lg bg-[#29183090] w-[120px] h-[44px]">
             <button
@@ -62,7 +62,7 @@ const Blog: FC = () => {
         {activeAllPost && <AddPost />}
         {activeSavedPost && <PostSaved />}
       </section>
-    </>
+    </div>
   )
 }
 

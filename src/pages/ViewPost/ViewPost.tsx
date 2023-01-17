@@ -6,7 +6,7 @@ const ViewPost = () => {
   const { id } = useParams()
   const { isLoading, isError, data: onePostData } = useFetchOnePostQuery(id)
   return (
-    <div className="mainGrid bg-purple-500 h-20 w-[400px]">
+    <div className="mainGrid backdrop-blur-[1px] bg-[#29183090] min-h-[600px] w-[1000px] m-auto mt-[40px] rounded-md">
       <div>{onePostData?.title}</div>
     </div>
   )

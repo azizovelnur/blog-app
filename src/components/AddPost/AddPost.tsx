@@ -10,10 +10,27 @@ import {
   ModalInput,
   ModalTextArea,
 } from "../StyledComponents/StyledComponents"
+import axios from "../../axiosDefaultConfig/axiosConf"
 
 const AddPost: FC = () => {
   const [addPost, { isSuccess }] = useFetchCreatePostMutation()
   const isAuth = useSelector(isAuthSelector)
+  const [imageUrl, setImageUrl] = useState<string>("")
+  const [active, setActive] = useState<Boolean>(false)
+
+  const handlerChangeFile = async (event: any) => {
+    try {
+      const formData = new FormData()
+      const file = event.target.files[0]
+      formData.append("image", file)
+      const { data } = await axios.post("/upload", formData)
+      setImageUrl(data.url)
+    } catch (error) {
+      console.log(error)
+      alert(error)
+    }
+  }
+
   const [newPost, setNewPost] = useState<TPost>({
     title: "",
     text: "",
@@ -27,7 +44,8 @@ const AddPost: FC = () => {
   }
 
   const createPost = async () => {
-    await addPost({ ...newPost }).unwrap()
+    await addPost({ ...newPost, imageUrl }).unwrap()
+    setImageUrl("")
     setNewPost({ title: "", text: "" })
     setActive(false)
   }
@@ -35,8 +53,6 @@ const AddPost: FC = () => {
   const onClickCreatePost = () => {
     setActive(!active)
   }
-
-  const [active, setActive] = useState<Boolean>(false)
 
   return (
     <>
@@ -72,6 +88,15 @@ const AddPost: FC = () => {
                   placeholder={"text..."}
                 />
               </div>
+
+              <input
+                className="cursor-pointer"
+                onChange={handlerChangeFile}
+                type="file"
+              />
+              {imageUrl && (
+                <img src={`http://localhost:5000${imageUrl}`} alt="postImage" />
+              )}
               <ModalButton onClick={() => createPost()}>
                 Create Post
               </ModalButton>

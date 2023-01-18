@@ -20,14 +20,31 @@ import {
 } from "../StyledComponents/StyledComponents"
 import { RootState, useAppDispatch } from "../../store/store"
 import { Link } from "react-router-dom"
+import axios from "../../axiosDefaultConfig/axiosConf"
 
 const Post = () => {
   const { posts } = useSelector((state: RootState) => state.posts)
   const [active, setActive] = useState<Boolean>(false)
-  const [isSaved, setIsSaved] = useState<Boolean>(false)
+  // const [isSaved, setIsSaved] = useState<Boolean>(false)
   const [id, setId] = useState<string>("")
+
+  const [imageUrl, setImageUrl] = useState<string>("")
   const { isLoading, isError, data: postsData } = useFetchPostsQuery(null)
   const [updatePost, { isSuccess }] = useFetchUpdatePostMutation()
+
+  const handlerChangeFile = async (event: any) => {
+    try {
+      const formData = new FormData()
+      const file = event.target.files[0]
+      formData.append("image", file)
+      const { data } = await axios.post("/upload", formData)
+      setImageUrl(data.url)
+    } catch (error) {
+      console.log(error)
+      alert(error)
+    }
+  }
+
   const [newPost, setNewPost] = useState<TPost>({
     title: "",
     text: "",
@@ -43,9 +60,9 @@ const Post = () => {
   const [removePost] = useFetchDeletePostMutation()
   const userData = useSelector(data)
 
-  const onClickIsSaved = (objId: string) => {
-    setIsSaved(!isSaved)
-  }
+  // const onClickIsSaved = (objId: string) => {
+  //   setIsSaved(!isSaved)
+  // }
 
   const onCLickEdit = (objId: string) => {
     const post = postsData?.filter(function (obj: any) {
@@ -60,7 +77,7 @@ const Post = () => {
     await removePost(_id).unwrap()
   }
   const onClickUpdatePost = async (_id: string) => {
-    await updatePost({ ...newPost, _id }).unwrap()
+    await updatePost({ ...newPost, _id, imageUrl }).unwrap()
     // setNewPost({ title: "", text: "" })
     setActive(false)
   }
@@ -85,6 +102,11 @@ const Post = () => {
             "relative mx-auto w-[600px] h-[400px] mb-[70px] rounded-[10px] shadow-[0px_4px_20px_4px_rgba(119,53,136,0.459)]"
           }
         >
+          <img
+            className="w-full h-[50%]"
+            src={`http://localhost:5000${obj.imageUrl}`}
+            alt="img"
+          />
           <div>
             <h1 className="text-[30px] font-bold">{obj.title}</h1>
           </div>
@@ -148,6 +170,17 @@ const Post = () => {
                       placeholder={"text..."}
                     />
                   </div>
+                  <input
+                    className="cursor-pointer"
+                    onChange={handlerChangeFile}
+                    type="file"
+                  />
+                  {imageUrl && (
+                    <img
+                      src={`http://localhost:5000${imageUrl}`}
+                      alt="postImage"
+                    />
+                  )}
                   <ModalButton onClick={() => onClickUpdatePost(id)}>
                     Update
                   </ModalButton>

@@ -18,6 +18,11 @@ const PostSaved = () => {
             "relative mx-auto w-[600px] h-[400px] mb-[70px] rounded-[10px] shadow-[0px_4px_20px_4px_rgba(119,53,136,0.459)]"
           }
         >
+          <img
+            className="w-full"
+            src={`http://localhost:5000${obj?.imageUrl}`}
+            alt="postImg"
+          />
           <div>
             <h1 className="text-[30px] font-bold">{obj.title}</h1>
           </div>

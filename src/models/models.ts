@@ -117,11 +117,13 @@ export interface IPost {
   text: string
   viewsCount: number
   user: IUser
+  imageUrl?: string
 }
 
 export type TPost = {
   title: string
   text: string
+  imageUrl?: string
 }
 
 export interface ILogin {

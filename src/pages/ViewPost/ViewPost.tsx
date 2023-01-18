@@ -1,10 +1,20 @@
-import React from "react"
+import React, { useState } from "react"
 import { useParams } from "react-router-dom"
+import {
+  useFetchCommentsQuery,
+  useFetchCreateCommentMutation,
+} from "../../store/rtk/comments/commentsApi"
 import { useFetchOnePostQuery } from "../../store/rtk/posts/postsApi"
 
 const ViewPost = () => {
   const { id } = useParams()
+
+  const [commentValue, setCommentValue] = useState<string>("")
+  const [createComment, { isSuccess }] = useFetchCreateCommentMutation()
+
+  const { data: commentsData } = useFetchCommentsQuery(id)
   const { isLoading, isError, data: onePostData } = useFetchOnePostQuery(id)
+  console.log(commentsData)
   return (
     <div className="mainGrid backdrop-blur-[1px] bg-[#29183090] min-h-[600px] w-[1000px] m-auto mt-[40px] rounded-md">
       <img
@@ -13,6 +23,21 @@ const ViewPost = () => {
         alt="postImg"
       />
       <div>{onePostData?.title}</div>
+      {commentsData?.map((obj: any, index: number) => {
+        return <div key={index}>{obj.comment}</div>
+      })}
+      <div>
+        <input
+          value={commentValue}
+          onChange={(event) => setCommentValue(event?.target.value)}
+          type="text"
+        />
+        <button
+          onClick={() => createComment({ postId: id, comment: commentValue })}
+        >
+          add Comment
+        </button>
+      </div>
     </div>
   )
 }

@@ -20,8 +20,8 @@ const Login: FC<IProps> = ({ active, setActive }) => {
 
   const { register, handleSubmit } = useForm<ILogin>({
     defaultValues: {
-      email: "t@gmail.com",
-      password: "t",
+      email: "admin@gmail.com",
+      password: "admin",
     },
     mode: "onChange",
   })

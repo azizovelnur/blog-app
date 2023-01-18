@@ -156,7 +156,7 @@ const Post = () => {
             </>
           )}
 
-          <div className="text-lg font-bold">@{obj.user.name}</div>
+          <div className="text-lg font-bold">@{obj.user.userName}</div>
         </div>
       ))}
     </>

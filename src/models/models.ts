@@ -104,7 +104,7 @@ export interface IOwner {
 //user
 export interface IUser {
   _id: string
-  name: string
+  userName: string
   email: string
   passwordHash: string
   token: string

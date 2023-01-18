@@ -19,9 +19,9 @@ const Registration: FC<IProps> = ({ active, setActive }) => {
 
   const { register, handleSubmit } = useForm<IRegistration>({
     defaultValues: {
-      name: "elnur",
-      email: "t@gmail.com",
-      password: "t",
+      name: "admin",
+      email: "admin@gmail.com",
+      password: "admin",
     },
     mode: "onChange",
   })

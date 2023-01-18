@@ -48,7 +48,7 @@ const Profile: FC = () => {
             <div>
               <div className="flex items-center">
                 <HiOutlineUserCircle size={"20px"} className="mr-[10px]" />
-                {userData?.name}
+                {userData?.userName}
               </div>
               <div className="flex items-center">
                 <MdOutlineMail size={"20px"} className="mr-[10px]" />

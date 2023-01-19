@@ -31,6 +31,12 @@ export const postsApi = createApi({
       }),
     }),
 
+    // fetchSearchPosts: build.query({
+    //   query: (value) => ({
+    //     url: `/posts/search/${value}`,
+    //   }),
+    // }),
+
     fetchCreatePost: build.mutation({
       query: (post) => {
         return {
@@ -70,6 +76,7 @@ export const postsApi = createApi({
 export const {
   useFetchPostsQuery,
   useFetchOnePostQuery,
+  // useFetchSearchPostsQuery,
   useFetchCreatePostMutation,
   useFetchUpdatePostMutation,
   useFetchDeletePostMutation,

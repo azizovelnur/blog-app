@@ -31,6 +31,12 @@ export const postsApi = createApi({
       }),
     }),
 
+    fetchPopularPosts: build.query({
+      query: (_id) => ({
+        url: `/posts/popular`,
+      }),
+    }),
+
     // fetchSearchPosts: build.query({
     //   query: (value) => ({
     //     url: `/posts/search/${value}`,
@@ -76,6 +82,7 @@ export const postsApi = createApi({
 export const {
   useFetchPostsQuery,
   useFetchOnePostQuery,
+  useFetchPopularPostsQuery,
   // useFetchSearchPostsQuery,
   useFetchCreatePostMutation,
   useFetchUpdatePostMutation,

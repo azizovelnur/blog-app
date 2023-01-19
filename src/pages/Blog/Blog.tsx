@@ -1,12 +1,24 @@
-import React, { FC, useState } from "react"
+import React, { FC, useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 import { AddPost } from "../../components/AddPost/AddPost"
 import { Post } from "../../components/Post/Post"
 import { PostSaved } from "../../components/Post/PostSaved"
+import { findPosts } from "../../store/postsSaved/postsSaved"
+import { useFetchPopularPostsQuery } from "../../store/rtk/posts/postsApi"
+import { useAppDispatch } from "../../store/store"
 
 const Blog: FC = () => {
   const [activeAllPost, setActiveAllPost] = useState<Boolean>(true)
   const [activeSavedPost, setActiveSavedPost] = useState<Boolean>(false)
 
+  const [searchPosts, setSearchPosts] = useState<string>("")
+  const dispatch = useAppDispatch()
+
+  const {
+    isLoading,
+    isError,
+    data: popularPosts,
+  } = useFetchPopularPostsQuery(null)
   const onClickAll = () => {
     setActiveAllPost(true)
     setActiveSavedPost(false)
@@ -16,6 +28,12 @@ const Blog: FC = () => {
     setActiveSavedPost(true)
     setActiveAllPost(false)
   }
+
+  useEffect(() => {
+    if (searchPosts !== "") {
+      dispatch(findPosts(searchPosts))
+    }
+  }, [searchPosts])
 
   return (
     <div className="blogGridContainer">
@@ -47,13 +65,25 @@ const Blog: FC = () => {
 
         <div className="mt-3 flex justify-center ">
           <input
+            value={searchPosts}
+            onChange={(event) => setSearchPosts(event.target.value)}
             className="w-44 h-7 rounded-sm backdrop-blur-[3px] outline-none bg-[#29183090]"
             type="text"
           />
         </div>
 
         <div className="flex flex-col justify-center items-center mt-10">
-          <div className="h-[200px] w-[200px] mb-[30px] rounded-[10px] backdrop-blur-[3px] bg-[#29183090]"></div>
+          <div className="h-[200px] w-[200px] mb-[30px] rounded-[10px] backdrop-blur-[3px] bg-[#29183090]">
+            {popularPosts?.map((popularPost: any, index: number) => {
+              return (
+                <div key={index}>
+                  <Link to={`/blog/${popularPost._id}`}>
+                    {popularPost.title}
+                  </Link>
+                </div>
+              )
+            })}
+          </div>
           <div className="h-[200px] w-[200px] rounded-[10px] backdrop-blur-[3px] bg-[#29183090]"></div>
         </div>
       </aside>

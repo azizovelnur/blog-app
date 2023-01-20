@@ -7,16 +7,16 @@ import { RootState, useAppDispatch } from "../../store/store"
 import { Post } from "./Post"
 
 interface searchValue {
-  searchPosts: string
+  searchPostsSaved: string
 }
 
-const PostSaved: FC<searchValue> = ({ searchPosts }) => {
+const PostSaved: FC<searchValue> = ({ searchPostsSaved }) => {
   const { posts } = useSelector((state: RootState) => state.posts)
   const { findedPosts } = useSelector((state: RootState) => state.posts)
   const dispatch = useAppDispatch()
   return (
     <div>
-      {findedPosts.length !== 0 && searchPosts
+      {findedPosts.length !== 0 && searchPostsSaved
         ? findedPosts.map((obj: IPost, index: number) => (
             <div
               key={index}

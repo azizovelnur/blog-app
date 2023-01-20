@@ -11,6 +11,7 @@ const Blog: FC = () => {
   const [activeAllPost, setActiveAllPost] = useState<Boolean>(true)
   const [activeSavedPost, setActiveSavedPost] = useState<Boolean>(false)
 
+  const [searchPostsSaved, setSearchPostsSaved] = useState<string>("")
   const [searchPosts, setSearchPosts] = useState<string>("")
   const dispatch = useAppDispatch()
 
@@ -28,10 +29,13 @@ const Blog: FC = () => {
     setActiveSavedPost(true)
     setActiveAllPost(false)
   }
+  const onChangeHanlder = (value: string) => {
+    setSearchPosts(value)
+  }
 
   useEffect(() => {
-    dispatch(findPosts(searchPosts))
-  }, [searchPosts])
+    dispatch(findPosts(searchPostsSaved))
+  }, [searchPostsSaved])
 
   return (
     <div className="blogGridContainer">
@@ -61,14 +65,33 @@ const Blog: FC = () => {
           </div>
         </div>
 
-        <div className="mt-3 flex justify-center ">
-          <input
-            value={searchPosts}
-            onChange={(event) => setSearchPosts(event.target.value)}
-            className="w-44 h-7 rounded-sm backdrop-blur-[3px] outline-none bg-[#29183090]"
-            type="text"
-          />
-        </div>
+        {activeSavedPost && (
+          <div className="mt-3 flex justify-center">
+            <div>
+              <div>Search Post Saved</div>
+              <input
+                value={searchPostsSaved}
+                onChange={(event) => setSearchPostsSaved(event.target.value)}
+                className="w-44 h-7 rounded-sm backdrop-blur-[3px] outline-none bg-[#29183090]"
+                type="text"
+              />
+            </div>
+          </div>
+        )}
+
+        {activeAllPost && (
+          <div className="mt-3 flex justify-center">
+            <div>
+              <div>Search Post</div>
+              <input
+                value={searchPosts}
+                onChange={(event) => onChangeHanlder(event.target.value)}
+                className="w-44 h-7 rounded-sm backdrop-blur-[3px] outline-none bg-[#29183090]"
+                type="text"
+              />
+            </div>
+          </div>
+        )}
 
         <div className="flex flex-col justify-center items-center mt-10">
           <div className="h-[200px] w-[200px] mb-[30px] rounded-[10px] backdrop-blur-[3px] bg-[#29183090]">
@@ -86,9 +109,9 @@ const Blog: FC = () => {
         </div>
       </aside>
       <section className="mainGrid">
-        {activeAllPost && <Post />}
+        {activeAllPost && <Post searchPosts={searchPosts} />}
         {activeAllPost && <AddPost />}
-        {activeSavedPost && <PostSaved searchPosts={searchPosts} />}
+        {activeSavedPost && <PostSaved searchPostsSaved={searchPostsSaved} />}
       </section>
     </div>
   )

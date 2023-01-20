@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { FC, useState } from "react"
 import { data } from "../../store/async/login/loginSlice"
 import { useSelector } from "react-redux"
 import {
@@ -22,7 +22,11 @@ import { RootState, useAppDispatch } from "../../store/store"
 import { Link } from "react-router-dom"
 import axios from "../../axiosDefaultConfig/axiosConf"
 
-const Post = () => {
+interface ISearchProps {
+  searchPosts: string
+}
+
+const Post: FC<ISearchProps> = ({ searchPosts }) => {
   const { posts } = useSelector((state: RootState) => state.posts)
   const [active, setActive] = useState<Boolean>(false)
   // const [isSaved, setIsSaved] = useState<Boolean>(false)
@@ -31,6 +35,16 @@ const Post = () => {
   const [imageUrl, setImageUrl] = useState<string>("")
   const { isLoading, isError, data: postsData } = useFetchPostsQuery(null)
   const [updatePost, { isSuccess }] = useFetchUpdatePostMutation()
+
+  const findedPosts =
+    searchPosts &&
+    postsData?.filter((obj: any) => {
+      if (obj.title.toLowerCase().includes(searchPosts)) {
+        return true
+      } else {
+        return false
+      }
+    })
 
   const handlerChangeFile = async (event: any) => {
     try {
@@ -95,103 +109,201 @@ const Post = () => {
 
   return (
     <>
-      {postsData?.map((obj: IPost, index: number) => (
-        <div
-          key={index}
-          className={
-            "relative mx-auto w-[600px] h-[400px] mb-[70px] rounded-[10px] shadow-[0px_4px_20px_4px_rgba(119,53,136,0.459)]"
-          }
-        >
-          <img
-            className="w-full h-[50%]"
-            src={`http://localhost:5000${obj.imageUrl}`}
-            alt="img"
-          />
-          <div>
-            <h1 className="text-[30px] font-bold">{obj.title}</h1>
-          </div>
-          <div>{obj.text}</div>
-          <div className="flex items-center w-[40px] text-[30px]">
-            {obj.viewsCount} <HiEye />
-          </div>
-
-          <Link to={`/blog/${obj._id}`}>
-            <button className="bg-black">PostView</button>
-          </Link>
-
-          {posts.find((post: any) => post._id === obj._id) ? (
-            <button
-              onClick={() => removeItemFromPostsSaved(obj._id)}
-              className="absolute bottom-8 right-8"
+      {findedPosts.length !== 0 && searchPosts
+        ? findedPosts?.map((obj: IPost, index: number) => (
+            <div
+              key={index}
+              className={
+                "relative mx-auto w-[600px] h-[400px] mb-[70px] rounded-[10px] shadow-[0px_4px_20px_4px_rgba(119,53,136,0.459)]"
+              }
             >
-              <BsFillBookmarkHeartFill color="red" size={"30px"} />
-            </button>
-          ) : (
-            <button
-              onClick={() => addItemToPostsSaved(obj)}
-              className="absolute bottom-8 right-8"
-            >
-              <BsFillBookmarkHeartFill color="white" size={"30px"} />
-            </button>
-          )}
-
-          {obj.user._id === userData?._id && (
-            <>
-              <div className="absolute flex justify-between top-5 right-4 w-16 h-10 rounded-md">
-                <button onClick={() => onCLickEdit(obj._id)}>
-                  <FiEdit2 color="white" size={"30px"} />
-                </button>
-                <button onClick={() => deletePost(obj._id)}>
-                  <TbTrash color="red" size={"30px"} />
-                </button>
+              <img
+                className="w-full h-[50%]"
+                src={`http://localhost:5000${obj.imageUrl}`}
+                alt="img"
+              />
+              <div>
+                <h1 className="text-[30px] font-bold">{obj.title}</h1>
+              </div>
+              <div>{obj.text}</div>
+              <div className="flex items-center w-[40px] text-[30px]">
+                {obj.viewsCount} <HiEye />
               </div>
 
-              <Modal active={active} setActive={setActive}>
-                <div className={"flex flex-col justify-between"}>
-                  <div className="text-center mb-5 font-black text-2xl">
-                    Update Post
-                  </div>
-                  <div>
-                    <div className="font-bold text-base">Title</div>
-                    <ModalInput
-                      value={newPost.title}
-                      name={"title"}
-                      onChange={changeHandler}
-                      placeholder={"title"}
-                      type="text"
-                    />
-                  </div>
-                  <div>
-                    <div className="font-bold text-base">Text</div>
-                    <ModalTextArea
-                      value={newPost.text}
-                      name={"text"}
-                      onChange={changeHandler}
-                      placeholder={"text..."}
-                    />
-                  </div>
-                  <input
-                    className="cursor-pointer"
-                    onChange={handlerChangeFile}
-                    type="file"
-                  />
-                  {imageUrl && (
-                    <img
-                      src={`http://localhost:5000${imageUrl}`}
-                      alt="postImage"
-                    />
-                  )}
-                  <ModalButton onClick={() => onClickUpdatePost(id)}>
-                    Update
-                  </ModalButton>
-                </div>
-              </Modal>
-            </>
-          )}
+              <Link to={`/blog/${obj._id}`}>
+                <button className="bg-black">PostView</button>
+              </Link>
 
-          <div className="text-lg font-bold">@{obj.user.userName}</div>
-        </div>
-      ))}
+              {posts.find((post: any) => post._id === obj._id) ? (
+                <button
+                  onClick={() => removeItemFromPostsSaved(obj._id)}
+                  className="absolute bottom-8 right-8"
+                >
+                  <BsFillBookmarkHeartFill color="red" size={"30px"} />
+                </button>
+              ) : (
+                <button
+                  onClick={() => addItemToPostsSaved(obj)}
+                  className="absolute bottom-8 right-8"
+                >
+                  <BsFillBookmarkHeartFill color="white" size={"30px"} />
+                </button>
+              )}
+
+              {obj.user._id === userData?._id && (
+                <>
+                  <div className="absolute flex justify-between top-5 right-4 w-16 h-10 rounded-md">
+                    <button onClick={() => onCLickEdit(obj._id)}>
+                      <FiEdit2 color="white" size={"30px"} />
+                    </button>
+                    <button onClick={() => deletePost(obj._id)}>
+                      <TbTrash color="red" size={"30px"} />
+                    </button>
+                  </div>
+
+                  <Modal active={active} setActive={setActive}>
+                    <div className={"flex flex-col justify-between"}>
+                      <div className="text-center mb-5 font-black text-2xl">
+                        Update Post
+                      </div>
+                      <div>
+                        <div className="font-bold text-base">Title</div>
+                        <ModalInput
+                          value={newPost.title}
+                          name={"title"}
+                          onChange={changeHandler}
+                          placeholder={"title"}
+                          type="text"
+                        />
+                      </div>
+                      <div>
+                        <div className="font-bold text-base">Text</div>
+                        <ModalTextArea
+                          value={newPost.text}
+                          name={"text"}
+                          onChange={changeHandler}
+                          placeholder={"text..."}
+                        />
+                      </div>
+                      <input
+                        className="cursor-pointer"
+                        onChange={handlerChangeFile}
+                        type="file"
+                      />
+                      {imageUrl && (
+                        <img
+                          src={`http://localhost:5000${imageUrl}`}
+                          alt="postImage"
+                        />
+                      )}
+                      <ModalButton onClick={() => onClickUpdatePost(id)}>
+                        Update
+                      </ModalButton>
+                    </div>
+                  </Modal>
+                </>
+              )}
+
+              <div className="text-lg font-bold">@{obj.user.userName}</div>
+            </div>
+          ))
+        : postsData?.map((obj: IPost, index: number) => (
+            <div
+              key={index}
+              className={
+                "relative mx-auto w-[600px] h-[400px] mb-[70px] rounded-[10px] shadow-[0px_4px_20px_4px_rgba(119,53,136,0.459)]"
+              }
+            >
+              <img
+                className="w-full h-[50%]"
+                src={`http://localhost:5000${obj.imageUrl}`}
+                alt="img"
+              />
+              <div>
+                <h1 className="text-[30px] font-bold">{obj.title}</h1>
+              </div>
+              <div>{obj.text}</div>
+              <div className="flex items-center w-[40px] text-[30px]">
+                {obj.viewsCount} <HiEye />
+              </div>
+
+              <Link to={`/blog/${obj._id}`}>
+                <button className="bg-black">PostView</button>
+              </Link>
+
+              {posts.find((post: any) => post._id === obj._id) ? (
+                <button
+                  onClick={() => removeItemFromPostsSaved(obj._id)}
+                  className="absolute bottom-8 right-8"
+                >
+                  <BsFillBookmarkHeartFill color="red" size={"30px"} />
+                </button>
+              ) : (
+                <button
+                  onClick={() => addItemToPostsSaved(obj)}
+                  className="absolute bottom-8 right-8"
+                >
+                  <BsFillBookmarkHeartFill color="white" size={"30px"} />
+                </button>
+              )}
+
+              {obj.user._id === userData?._id && (
+                <>
+                  <div className="absolute flex justify-between top-5 right-4 w-16 h-10 rounded-md">
+                    <button onClick={() => onCLickEdit(obj._id)}>
+                      <FiEdit2 color="white" size={"30px"} />
+                    </button>
+                    <button onClick={() => deletePost(obj._id)}>
+                      <TbTrash color="red" size={"30px"} />
+                    </button>
+                  </div>
+
+                  <Modal active={active} setActive={setActive}>
+                    <div className={"flex flex-col justify-between"}>
+                      <div className="text-center mb-5 font-black text-2xl">
+                        Update Post
+                      </div>
+                      <div>
+                        <div className="font-bold text-base">Title</div>
+                        <ModalInput
+                          value={newPost.title}
+                          name={"title"}
+                          onChange={changeHandler}
+                          placeholder={"title"}
+                          type="text"
+                        />
+                      </div>
+                      <div>
+                        <div className="font-bold text-base">Text</div>
+                        <ModalTextArea
+                          value={newPost.text}
+                          name={"text"}
+                          onChange={changeHandler}
+                          placeholder={"text..."}
+                        />
+                      </div>
+                      <input
+                        className="cursor-pointer"
+                        onChange={handlerChangeFile}
+                        type="file"
+                      />
+                      {imageUrl && (
+                        <img
+                          src={`http://localhost:5000${imageUrl}`}
+                          alt="postImage"
+                        />
+                      )}
+                      <ModalButton onClick={() => onClickUpdatePost(id)}>
+                        Update
+                      </ModalButton>
+                    </div>
+                  </Modal>
+                </>
+              )}
+
+              <div className="text-lg font-bold">@{obj.user.userName}</div>
+            </div>
+          ))}
     </>
   )
 }

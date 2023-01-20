@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FC } from "react"
 import { BsFillBookmarkHeartFill } from "react-icons/bs"
 import { useSelector } from "react-redux"
 import { IPost } from "../../models/models"
@@ -6,14 +6,17 @@ import { removeItem } from "../../store/postsSaved/postsSaved"
 import { RootState, useAppDispatch } from "../../store/store"
 import { Post } from "./Post"
 
-const PostSaved = () => {
+interface searchValue {
+  searchPosts: string
+}
+
+const PostSaved: FC<searchValue> = ({ searchPosts }) => {
   const { posts } = useSelector((state: RootState) => state.posts)
   const { findedPosts } = useSelector((state: RootState) => state.posts)
-
   const dispatch = useAppDispatch()
   return (
     <div>
-      {findedPosts.length !== 0
+      {findedPosts.length !== 0 && searchPosts
         ? findedPosts.map((obj: IPost, index: number) => (
             <div
               key={index}

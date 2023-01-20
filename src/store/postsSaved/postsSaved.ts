@@ -31,9 +31,14 @@ const postsSlice = createSlice({
     },
     findPosts(state, action) {
       const searchValue = action.payload.toLowerCase()
-      state.findedPosts = state.posts.filter(
-        (obj: any) => obj.title.toLowerCase() === searchValue
-      )
+
+      state.findedPosts = state.posts.filter((obj: any) => {
+        if (obj.title.toLowerCase().includes(searchValue)) {
+          return true
+        } else {
+          return false
+        }
+      })
     },
   },
 })

@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react"
+import React, { FC, useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
 import { AddPost } from "../../components/AddPost/AddPost"
 import { Post } from "../../components/Post/Post"
@@ -30,9 +30,7 @@ const Blog: FC = () => {
   }
 
   useEffect(() => {
-    if (searchPosts !== "") {
-      dispatch(findPosts(searchPosts))
-    }
+    dispatch(findPosts(searchPosts))
   }, [searchPosts])
 
   return (
@@ -90,7 +88,7 @@ const Blog: FC = () => {
       <section className="mainGrid">
         {activeAllPost && <Post />}
         {activeAllPost && <AddPost />}
-        {activeSavedPost && <PostSaved />}
+        {activeSavedPost && <PostSaved searchPosts={searchPosts} />}
       </section>
     </div>
   )

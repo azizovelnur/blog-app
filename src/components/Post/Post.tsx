@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react"
-import { data } from "../../store/async/login/loginSlice"
+import { data } from "../../store/slices/async/login/loginSlice"
 import { useSelector } from "react-redux"
 import {
   useFetchDeletePostMutation,
@@ -11,7 +11,7 @@ import { HiEye } from "react-icons/hi"
 import { TbTrash } from "react-icons/tb"
 import { FiEdit2 } from "react-icons/fi"
 import { BsFillBookmarkHeartFill } from "react-icons/bs"
-import { addItem, removeItem } from "../../store/postsSaved/postsSaved"
+import { addItem, removeItem } from "../../store/slices/postsSlice/postsSlice"
 import { Modal } from "../Modal/Modal"
 import {
   ModalButton,
@@ -20,7 +20,7 @@ import {
 } from "../StyledComponents/StyledComponents"
 import { RootState, useAppDispatch } from "../../store/store"
 import { Link } from "react-router-dom"
-import axios from "../../axiosDefaultConfig/axiosConf"
+import axios from "../../axios/axiosConf"
 
 interface ISearchProps {
   searchPosts: string

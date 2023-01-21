@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import { AddPost } from "../../components/AddPost/AddPost"
 import { Post } from "../../components/Post/Post"
 import { PostSaved } from "../../components/Post/PostSaved"
-import { findPosts } from "../../store/postsSaved/postsSaved"
+import { findPosts } from "../../store/slices/postsSlice/postsSlice"
 import { useFetchPopularPostsQuery } from "../../store/rtk/posts/postsApi"
 import { RootState, useAppDispatch } from "../../store/store"
 
@@ -16,7 +16,7 @@ const Blog: FC = () => {
   const [searchPosts, setSearchPosts] = useState<string>("")
   const dispatch = useAppDispatch()
 
-  const { recents } = useSelector((state: RootState) => state.utils)
+  const { recents } = useSelector((state: RootState) => state.helper)
   const uniqueRecents = recents.filter((item, index) => {
     return index === recents.indexOf(item)
   })

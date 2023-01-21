@@ -2,7 +2,7 @@ import React, { FC } from "react"
 import { BsFillBookmarkHeartFill } from "react-icons/bs"
 import { useSelector } from "react-redux"
 import { IPost } from "../../models/models"
-import { removeItem } from "../../store/postsSaved/postsSaved"
+import { removeItem } from "../../store/slices/postsSlice/postsSlice"
 import { RootState, useAppDispatch } from "../../store/store"
 import { Post } from "./Post"
 

@@ -2,7 +2,10 @@ import React, { Dispatch, FC, SetStateAction } from "react"
 import { useForm } from "react-hook-form"
 import { Navigate } from "react-router-dom"
 import { ILogin } from "../../models/models"
-import { fetchLogin, isAuthSelector } from "../../store/async/login/loginSlice"
+import {
+  fetchLogin,
+  isAuthSelector,
+} from "../../store/slices/async/login/loginSlice"
 import { useAppDispatch } from "../../store/store"
 import { useSelector } from "react-redux"
 import { ModalButton, ModalInput } from "../StyledComponents/StyledComponents"

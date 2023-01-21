@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { getDataFromLocalStorage } from "../../utils/getDataFromLS"
-import { addPostToLS } from "../../utils/addPostToLS"
+import { getDataFromLocalStorage } from "../../../helpers/getDataFromLS"
+import { addPostToLS } from "../../../helpers/addPostToLS"
 
 const initialState = {
   posts: getDataFromLocalStorage(),

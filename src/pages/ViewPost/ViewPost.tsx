@@ -6,7 +6,7 @@ import {
 } from "../../store/rtk/comments/commentsApi"
 import { useFetchOnePostQuery } from "../../store/rtk/posts/postsApi"
 import { useAppDispatch } from "../../store/store"
-import { setRecents } from "../../store/utils/utlisSlice"
+import { setRecents } from "../../store/slices/helperSlice/helperSlice"
 
 const ViewPost = () => {
   const { id } = useParams()

@@ -2,9 +2,9 @@ import { commentsApi } from "./rtk/comments/commentsApi"
 import { configureStore } from "@reduxjs/toolkit"
 import { githubApi } from "./rtk/github/githubApi"
 import { postsApi } from "./rtk/posts/postsApi"
-import { loginReducer } from "./async/login/loginSlice"
-import { postsReducer } from "./postsSaved/postsSaved"
-import { utilsReducer } from "./utils/utlisSlice"
+import { loginReducer } from "./slices/async/login/loginSlice"
+import { postsReducer } from "./slices/postsSlice/postsSlice"
+import { helperReducer } from "./slices/helperSlice/helperSlice"
 import { useDispatch } from "react-redux"
 
 export const store = configureStore({
@@ -14,7 +14,7 @@ export const store = configureStore({
     [commentsApi.reducerPath]: commentsApi.reducer,
     login: loginReducer,
     posts: postsReducer,
-    utils: utilsReducer,
+    helper: helperReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(

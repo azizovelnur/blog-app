@@ -2,7 +2,7 @@ import React, { FC, useState } from "react"
 import { useSelector } from "react-redux"
 import { Modal } from "../Modal/Modal"
 import { TPost } from "../../models/models"
-import { isAuthSelector } from "../../store/async/login/loginSlice"
+import { isAuthSelector } from "../../store/slices/async/login/loginSlice"
 import { useFetchCreatePostMutation } from "../../store/rtk/posts/postsApi"
 import { IoCreate } from "react-icons/io5"
 import {
@@ -10,7 +10,7 @@ import {
   ModalInput,
   ModalTextArea,
 } from "../StyledComponents/StyledComponents"
-import axios from "../../axiosDefaultConfig/axiosConf"
+import axios from "../../axios/axiosConf"
 
 const AddPost: FC = () => {
   const [addPost, { isSuccess }] = useFetchCreatePostMutation()

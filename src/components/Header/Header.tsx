@@ -1,7 +1,7 @@
 import React, { FC, useState } from "react"
 import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
-import { isAuthSelector } from "../../store/async/login/loginSlice"
+import { isAuthSelector } from "../../store/slices/async/login/loginSlice"
 import { Profile } from "./Profile"
 import { Modal } from "../Modal/Modal"
 import { Login } from "../Login/Login"

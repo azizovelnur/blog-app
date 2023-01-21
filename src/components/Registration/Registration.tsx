@@ -5,7 +5,7 @@ import { IRegistration } from "../../models/models"
 import {
   fetchRegistration,
   isAuthRegistration,
-} from "../../store/async/login/loginSlice"
+} from "../../store/slices/async/login/loginSlice"
 import { useAppDispatch } from "../../store/store"
 import { useSelector } from "react-redux"
 import { ModalButton, ModalInput } from "../StyledComponents/StyledComponents"

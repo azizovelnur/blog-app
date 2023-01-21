@@ -1,17 +1,17 @@
 // import { addPostRecentToLS } from "./../../utils/addPostToLS"
-import { IPost } from "./../../models/models"
+import { IPost } from "../../../models/models"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 // import { getRecentsPostsFromLS } from "../../utils/getDataFromLS"
 
-interface utilsState {
+interface IHelpersState {
   recents: IPost[]
 }
 
-const initialState: utilsState = {
+const initialState: IHelpersState = {
   recents: [],
 }
 
-const utilsSlice = createSlice({
+const helperSlice = createSlice({
   name: "utils",
   initialState,
 
@@ -22,6 +22,6 @@ const utilsSlice = createSlice({
   },
 })
 
-export const { setRecents } = utilsSlice.actions
+export const { setRecents } = helperSlice.actions
 
-export const utilsReducer = utilsSlice.reducer
+export const helperReducer = helperSlice.reducer

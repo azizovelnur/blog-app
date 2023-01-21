@@ -2,7 +2,7 @@ import React, { useState, FC, useEffect, useRef } from "react"
 import { FaUserAlt } from "react-icons/fa"
 import { HiArrowDown, HiArrowUp, HiOutlineUserCircle } from "react-icons/hi"
 import { useDispatch, useSelector } from "react-redux"
-import { data, logout } from "../../store/async/login/loginSlice"
+import { data, logout } from "../../store/slices/async/login/loginSlice"
 import { MdOutlineMail } from "react-icons/md"
 
 const Profile: FC = () => {

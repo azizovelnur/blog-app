@@ -1,11 +1,12 @@
 import React, { FC, useEffect, useRef, useState } from "react"
+import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { AddPost } from "../../components/AddPost/AddPost"
 import { Post } from "../../components/Post/Post"
 import { PostSaved } from "../../components/Post/PostSaved"
 import { findPosts } from "../../store/postsSaved/postsSaved"
 import { useFetchPopularPostsQuery } from "../../store/rtk/posts/postsApi"
-import { useAppDispatch } from "../../store/store"
+import { RootState, useAppDispatch } from "../../store/store"
 
 const Blog: FC = () => {
   const [activeAllPost, setActiveAllPost] = useState<Boolean>(true)
@@ -14,6 +15,11 @@ const Blog: FC = () => {
   const [searchPostsSaved, setSearchPostsSaved] = useState<string>("")
   const [searchPosts, setSearchPosts] = useState<string>("")
   const dispatch = useAppDispatch()
+
+  const { recents } = useSelector((state: RootState) => state.utils)
+  const uniqueRecents = recents.filter((item, index) => {
+    return index === recents.indexOf(item)
+  })
 
   const {
     isLoading,
@@ -105,7 +111,15 @@ const Blog: FC = () => {
               )
             })}
           </div>
-          <div className="h-[200px] w-[200px] rounded-[10px] backdrop-blur-[3px] bg-[#29183090]"></div>
+          <div className="h-[200px] w-[200px] rounded-[10px] backdrop-blur-[3px] bg-[#29183090]">
+            {uniqueRecents?.map((recentPost: any, index: number) => {
+              return (
+                <div key={index}>
+                  <Link to={`/blog/${recentPost._id}`}>{recentPost.title}</Link>
+                </div>
+              )
+            })}
+          </div>
         </div>
       </aside>
       <section className="mainGrid">

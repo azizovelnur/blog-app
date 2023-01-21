@@ -4,6 +4,7 @@ import { githubApi } from "./rtk/github/githubApi"
 import { postsApi } from "./rtk/posts/postsApi"
 import { loginReducer } from "./async/login/loginSlice"
 import { postsReducer } from "./postsSaved/postsSaved"
+import { utilsReducer } from "./utils/utlisSlice"
 import { useDispatch } from "react-redux"
 
 export const store = configureStore({
@@ -13,6 +14,7 @@ export const store = configureStore({
     [commentsApi.reducerPath]: commentsApi.reducer,
     login: loginReducer,
     posts: postsReducer,
+    utils: utilsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(

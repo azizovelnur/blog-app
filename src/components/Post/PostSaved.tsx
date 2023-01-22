@@ -34,7 +34,7 @@ const PostSaved: FC<searchValue> = ({ searchPostsSaved }) => {
               </div>
               <div>{obj.text}</div>
 
-              {posts.find((post: any) => post._id === obj._id) && (
+              {posts.find((post: IPost) => post._id === obj._id) && (
                 <button
                   onClick={() => dispatch(removeItem(obj._id))}
                   className="absolute bottom-8 right-8"
@@ -63,7 +63,7 @@ const PostSaved: FC<searchValue> = ({ searchPostsSaved }) => {
               </div>
               <div>{obj.text}</div>
 
-              {posts.find((post: any) => post._id === obj._id) && (
+              {posts.find((post: IPost) => post._id === obj._id) && (
                 <button
                   onClick={() => dispatch(removeItem(obj._id))}
                   className="absolute bottom-8 right-8"

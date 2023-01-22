@@ -7,6 +7,7 @@ import {
 import { useFetchOnePostQuery } from "../../store/rtk/posts/postsApi"
 import { useAppDispatch } from "../../store/store"
 import { setRecents } from "../../store/slices/helperSlice/helperSlice"
+import { IComment } from "../../store/storeModels/storeModels"
 
 const ViewPost = () => {
   const { id } = useParams()
@@ -15,8 +16,12 @@ const ViewPost = () => {
   const [commentValue, setCommentValue] = useState<string>("")
   const [createComment, { isSuccess }] = useFetchCreateCommentMutation()
 
-  const { data: commentsData } = useFetchCommentsQuery(id)
-  const { isLoading, isError, data: onePostData } = useFetchOnePostQuery(id)
+  const { data: commentsData } = useFetchCommentsQuery(id as string)
+  const {
+    isLoading,
+    isError,
+    data: onePostData,
+  } = useFetchOnePostQuery(id as string)
 
   useEffect(() => {
     if (onePostData) {
@@ -31,7 +36,7 @@ const ViewPost = () => {
         alt="postImg"
       />
       <div>{onePostData?.title}</div>
-      {commentsData?.map((obj: any, index: number) => {
+      {commentsData?.map((obj: IComment, index: number) => {
         return <div key={index}>{obj.comment}</div>
       })}
       <div>
@@ -41,7 +46,9 @@ const ViewPost = () => {
           type="text"
         />
         <button
-          onClick={() => createComment({ postId: id, comment: commentValue })}
+          onClick={() =>
+            createComment({ postId: id as string, comment: commentValue })
+          }
         >
           add Comment
         </button>

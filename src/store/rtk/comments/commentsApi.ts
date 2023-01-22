@@ -1,3 +1,4 @@
+import { IComment, ICreateComment } from "./../../storeModels/storeModels"
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
 export const commentsApi = createApi({
@@ -11,7 +12,7 @@ export const commentsApi = createApi({
     },
   }),
   endpoints: (build) => ({
-    fetchComments: build.query({
+    fetchComments: build.query<IComment[], string>({
       query: (id) => ({
         url: `/posts/comments/${id}`,
       }),
@@ -19,18 +20,18 @@ export const commentsApi = createApi({
       providesTags: (result) =>
         result
           ? [
-              ...result.map(({ id }: any) => ({ type: "Comments", id })),
+              ...result.map(({ _id }) => ({ type: "Comments" as const, _id })),
               { type: "Comments", id: "LIST" },
             ]
           : [{ type: "Comments", id: "LIST" }],
     }),
 
-    fetchCreateComment: build.mutation({
-      query: (postIdAndComment) => {
+    fetchCreateComment: build.mutation<IComment, ICreateComment>({
+      query: (comment) => {
         return {
-          url: `/comments/${postIdAndComment.postId}`,
+          url: `/comments/${comment.postId}`,
           method: "POST",
-          body: postIdAndComment,
+          body: comment,
         }
       },
       invalidatesTags: [{ type: "Comments", id: "LIST" }],

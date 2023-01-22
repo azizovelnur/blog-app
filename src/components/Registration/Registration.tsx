@@ -1,11 +1,11 @@
 import React, { Dispatch, FC, SetStateAction } from "react"
 import { useForm } from "react-hook-form"
 import { Navigate } from "react-router-dom"
-import { IRegistration } from "../../models/models"
+import { IRegistration, IUser } from "../../models/models"
 import {
   fetchRegistration,
   isAuthRegistration,
-} from "../../store/slices/async/login/loginSlice"
+} from "../../store/slices/async/auth/authSlice"
 import { useAppDispatch } from "../../store/store"
 import { useSelector } from "react-redux"
 import { ModalButton, ModalInput } from "../StyledComponents/StyledComponents"
@@ -13,6 +13,9 @@ import { ModalButton, ModalInput } from "../StyledComponents/StyledComponents"
 interface IProps {
   active: Boolean
   setActive: Dispatch<SetStateAction<Boolean>>
+}
+interface IFetchData {
+  payload: IUser | any
 }
 const Registration: FC<IProps> = ({ active, setActive }) => {
   const dispatch = useAppDispatch()
@@ -28,7 +31,7 @@ const Registration: FC<IProps> = ({ active, setActive }) => {
 
   const onSubmit = async (values: IRegistration) => {
     setActive(false)
-    const userData = await dispatch(fetchRegistration(values))
+    const userData: IFetchData = await dispatch(fetchRegistration(values))
 
     if (!userData.payload) {
       return alert("login error")

@@ -2,7 +2,7 @@ import React, { FC, useState } from "react"
 import { useSelector } from "react-redux"
 import { Modal } from "../Modal/Modal"
 import { TPost } from "../../models/models"
-import { isAuthSelector } from "../../store/slices/async/login/loginSlice"
+import { isAuthSelector } from "../../store/slices/async/auth/authSlice"
 import { useFetchCreatePostMutation } from "../../store/rtk/posts/postsApi"
 import { IoCreate } from "react-icons/io5"
 import {
@@ -18,13 +18,17 @@ const AddPost: FC = () => {
   const [imageUrl, setImageUrl] = useState<string>("")
   const [active, setActive] = useState<Boolean>(false)
 
-  const handlerChangeFile = async (event: any) => {
+  const handlerChangeFile = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     try {
-      const formData = new FormData()
-      const file = event.target.files[0]
-      formData.append("image", file)
-      const { data } = await axios.post("/upload", formData)
-      setImageUrl(data.url)
+      if (event.target.files) {
+        const formData = new FormData()
+        const file = event.target.files[0]
+        formData.append("image", file)
+        const { data } = await axios.post("/upload", formData)
+        setImageUrl(data.url)
+      }
     } catch (error) {
       console.log(error)
       alert(error)
@@ -36,7 +40,9 @@ const AddPost: FC = () => {
     text: "",
   })
 
-  const changeHandler = (e: any) => {
+  const changeHandler = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setNewPost({
       ...newPost,
       [e.target.name]: e.target.value,

@@ -120,6 +120,15 @@ export interface IPost {
   imageUrl?: string
 }
 
+export interface IPostMutation {
+  _id?: string
+  title: string
+  text: string
+  viewsCount?: number
+  user?: IUser
+  imageUrl?: string
+}
+
 export type TPost = {
   title: string
   text: string

@@ -1,11 +1,11 @@
 import React, { Dispatch, FC, SetStateAction } from "react"
 import { useForm } from "react-hook-form"
 import { Navigate } from "react-router-dom"
-import { ILogin } from "../../models/models"
+import { ILogin, IUser } from "../../models/models"
 import {
   fetchLogin,
   isAuthSelector,
-} from "../../store/slices/async/login/loginSlice"
+} from "../../store/slices/async/auth/authSlice"
 import { useAppDispatch } from "../../store/store"
 import { useSelector } from "react-redux"
 import { ModalButton, ModalInput } from "../StyledComponents/StyledComponents"
@@ -13,6 +13,10 @@ import { ModalButton, ModalInput } from "../StyledComponents/StyledComponents"
 interface IProps {
   active: Boolean
   setActive: Dispatch<SetStateAction<Boolean>>
+}
+
+interface IFetchData {
+  payload: IUser | any
 }
 
 const Login: FC<IProps> = ({ active, setActive }) => {
@@ -31,7 +35,8 @@ const Login: FC<IProps> = ({ active, setActive }) => {
 
   const onSubmit = async (values: ILogin) => {
     setActive(false)
-    const userData = await dispatch(fetchLogin(values))
+    const userData: IFetchData = await dispatch(fetchLogin(values))
+    console.log(userData)
 
     if (!userData.payload) {
       return alert("login error")

@@ -1,11 +1,8 @@
 // import { addPostRecentToLS } from "./../../utils/addPostToLS"
 import { IPost } from "../../../models/models"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { IHelpersState } from "../../storeModels/storeModels"
 // import { getRecentsPostsFromLS } from "../../utils/getDataFromLS"
-
-interface IHelpersState {
-  recents: IPost[]
-}
 
 const initialState: IHelpersState = {
   recents: [],

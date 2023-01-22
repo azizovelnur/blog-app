@@ -1,8 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { IPost } from "./../../../models/models"
+import { IStatePosts } from "./../../storeModels/storeModels"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { getDataFromLocalStorage } from "../../../helpers/getDataFromLS"
 import { addPostToLS } from "../../../helpers/addPostToLS"
 
-const initialState = {
+const initialState: IStatePosts = {
   posts: getDataFromLocalStorage(),
   findedPosts: [],
 }
@@ -12,27 +14,25 @@ const postsSlice = createSlice({
   initialState,
 
   reducers: {
-    addItem(state, action) {
+    addItem(state, action: PayloadAction<IPost>) {
       const postsArr = state.posts.filter(
-        (obj: any) => obj.id !== action.payload._id
+        (obj) => obj._id !== action.payload._id
       )
       state.posts = [...postsArr, action.payload]
       console.log(state.posts)
       addPostToLS(state.posts)
     },
-    removeItem(state, action) {
-      state.posts = state.posts.filter(
-        (item: any) => item._id !== action.payload
-      )
+    removeItem(state, action: PayloadAction<string>) {
+      state.posts = state.posts.filter((item) => item._id !== action.payload)
       state.findedPosts = state.findedPosts.filter(
-        (item: any) => item._id !== action.payload
+        (item) => item._id !== action.payload
       )
       addPostToLS(state.posts)
     },
-    findPosts(state, action) {
+    findPosts(state, action: PayloadAction<string>) {
       const searchValue = action.payload.toLowerCase()
 
-      state.findedPosts = state.posts.filter((obj: any) => {
+      state.findedPosts = state.posts.filter((obj) => {
         if (obj.title.toLowerCase().includes(searchValue)) {
           return true
         } else {

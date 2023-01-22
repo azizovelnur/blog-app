@@ -7,6 +7,7 @@ import { PostSaved } from "../../components/Post/PostSaved"
 import { findPosts } from "../../store/slices/postsSlice/postsSlice"
 import { useFetchPopularPostsQuery } from "../../store/rtk/posts/postsApi"
 import { RootState, useAppDispatch } from "../../store/store"
+import { IPost } from "../../models/models"
 
 const Blog: FC = () => {
   const [activeAllPost, setActiveAllPost] = useState<Boolean>(true)
@@ -21,11 +22,7 @@ const Blog: FC = () => {
     return index === recents.indexOf(item)
   })
 
-  const {
-    isLoading,
-    isError,
-    data: popularPosts,
-  } = useFetchPopularPostsQuery(null)
+  const { isLoading, isError, data: popularPosts } = useFetchPopularPostsQuery()
   const onClickAll = () => {
     setActiveAllPost(true)
     setActiveSavedPost(false)
@@ -101,7 +98,7 @@ const Blog: FC = () => {
 
         <div className="flex flex-col justify-center items-center mt-10">
           <div className="h-[200px] w-[200px] mb-[30px] rounded-[10px] backdrop-blur-[3px] bg-[#29183090]">
-            {popularPosts?.map((popularPost: any, index: number) => {
+            {popularPosts?.map((popularPost: IPost, index: number) => {
               return (
                 <div key={index}>
                   <Link to={`/blog/${popularPost._id}`}>
@@ -112,7 +109,7 @@ const Blog: FC = () => {
             })}
           </div>
           <div className="h-[200px] w-[200px] rounded-[10px] backdrop-blur-[3px] bg-[#29183090]">
-            {uniqueRecents?.map((recentPost: any, index: number) => {
+            {uniqueRecents?.map((recentPost: IPost, index: number) => {
               return (
                 <div key={index}>
                   <Link to={`/blog/${recentPost._id}`}>{recentPost.title}</Link>

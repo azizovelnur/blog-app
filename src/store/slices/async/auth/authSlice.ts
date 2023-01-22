@@ -1,36 +1,40 @@
+import { IUser } from "../../../../models/models"
 import { IRegistration } from "../../../../models/models"
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import { ILogin, IUserState, Status } from "../../../../models/models"
 import axios from "../../../../axios/axiosConf"
 import { RootState } from "../../../store"
 
-export const fetchLogin = createAsyncThunk(
-  "login/fetchLogin",
-  async (userData: ILogin) => {
-    const { data } = await axios.post("/auth/login", userData)
+export const fetchLogin = createAsyncThunk<IUser, ILogin>(
+  "auth/fetchLogin",
+  async (userData) => {
+    const { data } = await axios.post<IUser>("/auth/login", userData)
     return data
   }
 )
 
-export const fetchRegistration = createAsyncThunk(
-  "login/fetchRegistration",
+export const fetchRegistration = createAsyncThunk<IUser, IRegistration>(
+  "auth/fetchRegistration",
   async (userData: IRegistration) => {
-    const { data } = await axios.post("/auth/register", userData)
+    const { data } = await axios.post<IUser>("/auth/register", userData)
     return data
   }
 )
 
-export const fetchAuthMe = createAsyncThunk("login/fetchAuthMe", async () => {
-  const { data } = await axios.get("/auth/me")
-  return data
-})
+export const fetchAuthMe = createAsyncThunk<IUser>(
+  "auth/fetchAuthMe",
+  async () => {
+    const { data } = await axios.get<IUser>("/auth/me")
+    return data
+  }
+)
 
 const initialState: IUserState = {
   data: null,
   status: Status.LOADING,
 }
 
-const loginSlice = createSlice({
+const authSlice = createSlice({
   name: "login",
   initialState,
 
@@ -85,10 +89,9 @@ const loginSlice = createSlice({
   },
 })
 
-export const isAuthSelector = (state: RootState) => Boolean(state.login.data)
-export const data = (state: RootState) => state.login.data
-export const isAuthRegistration = (state: RootState) =>
-  Boolean(state.login.data)
-export const loginReducer = loginSlice.reducer
+export const isAuthSelector = (state: RootState) => Boolean(state.auth.data)
+export const data = (state: RootState) => state.auth.data
+export const isAuthRegistration = (state: RootState) => Boolean(state.auth.data)
+export const authReducer = authSlice.reducer
 
-export const { logout } = loginSlice.actions
+export const { logout } = authSlice.actions

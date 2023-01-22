@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react"
-import { data } from "../../store/slices/async/login/loginSlice"
+import { data } from "../../store/slices/async/auth/authSlice"
 import { useSelector } from "react-redux"
 import {
   useFetchDeletePostMutation,
@@ -33,26 +33,28 @@ const Post: FC<ISearchProps> = ({ searchPosts }) => {
   const [id, setId] = useState<string>("")
 
   const [imageUrl, setImageUrl] = useState<string>("")
-  const { isLoading, isError, data: postsData } = useFetchPostsQuery(null)
+  const { isLoading, isError, data: postsData } = useFetchPostsQuery()
   const [updatePost, { isSuccess }] = useFetchUpdatePostMutation()
 
-  const findedPosts =
-    searchPosts &&
-    postsData?.filter((obj: any) => {
-      if (obj.title.toLowerCase().includes(searchPosts)) {
-        return true
-      } else {
-        return false
-      }
-    })
+  const findedPosts = postsData?.filter((obj: IPost) => {
+    if (obj.title.toLowerCase().includes(searchPosts)) {
+      return true
+    } else {
+      return false
+    }
+  })
 
-  const handlerChangeFile = async (event: any) => {
+  const handlerChangeFile = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     try {
-      const formData = new FormData()
-      const file = event.target.files[0]
-      formData.append("image", file)
-      const { data } = await axios.post("/upload", formData)
-      setImageUrl(data.url)
+      if (event.target.files) {
+        const formData = new FormData()
+        const file = event.target.files[0]
+        formData.append("image", file)
+        const { data } = await axios.post("/upload", formData)
+        setImageUrl(data.url)
+      }
     } catch (error) {
       console.log(error)
       alert(error)
@@ -63,7 +65,9 @@ const Post: FC<ISearchProps> = ({ searchPosts }) => {
     title: "",
     text: "",
   })
-  const changeHandler = (e: any) => {
+  const changeHandler = (
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
     setNewPost({
       ...newPost,
       [e.target.name]: e.target.value,
@@ -79,10 +83,12 @@ const Post: FC<ISearchProps> = ({ searchPosts }) => {
   // }
 
   const onCLickEdit = (objId: string) => {
-    const post = postsData?.filter(function (obj: any) {
+    const post = postsData?.filter(function (obj: IPost) {
       return obj._id === objId
     })
-    setNewPost({ title: post[0].title, text: post[0].text })
+    if (post) {
+      setNewPost({ title: post[0].title, text: post[0].text })
+    }
     setActive(true)
     setId(objId)
   }
@@ -96,7 +102,7 @@ const Post: FC<ISearchProps> = ({ searchPosts }) => {
     setActive(false)
   }
 
-  const addItemToPostsSaved = (obj: any) => {
+  const addItemToPostsSaved = (obj: IPost) => {
     // const post = postsData?.filter(function (obj: any) {
     //   return obj._id === id
     // })
@@ -109,7 +115,7 @@ const Post: FC<ISearchProps> = ({ searchPosts }) => {
 
   return (
     <>
-      {findedPosts.length !== 0 && searchPosts
+      {findedPosts?.length !== 0 && searchPosts
         ? findedPosts?.map((obj: IPost, index: number) => (
             <div
               key={index}
@@ -134,7 +140,7 @@ const Post: FC<ISearchProps> = ({ searchPosts }) => {
                 <button className="bg-black">PostView</button>
               </Link>
 
-              {posts.find((post: any) => post._id === obj._id) ? (
+              {posts.find((post: IPost) => post._id === obj._id) ? (
                 <button
                   onClick={() => removeItemFromPostsSaved(obj._id)}
                   className="absolute bottom-8 right-8"
@@ -231,7 +237,7 @@ const Post: FC<ISearchProps> = ({ searchPosts }) => {
                 <button className="bg-black">PostView</button>
               </Link>
 
-              {posts.find((post: any) => post._id === obj._id) ? (
+              {posts.find((post: IPost) => post._id === obj._id) ? (
                 <button
                   onClick={() => removeItemFromPostsSaved(obj._id)}
                   className="absolute bottom-8 right-8"

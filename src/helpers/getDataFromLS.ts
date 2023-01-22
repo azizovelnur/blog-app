@@ -1,7 +1,8 @@
+import { IPost } from "./../models/models"
 export const getDataFromLocalStorage = () => {
   const getPosts = localStorage.getItem("postsLS")
   const posts = getPosts ? JSON.parse(getPosts) : []
-  return posts
+  return posts as IPost[]
 }
 
 // export const getRecentsPostsFromLS = () => {

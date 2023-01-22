@@ -2,7 +2,7 @@ import { commentsApi } from "./rtk/comments/commentsApi"
 import { configureStore } from "@reduxjs/toolkit"
 import { githubApi } from "./rtk/github/githubApi"
 import { postsApi } from "./rtk/posts/postsApi"
-import { loginReducer } from "./slices/async/login/loginSlice"
+import { authReducer } from "./slices/async/auth/authSlice"
 import { postsReducer } from "./slices/postsSlice/postsSlice"
 import { helperReducer } from "./slices/helperSlice/helperSlice"
 import { useDispatch } from "react-redux"
@@ -12,7 +12,7 @@ export const store = configureStore({
     [githubApi.reducerPath]: githubApi.reducer,
     [postsApi.reducerPath]: postsApi.reducer,
     [commentsApi.reducerPath]: commentsApi.reducer,
-    login: loginReducer,
+    auth: authReducer,
     posts: postsReducer,
     helper: helperReducer,
   },

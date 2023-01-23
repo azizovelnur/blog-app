@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react"
 import { data } from "../../store/slices/async/auth/authSlice"
-import { useSelector } from "react-redux"
+import { useAppSelector, useAppDispatch } from "../../hooks/hooks"
 import {
   useFetchDeletePostMutation,
   useFetchPostsQuery,
@@ -18,7 +18,7 @@ import {
   ModalInput,
   ModalTextArea,
 } from "../StyledComponents/StyledComponents"
-import { RootState, useAppDispatch } from "../../store/store"
+import { RootState } from "../../store/store"
 import { Link } from "react-router-dom"
 import axios from "../../axios/axiosConf"
 
@@ -27,7 +27,7 @@ interface ISearchProps {
 }
 
 const Post: FC<ISearchProps> = ({ searchPosts }) => {
-  const { posts } = useSelector((state: RootState) => state.posts)
+  const { posts } = useAppSelector((state: RootState) => state.posts)
   const [active, setActive] = useState<Boolean>(false)
   // const [isSaved, setIsSaved] = useState<Boolean>(false)
   const [id, setId] = useState<string>("")
@@ -76,7 +76,7 @@ const Post: FC<ISearchProps> = ({ searchPosts }) => {
 
   const dispatch = useAppDispatch()
   const [removePost] = useFetchDeletePostMutation()
-  const userData = useSelector(data)
+  const userData = useAppSelector(data)
 
   // const onClickIsSaved = (objId: string) => {
   //   setIsSaved(!isSaved)

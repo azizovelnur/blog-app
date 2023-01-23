@@ -1,12 +1,12 @@
 import React, { FC, useEffect, useRef, useState } from "react"
-import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { AddPost } from "../../components/AddPost/AddPost"
 import { Post } from "../../components/Post/Post"
 import { PostSaved } from "../../components/Post/PostSaved"
 import { findPosts } from "../../store/slices/postsSlice/postsSlice"
 import { useFetchPopularPostsQuery } from "../../store/rtk/posts/postsApi"
-import { RootState, useAppDispatch } from "../../store/store"
+import { RootState } from "../../store/store"
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks"
 import { IPost } from "../../models/models"
 
 const Blog: FC = () => {
@@ -17,7 +17,7 @@ const Blog: FC = () => {
   const [searchPosts, setSearchPosts] = useState<string>("")
   const dispatch = useAppDispatch()
 
-  const { recents } = useSelector((state: RootState) => state.helper)
+  const { recents } = useAppSelector((state: RootState) => state.helper)
   const uniqueRecents = recents.filter((item, index) => {
     return index === recents.indexOf(item)
   })

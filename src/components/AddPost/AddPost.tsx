@@ -1,8 +1,8 @@
 import React, { FC, useState } from "react"
-import { useSelector } from "react-redux"
+import { useAppSelector } from "../../hooks/hooks"
 import { Modal } from "../Modal/Modal"
 import { TPost } from "../../models/models"
-import { isAuthSelector } from "../../store/slices/async/auth/authSlice"
+import { data } from "../../store/slices/async/auth/authSlice"
 import { useFetchCreatePostMutation } from "../../store/rtk/posts/postsApi"
 import { IoCreate } from "react-icons/io5"
 import {
@@ -14,7 +14,7 @@ import axios from "../../axios/axiosConf"
 
 const AddPost: FC = () => {
   const [addPost, { isSuccess }] = useFetchCreatePostMutation()
-  const isAuth = useSelector(isAuthSelector)
+  const isAuth = useAppSelector(data)
   const [imageUrl, setImageUrl] = useState<string>("")
   const [active, setActive] = useState<Boolean>(false)
 

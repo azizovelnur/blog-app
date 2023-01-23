@@ -2,12 +2,9 @@ import React, { Dispatch, FC, SetStateAction } from "react"
 import { useForm } from "react-hook-form"
 import { Navigate } from "react-router-dom"
 import { ILogin, IUser } from "../../models/models"
-import {
-  fetchLogin,
-  isAuthSelector,
-} from "../../store/slices/async/auth/authSlice"
-import { useAppDispatch } from "../../store/store"
-import { useSelector } from "react-redux"
+import { fetchLogin, data } from "../../store/slices/async/auth/authSlice"
+import { useAppDispatch } from "../../hooks/hooks"
+import { useAppSelector } from "../../hooks/hooks"
 import { ModalButton, ModalInput } from "../StyledComponents/StyledComponents"
 
 interface IProps {
@@ -20,7 +17,7 @@ interface IFetchData {
 }
 
 const Login: FC<IProps> = ({ active, setActive }) => {
-  const isAuth = useSelector(isAuthSelector)
+  const isAuth = useAppSelector(data)
   console.log(isAuth)
 
   const dispatch = useAppDispatch()

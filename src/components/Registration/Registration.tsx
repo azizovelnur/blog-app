@@ -2,12 +2,8 @@ import React, { Dispatch, FC, SetStateAction } from "react"
 import { useForm } from "react-hook-form"
 import { Navigate } from "react-router-dom"
 import { IRegistration, IUser } from "../../models/models"
-import {
-  fetchRegistration,
-  isAuthRegistration,
-} from "../../store/slices/async/auth/authSlice"
-import { useAppDispatch } from "../../store/store"
-import { useSelector } from "react-redux"
+import { fetchRegistration } from "../../store/slices/async/auth/authSlice"
+import { useAppDispatch } from "../../hooks/hooks"
 import { ModalButton, ModalInput } from "../StyledComponents/StyledComponents"
 
 interface IProps {

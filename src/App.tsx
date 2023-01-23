@@ -6,7 +6,7 @@ import { Home } from "./pages/Home/Home"
 import { Projects } from "./pages/Projects/Projects"
 import { ViewPost } from "./pages/ViewPost/ViewPost"
 import { fetchAuthMe } from "./store/slices/async/auth/authSlice"
-import { useAppDispatch } from "./store/store"
+import { useAppDispatch } from "./hooks/hooks"
 
 function App() {
   const dispatch = useAppDispatch()

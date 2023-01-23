@@ -5,7 +5,7 @@ import {
   useFetchCreateCommentMutation,
 } from "../../store/rtk/comments/commentsApi"
 import { useFetchOnePostQuery } from "../../store/rtk/posts/postsApi"
-import { useAppDispatch } from "../../store/store"
+import { useAppDispatch } from "../../hooks/hooks"
 import { setRecents } from "../../store/slices/helperSlice/helperSlice"
 import { IComment } from "../../store/storeModels/storeModels"
 

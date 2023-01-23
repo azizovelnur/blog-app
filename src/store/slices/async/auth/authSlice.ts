@@ -89,9 +89,8 @@ const authSlice = createSlice({
   },
 })
 
-export const isAuthSelector = (state: RootState) => Boolean(state.auth.data)
 export const data = (state: RootState) => state.auth.data
-export const isAuthRegistration = (state: RootState) => Boolean(state.auth.data)
+
 export const authReducer = authSlice.reducer
 
 export const { logout } = authSlice.actions

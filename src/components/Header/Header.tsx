@@ -1,7 +1,7 @@
 import React, { FC, useState } from "react"
 import { Link } from "react-router-dom"
-import { useSelector } from "react-redux"
-import { isAuthSelector } from "../../store/slices/async/auth/authSlice"
+import { useAppSelector } from "../../hooks/hooks"
+import { data } from "../../store/slices/async/auth/authSlice"
 import { Profile } from "./Profile"
 import { Modal } from "../Modal/Modal"
 import { Login } from "../Login/Login"
@@ -11,7 +11,7 @@ import { FaBlog } from "react-icons/fa"
 import { GoProject } from "react-icons/go"
 
 const Header: FC = () => {
-  const isAuth = useSelector(isAuthSelector)
+  const isAuth = useAppSelector(data)
 
   const [modalActive, setModalActive] = useState<Boolean>(false)
   const [loginActive, setLoginActive] = useState<Boolean>(false)

@@ -5,7 +5,6 @@ import { postsApi } from "./rtk/posts/postsApi"
 import { authReducer } from "./slices/async/auth/authSlice"
 import { postsReducer } from "./slices/postsSlice/postsSlice"
 import { helperReducer } from "./slices/helperSlice/helperSlice"
-import { useDispatch } from "react-redux"
 
 export const store = configureStore({
   reducer: {
@@ -27,4 +26,3 @@ export const store = configureStore({
 export type RootState = ReturnType<typeof store.getState>
 
 export type AppDispatch = typeof store.dispatch
-export const useAppDispatch = () => useDispatch<AppDispatch>()

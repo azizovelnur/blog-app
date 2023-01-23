@@ -1,9 +1,9 @@
 import React, { FC } from "react"
 import { BsFillBookmarkHeartFill } from "react-icons/bs"
-import { useSelector } from "react-redux"
 import { IPost } from "../../models/models"
 import { removeItem } from "../../store/slices/postsSlice/postsSlice"
-import { RootState, useAppDispatch } from "../../store/store"
+import { RootState } from "../../store/store"
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks"
 import { Post } from "./Post"
 
 interface searchValue {
@@ -11,8 +11,8 @@ interface searchValue {
 }
 
 const PostSaved: FC<searchValue> = ({ searchPostsSaved }) => {
-  const { posts } = useSelector((state: RootState) => state.posts)
-  const { findedPosts } = useSelector((state: RootState) => state.posts)
+  const { posts } = useAppSelector((state: RootState) => state.posts)
+  const { findedPosts } = useAppSelector((state: RootState) => state.posts)
   const dispatch = useAppDispatch()
   return (
     <div>

@@ -1,8 +1,8 @@
 import React, { FC, useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
 import { AddPost } from "../../components/AddPost/AddPost"
-import { Post } from "../../components/Post/Post"
-import { PostSaved } from "../../components/Post/PostSaved"
+import { Posts } from "../../components/Posts/Posts"
+import { PostSaved } from "../../components/Posts/PostSaved"
 import { findPosts } from "../../store/slices/postsSlice/postsSlice"
 import { useFetchPopularPostsQuery } from "../../store/rtk/posts/postsApi"
 import { RootState } from "../../store/store"
@@ -120,7 +120,7 @@ const Blog: FC = () => {
         </div>
       </aside>
       <section className="mainGrid">
-        {activeAllPost && <Post searchPosts={searchPosts} />}
+        {activeAllPost && <Posts searchPosts={searchPosts} />}
         {activeAllPost && <AddPost />}
         {activeSavedPost && <PostSaved searchPostsSaved={searchPostsSaved} />}
       </section>

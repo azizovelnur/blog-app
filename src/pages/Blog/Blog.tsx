@@ -18,9 +18,6 @@ const Blog: FC = () => {
   const dispatch = useAppDispatch()
 
   const { recents } = useAppSelector((state: RootState) => state.helper)
-  const uniqueRecents = recents.filter((item, index) => {
-    return index === recents.indexOf(item)
-  })
 
   const { isLoading, isError, data: popularPosts } = useFetchPopularPostsQuery()
   const onClickAll = () => {
@@ -109,7 +106,7 @@ const Blog: FC = () => {
             })}
           </div>
           <div className="h-[200px] w-[200px] rounded-[10px] backdrop-blur-[3px] bg-[#29183090]">
-            {uniqueRecents?.map((recentPost: IPost, index: number) => {
+            {recents?.map((recentPost: IPost, index: number) => {
               return (
                 <div key={index}>
                   <Link to={`/blog/${recentPost._id}`}>{recentPost.title}</Link>

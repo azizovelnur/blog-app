@@ -22,10 +22,10 @@ const Posts: FC<ISearchProps> = ({ searchPosts }) => {
     <>
       {findedPosts?.length !== 0 && searchPosts
         ? findedPosts?.map((obj: IPost, index: number) => (
-            <Post obj={obj} postsData={postsData} allPosts={true} />
+            <Post key={index} obj={obj} postsData={postsData} allPosts={true} />
           ))
         : postsData?.map((obj: IPost, index: number) => (
-            <Post obj={obj} postsData={postsData} allPosts={true} />
+            <Post key={index} obj={obj} postsData={postsData} allPosts={true} />
           ))}
     </>
   )

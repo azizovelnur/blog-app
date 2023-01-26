@@ -23,6 +23,8 @@ import {
 } from "../../StyledComponents/StyledComponents"
 import { RootState } from "../../../store/store"
 import axios from "../../../axios/axiosConf"
+import { ReactComponent as NoImage } from "../../../assets/images/NoImage.svg"
+import { FaComments } from "react-icons/fa"
 
 interface IPostProps {
   obj: IPost
@@ -102,41 +104,44 @@ const Post: FC<IPostProps> = ({ obj, postsData, allPosts }) => {
       <div
         key={obj._id}
         className={
-          "relative mx-auto w-[600px] h-[400px] mb-[70px] rounded-[10px] shadow-[0px_4px_20px_4px_rgba(119,53,136,0.459)]"
+          "relative mx-auto w-[640px] h-[480px] mb-[70px] rounded-[10px] shadow-[0px_4px_20px_4px_rgba(119,53,136,0.459)]"
         }
       >
-        <Link to={`/blog/${obj._id}`}>
+        {obj.imageUrl ? (
           <img
-            className="w-full h-[50%]"
+            className="w-full h-[50%] rounded-t-md object-cover object-top"
             src={`http://localhost:5000${obj.imageUrl}`}
             alt="img"
           />
-        </Link>
-        <div>
-          <h1 className="text-[30px] font-bold">{obj.title}</h1>
-        </div>
-        <div>{obj.text}</div>
-
-        {allPosts && (
-          <div className="flex items-center w-[40px] text-[30px]">
-            {obj.viewsCount} <HiEye />
-          </div>
+        ) : (
+          <NoImage className="rounded-t-md" />
         )}
+        <div>
+          <h2 className="text-[30px] font-bold my-2">{obj.title}</h2>
+        </div>
+        <div>
+          <h2 className="text-[30px] font-bold my-2">{obj.viewsCount}</h2>
+        </div>
+        <p className="h-[120px] overflow-y-scroll">{obj.text}</p>
 
         {posts.find((post: IPost) => post._id === obj._id) ? (
-          <button
-            onClick={() => removeItemFromPostsSaved(obj._id)}
-            className="absolute bottom-8 right-8"
-          >
-            <BsFillBookmarkHeartFill color="red" size={"30px"} />
-          </button>
+          <div className="absolute bottom-2 right-2 flex items-center justify-between w-[70px] text-[30px]">
+            <Link to={`/blog/${obj._id}`}>
+              <FaComments />
+            </Link>
+            <button onClick={() => removeItemFromPostsSaved(obj._id)}>
+              <BsFillBookmarkHeartFill color="purple" />
+            </button>
+          </div>
         ) : (
-          <button
-            onClick={() => addItemToPostsSaved(obj)}
-            className="absolute bottom-8 right-8"
-          >
-            <BsFillBookmarkHeartFill color="white" size={"30px"} />
-          </button>
+          <div className="absolute bottom-2 right-2 flex items-center justify-between w-[70px] text-[30px]">
+            <Link to={`/blog/${obj._id}`}>
+              <FaComments />
+            </Link>
+            <button onClick={() => addItemToPostsSaved(obj)}>
+              <BsFillBookmarkHeartFill color="white" />
+            </button>
+          </div>
         )}
 
         {allPosts && obj.user._id === userData?._id && (
@@ -146,7 +151,7 @@ const Post: FC<IPostProps> = ({ obj, postsData, allPosts }) => {
                 <FiEdit2 color="white" size={"30px"} />
               </button>
               <button onClick={() => deletePost(obj._id)}>
-                <TbTrash color="red" size={"30px"} />
+                <TbTrash color="purple" size={"30px"} />
               </button>
             </div>
 
@@ -193,7 +198,9 @@ const Post: FC<IPostProps> = ({ obj, postsData, allPosts }) => {
           </>
         )}
 
-        <div className="text-lg font-bold">@{obj.user.userName}</div>
+        <div className="text-lg font-bold absolute left-2 bottom-2">
+          @{obj.user.userName}
+        </div>
       </div>
     </>
   )

@@ -5,8 +5,8 @@ export const getDataFromLocalStorage = () => {
   return posts as IPost[]
 }
 
-// export const getRecentsPostsFromLS = () => {
-//   const getRecentsPosts = localStorage.getItem("recentsPostsLS")
-//   const recentsPosts = getRecentsPosts ? JSON.parse(getRecentsPosts) : []
-//   return recentsPosts
-// }
+export const getRecentsPostsFromLS = () => {
+  const posts = localStorage.getItem("recentsPosts")
+  const recentsPosts = posts ? JSON.parse(posts) : []
+  return recentsPosts as IPost[]
+}

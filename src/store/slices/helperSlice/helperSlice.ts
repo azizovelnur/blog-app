@@ -1,11 +1,11 @@
-// import { addPostRecentToLS } from "./../../utils/addPostToLS"
+import { addRecentsToLS } from "./../../../helpers/addPostToLS"
 import { IPost } from "../../../models/models"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { IHelpersState } from "../../storeModels/storeModels"
-// import { getRecentsPostsFromLS } from "../../utils/getDataFromLS"
+import { getRecentsPostsFromLS } from "../../../helpers/getDataFromLS"
 
 const initialState: IHelpersState = {
-  recents: [],
+  recents: getRecentsPostsFromLS(),
 }
 
 const helperSlice = createSlice({
@@ -14,7 +14,12 @@ const helperSlice = createSlice({
 
   reducers: {
     setRecents(state, action: PayloadAction<IPost>) {
+      state.recents = state.recents.filter(({ _id }) => {
+        return _id !== action.payload._id
+      })
       state.recents.unshift(action.payload)
+      state.recents = state.recents.slice(0, 8)
+      addRecentsToLS(state.recents)
     },
   },
 })

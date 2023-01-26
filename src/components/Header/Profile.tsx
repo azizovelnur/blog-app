@@ -47,12 +47,20 @@ const Profile: FC = () => {
           <div className="flex justify-between flex-col h-full">
             <div>
               <div className="flex items-center">
-                <HiOutlineUserCircle size={"20px"} className="mr-[10px]" />
-                {userData?.userName}
+                <div>
+                  <HiOutlineUserCircle size={"20px"} />
+                </div>
+                <div className="ml-2 overflow-hidden overflow-ellipsis whitespace-nowrap">
+                  {userData?.userName}
+                </div>
               </div>
               <div className="flex items-center">
-                <MdOutlineMail size={"20px"} className="mr-[10px]" />
-                {userData?.email}
+                <div>
+                  <MdOutlineMail size={"20px"} />
+                </div>
+                <div className="ml-2 overflow-hidden overflow-ellipsis whitespace-nowrap">
+                  {userData?.email}
+                </div>
               </div>
             </div>
 

@@ -38,12 +38,6 @@ export const postsApi = createApi({
       }),
     }),
 
-    // fetchSearchPosts: build.query({
-    //   query: (value) => ({
-    //     url: `/posts/search/${value}`,
-    //   }),
-    // }),
-
     fetchCreatePost: build.mutation<IPost, IPostMutation>({
       query: (post) => {
         return {

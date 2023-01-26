@@ -1,12 +1,14 @@
+import { getRecentsPostsFromLS } from "./../../../helpers/getDataFromLS"
 import { IPost } from "./../../../models/models"
 import { IStatePosts } from "./../../storeModels/storeModels"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { getDataFromLocalStorage } from "../../../helpers/getDataFromLS"
-import { addPostToLS } from "../../../helpers/addPostToLS"
+import { addPostToLS, addRecentsToLS } from "../../../helpers/addPostToLS"
 
 const initialState: IStatePosts = {
   posts: getDataFromLocalStorage(),
   findedPosts: [],
+  recents: getRecentsPostsFromLS(),
 }
 
 const postsSlice = createSlice({
@@ -29,6 +31,14 @@ const postsSlice = createSlice({
       )
       addPostToLS(state.posts)
     },
+    setRecents(state, action: PayloadAction<IPost>) {
+      state.recents = state.recents.filter(({ _id }) => {
+        return _id !== action.payload._id
+      })
+      state.recents.unshift(action.payload)
+      state.recents = state.recents.slice(0, 8)
+      addRecentsToLS(state.recents)
+    },
     findPosts(state, action: PayloadAction<string>) {
       const searchValue = action.payload.toLowerCase()
 
@@ -43,6 +53,6 @@ const postsSlice = createSlice({
   },
 })
 
-export const { addItem, removeItem, findPosts } = postsSlice.actions
+export const { addItem, removeItem, setRecents, findPosts } = postsSlice.actions
 
 export const postsReducer = postsSlice.reducer

@@ -2,11 +2,8 @@ import { IPost } from "../../models/models"
 
 export interface IStatePosts {
   posts: IPost[]
-  findedPosts: IPost[]
-}
-
-export interface IHelpersState {
   recents: IPost[]
+  findedPosts: IPost[]
 }
 
 export interface IComment {

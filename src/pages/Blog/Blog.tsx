@@ -17,7 +17,7 @@ const Blog: FC = () => {
   const [searchPosts, setSearchPosts] = useState<string>("")
   const dispatch = useAppDispatch()
 
-  const { recents } = useAppSelector((state: RootState) => state.helper)
+  const { recents } = useAppSelector((state: RootState) => state.posts)
 
   const { isLoading, isError, data: popularPosts } = useFetchPopularPostsQuery()
   const onClickAll = () => {

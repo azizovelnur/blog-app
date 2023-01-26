@@ -6,7 +6,7 @@ import {
 } from "../../store/rtk/comments/commentsApi"
 import { useFetchOnePostQuery } from "../../store/rtk/posts/postsApi"
 import { useAppDispatch } from "../../hooks/hooks"
-import { setRecents } from "../../store/slices/helperSlice/helperSlice"
+import { setRecents } from "../../store/slices/postsSlice/postsSlice"
 import { IComment } from "../../store/storeModels/storeModels"
 
 const ViewPost = () => {

@@ -4,7 +4,6 @@ import { githubApi } from "./rtk/github/githubApi"
 import { postsApi } from "./rtk/posts/postsApi"
 import { authReducer } from "./slices/async/auth/authSlice"
 import { postsReducer } from "./slices/postsSlice/postsSlice"
-import { helperReducer } from "./slices/helperSlice/helperSlice"
 
 export const store = configureStore({
   reducer: {
@@ -13,7 +12,6 @@ export const store = configureStore({
     [commentsApi.reducerPath]: commentsApi.reducer,
     auth: authReducer,
     posts: postsReducer,
-    helper: helperReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(

@@ -8,7 +8,7 @@ import { Login } from "../Login/Login"
 import { Registration } from "../Registration/Registration"
 import { BiHome } from "react-icons/bi"
 import { FaBlog } from "react-icons/fa"
-import { GoProject } from "react-icons/go"
+import { AddPost } from "../AddPost/AddPost"
 
 const Header: FC = () => {
   const isAuth = useAppSelector(data)
@@ -30,44 +30,26 @@ const Header: FC = () => {
   }
 
   return (
-    <header className={"headerGrid z-50 fixed w-full text-[16px] headerBlur"}>
-      <div className={"container mx-auto max-w-[1480px]"}>
+    <header className={"headerGrid z-50 fixed w-full text-[16px] bg-[#fff]"}>
+      <div className={"container mx-auto max-w-7xl"}>
         <div className={"flex justify-between items-center h-[50px]"}>
           <Link to={"/"}>
             <div className={"flex items-center"}>
               <h2
                 className={
-                  "text-[#fff] font-black text-[22px] rounded-[4px] px-[4px]"
+                  "text-[#000] font-black text-[22px] rounded-[4px] px-[4px]"
                 }
               >
-                Portfolio
+                Blog
               </h2>
             </div>
           </Link>
 
-          <div className="flex justify-between items-center w-1/3">
-            <Link to={"/"}>
-              <div className="flex">
-                <BiHome size={"30px"} />
-                <div className="text-[24px] ml-[2px]">Home</div>
-              </div>
-            </Link>
-            <Link to={"/blog"}>
-              <div className="flex">
-                <FaBlog size={"30px"} />
-                <div className="text-[24px] ml-[2px]">Blog</div>
-              </div>
-            </Link>
-            <Link to={"/projects"}>
-              <div className="flex">
-                <GoProject size={"30px"} />
-                <div className="text-[24px] ml-[2px]">Projects</div>
-              </div>
-            </Link>
-          </div>
-
           {isAuth ? (
-            <Profile />
+            <>
+              <AddPost />
+              <Profile />
+            </>
           ) : (
             <div className="flex justify-between w-[140px] items-center">
               <div

@@ -104,7 +104,7 @@ const Post: FC<IPostProps> = ({ obj, postsData, allPosts }) => {
       <div
         key={obj._id}
         className={
-          "relative mx-auto w-[640px] h-[480px] mb-[70px] rounded-[10px] shadow-[0px_4px_20px_4px_rgba(119,53,136,0.459)]"
+          "relative mx-auto w-[640px] h-[480px] mb-[70px] rounded-[10px] bg-white"
         }
       >
         {obj.imageUrl ? (
@@ -122,7 +122,9 @@ const Post: FC<IPostProps> = ({ obj, postsData, allPosts }) => {
         <div>
           <h2 className="text-[30px] font-bold my-2">{obj.viewsCount}</h2>
         </div>
-        <p className="h-[120px] overflow-y-scroll">{obj.text}</p>
+        <p className="h-[140px] overflow-hidden overflow-ellipsis">
+          {obj.text}
+        </p>
 
         {posts.find((post: IPost) => post._id === obj._id) ? (
           <div className="absolute bottom-2 right-2 flex items-center justify-between w-[70px] text-[30px]">

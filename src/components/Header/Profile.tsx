@@ -38,12 +38,12 @@ const Profile: FC = () => {
         onClick={() => setOpen(!open)}
         className="flex justify-between w-[40px] h-[30px]  items-center rounded-[4px] p-[2px] cursor-pointer"
       >
-        <FaUserAlt color="white" />
-        {open ? <HiArrowUp color="white" /> : <HiArrowDown color="white" />}
+        <FaUserAlt color="black" />
+        {open ? <HiArrowUp color="black" /> : <HiArrowDown color="black" />}
       </div>
 
       {open && (
-        <div className="absolute bg-[#29183090] rounded-[10px] p-2 backdrop-blur-md top-[32px] right-[0px] w-[200px] h-[200px] text-white">
+        <div className="absolute rounded-[10px] p-2 bg-black backdrop-blur-md top-[32px] right-[0px] w-[200px] h-[200px] text-white">
           <div className="flex justify-between flex-col h-full">
             <div>
               <div className="flex items-center">

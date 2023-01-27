@@ -8,7 +8,7 @@ interface searchValue {
   searchPostsSaved: string
 }
 
-const PostSaved: FC<searchValue> = ({ searchPostsSaved }) => {
+const SavedPosts: FC<searchValue> = ({ searchPostsSaved }) => {
   const { posts, findedPosts } = useAppSelector(
     (state: RootState) => state.posts
   )
@@ -16,10 +16,14 @@ const PostSaved: FC<searchValue> = ({ searchPostsSaved }) => {
   return (
     <div>
       {findedPosts.length !== 0 && searchPostsSaved
-        ? findedPosts.map((obj: IPost, index: number) => <Post obj={obj} />)
-        : posts.map((obj: IPost, index: number) => <Post obj={obj} />)}
+        ? findedPosts.map((obj: IPost, index: number) => (
+            <Post key={index} obj={obj} />
+          ))
+        : posts.map((obj: IPost, index: number) => (
+            <Post key={index} obj={obj} />
+          ))}
     </div>
   )
 }
 
-export { PostSaved }
+export { SavedPosts }

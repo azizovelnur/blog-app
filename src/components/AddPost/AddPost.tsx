@@ -64,12 +64,7 @@ const AddPost: FC = () => {
     <>
       {isAuth && (
         <>
-          <button
-            onClick={() => onClickCreatePost()}
-            className="fixed top-[100px] right-[100px]"
-          >
-            <IoCreate size={"40"} />
-          </button>
+          <button onClick={() => onClickCreatePost()}>Create Post</button>
           <Modal active={active} setActive={setActive}>
             <div className={"flex flex-col justify-between"}>
               <div className="text-center mb-5 font-black text-2xl">

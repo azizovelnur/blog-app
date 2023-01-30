@@ -9,6 +9,7 @@ const initialState: IStatePosts = {
   posts: getDataFromLocalStorage(),
   findedPosts: [],
   recents: getRecentsPostsFromLS(),
+  openMenu: false,
 }
 
 const postsSlice = createSlice({
@@ -50,9 +51,13 @@ const postsSlice = createSlice({
         }
       })
     },
+    setOpenMenu(state, action: PayloadAction<Boolean>) {
+      state.openMenu = action.payload
+    },
   },
 })
 
-export const { addItem, removeItem, setRecents, findPosts } = postsSlice.actions
+export const { addItem, removeItem, setRecents, findPosts, setOpenMenu } =
+  postsSlice.actions
 
 export const postsReducer = postsSlice.reducer

@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react"
-import { Link } from "react-router-dom"
-import { useAppSelector } from "../../hooks/hooks"
+import { Link, NavLink } from "react-router-dom"
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks"
 import { data } from "../../store/slices/async/auth/authSlice"
 import { Profile } from "./Profile"
 import { Modal } from "../Modal/Modal"
@@ -9,9 +9,16 @@ import { Registration } from "../Registration/Registration"
 import { BiHome } from "react-icons/bi"
 import { FaBlog } from "react-icons/fa"
 import { AddPost } from "../AddPost/AddPost"
+import { IoCloseSharp } from "react-icons/io5"
+import { GiHamburgerMenu } from "react-icons/gi"
+import { setOpenMenu } from "../../store/slices/postsSlice/postsSlice"
+import { RootState } from "../../store/store"
 
 const Header: FC = () => {
   const isAuth = useAppSelector(data)
+  const dispatch = useAppDispatch()
+
+  const { openMenu } = useAppSelector((state: RootState) => state.posts)
 
   const [modalActive, setModalActive] = useState<Boolean>(false)
   const [loginActive, setLoginActive] = useState<Boolean>(false)
@@ -30,24 +37,49 @@ const Header: FC = () => {
   }
 
   return (
-    <header className={"headerGrid z-50 fixed w-full text-[16px] bg-[#fff]"}>
-      <div className={"container mx-auto max-w-7xl"}>
+    <header className={"z-50 fixed w-full text-[16px] bg-[#fff]"}>
+      <div className={"container mx-auto max-w-5xl"}>
         <div className={"flex justify-between items-center h-[50px]"}>
-          <Link to={"/"}>
-            <div className={"flex items-center"}>
-              <h2
-                className={
-                  "text-[#000] font-black text-[22px] rounded-[4px] px-[4px]"
-                }
-              >
-                Blog
-              </h2>
-            </div>
-          </Link>
+          <div className="flex">
+            <button
+              onClick={() => dispatch(setOpenMenu(!openMenu))}
+              className={"md:hidden block w-[30px] h-[30px]"}
+            >
+              {openMenu ? (
+                <IoCloseSharp className={"fill-black h-[30px] w-[30px]"} />
+              ) : (
+                <GiHamburgerMenu className={"fill-black"} />
+              )}
+            </button>
+            <Link to={"/"}>
+              <div className={"flex items-center"}>
+                <h2
+                  className={
+                    "text-[#000] font-black text-[22px] rounded-[4px] px-[4px]"
+                  }
+                >
+                  Blog
+                </h2>
+              </div>
+            </Link>
+          </div>
+
+          <nav>
+            <ul className="flex justify-between w-[200px]">
+              <li>
+                <NavLink to={"/"}>Home</NavLink>
+              </li>
+              <li>
+                <NavLink to={"/saved"}>Saved</NavLink>
+              </li>
+              <li>
+                <NavLink to={"/recents"}>Recents</NavLink>
+              </li>
+            </ul>
+          </nav>
 
           {isAuth ? (
             <>
-              <AddPost />
               <Profile />
             </>
           ) : (
@@ -55,15 +87,15 @@ const Header: FC = () => {
               <div
                 onClick={() => onClickLogin()}
                 className={
-                  "text-white cursor-pointer h-[30px] rounded-[4px] p-[2px]"
+                  "text-black cursor-pointer h-[30px] rounded-[4px] p-[2px]"
                 }
               >
-                <span>Log In</span>
+                <span>Login</span>
               </div>
               <div
                 onClick={() => onClickRegistration()}
                 className={
-                  "text-white cursor-pointer h-[30px] rounded-[4px] p-[2px]"
+                  "text-black cursor-pointer h-[30px] rounded-[4px] p-[2px]"
                 }
               >
                 <span>Register</span>

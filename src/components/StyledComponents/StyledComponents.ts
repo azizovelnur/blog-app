@@ -40,7 +40,8 @@ export const ModalStyle = styled.section<IModalProps>`
   position: fixed;
   top: 0;
   left: 0;
-  background-color: ${(props) => (props.isActive ? "#000" : "transperent")};
+  background-color: ${(props) =>
+    props.isActive ? "#4747478d" : "transperent"};
   transition-duration: 200ms;
   justify-content: center;
   align-items: center;
@@ -50,6 +51,7 @@ export const ModalStyle = styled.section<IModalProps>`
   width: 100vw;
 `
 export const ModalContentStyle = styled.div<IModalProps>`
+  background-color: white;
   position: relative;
   transform: ${(props) => (props.isActive ? "scale(1)" : "scale(0.5)")};
   transition: 0.4s all;

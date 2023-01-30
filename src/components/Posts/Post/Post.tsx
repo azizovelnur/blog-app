@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, NavLink, useLocation } from "react-router-dom"
 import React, { FC, useState } from "react"
 import { data } from "../../../store/slices/async/auth/authSlice"
 import { useAppSelector, useAppDispatch } from "../../../hooks/hooks"
@@ -29,15 +29,15 @@ import { FaComments } from "react-icons/fa"
 interface IPostProps {
   obj: IPost
   postsData?: IPost[]
-  allPosts?: Boolean
 }
 
-const Post: FC<IPostProps> = ({ obj, postsData, allPosts }) => {
+const Post: FC<IPostProps> = ({ obj, postsData }) => {
+  const location = useLocation()
+  const { posts } = useAppSelector((state: RootState) => state.posts)
   const dispatch = useAppDispatch()
   const [removePost] = useFetchDeletePostMutation()
-  const userData = useAppSelector(data)
   const [updatePost, { isSuccess }] = useFetchUpdatePostMutation()
-  const { posts } = useAppSelector((state: RootState) => state.posts)
+  const userData = useAppSelector(data)
   const [active, setActive] = useState<Boolean>(false)
   const [id, setId] = useState<string>("")
 
@@ -104,28 +104,41 @@ const Post: FC<IPostProps> = ({ obj, postsData, allPosts }) => {
       <div
         key={obj._id}
         className={
-          "relative mx-auto w-[640px] h-[480px] mb-[70px] rounded-[10px] bg-white"
+          "relative w-[500px] h-[480px] mb-[70px] rounded-[10px] bg-white hover:scale-[102%] duration-300 origin-bottom"
         }
       >
         {obj.imageUrl ? (
-          <img
-            className="w-full h-[50%] rounded-t-md object-cover object-top"
-            src={`http://localhost:5000${obj.imageUrl}`}
-            alt="img"
-          />
+          <Link to={`/blog/${obj._id}`}>
+            <img
+              className="w-full h-[50%] rounded-t-md object-cover object-top"
+              src={`http://localhost:5000${obj.imageUrl}`}
+              alt="img"
+            />
+          </Link>
         ) : (
-          <NoImage className="rounded-t-md" />
+          <Link to={`/blog/${obj._id}`}>
+            <img
+              className="w-full h-[50%] rounded-t-md object-cover object-top"
+              src={`https://via.placeholder.com/800x400.jpg?text=No+Image`}
+              alt="img"
+            />
+          </Link>
         )}
         <div>
-          <h2 className="text-[30px] font-bold my-2">{obj.title}</h2>
-        </div>
-        <div>
-          <h2 className="text-[30px] font-bold my-2">{obj.viewsCount}</h2>
-        </div>
-        <p className="h-[140px] overflow-hidden overflow-ellipsis">
-          {obj.text}
-        </p>
+          <div>
+            <h2 className="text-[30px] font-bold my-2">{obj.title}</h2>
+          </div>
 
+          <p className="h-[140px] overflow-hidden overflow-ellipsis">
+            {obj.text}
+          </p>
+        </div>
+        {location.pathname !== "/saved" && (
+          <div className="absolute text-lg top-4 right-4 flex items-center bg-white rounded-md p-1">
+            <HiEye color="black" />
+            <div className="ml-1">{obj.viewsCount}</div>
+          </div>
+        )}
         {posts.find((post: IPost) => post._id === obj._id) ? (
           <div className="absolute bottom-2 right-2 flex items-center justify-between w-[70px] text-[30px]">
             <Link to={`/blog/${obj._id}`}>
@@ -140,13 +153,13 @@ const Post: FC<IPostProps> = ({ obj, postsData, allPosts }) => {
             <Link to={`/blog/${obj._id}`}>
               <FaComments />
             </Link>
+
             <button onClick={() => addItemToPostsSaved(obj)}>
               <BsFillBookmarkHeartFill color="white" />
             </button>
           </div>
         )}
-
-        {allPosts && obj.user._id === userData?._id && (
+        {/* {obj.user._id === userData?._id && (
           <>
             <div className="absolute flex justify-between top-5 right-4 w-16 h-10 rounded-md">
               <button onClick={() => onCLickEdit(obj._id)}>
@@ -198,8 +211,7 @@ const Post: FC<IPostProps> = ({ obj, postsData, allPosts }) => {
               </div>
             </Modal>
           </>
-        )}
-
+        )} */}
         <div className="text-lg font-bold absolute left-2 bottom-2">
           @{obj.user.userName}
         </div>

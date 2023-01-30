@@ -8,7 +8,11 @@ interface ISearchProps {
 }
 
 const Posts: FC<ISearchProps> = ({ searchPosts }) => {
-  const { isLoading, isError, data: postsData } = useFetchPostsQuery()
+  const {
+    isLoading,
+    isError,
+    data: postsData,
+  } = useFetchPostsQuery(undefined, { refetchOnMountOrArgChange: true })
 
   const findedPosts = postsData?.filter((obj: IPost) => {
     if (obj.title.toLowerCase().includes(searchPosts)) {
@@ -22,10 +26,10 @@ const Posts: FC<ISearchProps> = ({ searchPosts }) => {
     <>
       {findedPosts?.length !== 0 && searchPosts
         ? findedPosts?.map((obj: IPost, index: number) => (
-            <Post key={index} obj={obj} postsData={postsData} allPosts={true} />
+            <Post key={index} obj={obj} postsData={postsData} />
           ))
         : postsData?.map((obj: IPost, index: number) => (
-            <Post key={index} obj={obj} postsData={postsData} allPosts={true} />
+            <Post key={index} obj={obj} postsData={postsData} />
           ))}
     </>
   )

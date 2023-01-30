@@ -9,8 +9,8 @@ export const Layout: FC = () => {
     <>
       {/* <ParticlesBackground /> */}
       <Header />
-      <div className="h-[60px]"></div>
-      <div className={"container mx-auto max-w-7xl"}>
+      <div className="h-[80px]"></div>
+      <div className={"container mx-auto max-w-5xl"}>
         <Outlet />
       </div>
     </>

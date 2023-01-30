@@ -5,6 +5,8 @@ import { Home } from "./pages/Home/Home"
 import { ViewPost } from "./pages/ViewPost/ViewPost"
 import { fetchAuthMe } from "./store/slices/async/auth/authSlice"
 import { useAppDispatch } from "./hooks/hooks"
+import { SavedPosts } from "./components/Posts/SavedPosts"
+import { RecentsPosts } from "./components/Posts/RecentsPosts"
 
 function App() {
   const dispatch = useAppDispatch()
@@ -17,6 +19,8 @@ function App() {
     <Routes>
       <Route path={"/"} element={<Layout />}>
         <Route index element={<Home />} />
+        <Route path="/saved" element={<SavedPosts />} />
+        <Route path="/recents" element={<RecentsPosts />} />
         <Route path="/blog/:id" element={<ViewPost />} />
       </Route>
     </Routes>

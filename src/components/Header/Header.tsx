@@ -79,9 +79,10 @@ const Header: FC = () => {
           </nav>
 
           {isAuth ? (
-            <>
+            <div className="flex justify-between w-[180px] items-center">
+              <AddPost />
               <Profile />
-            </>
+            </div>
           ) : (
             <div className="flex justify-between w-[140px] items-center">
               <div

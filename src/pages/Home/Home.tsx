@@ -10,6 +10,7 @@ import { PopularPosts } from "../../components/Posts/PopularPosts"
 import { AddPost } from "../../components/AddPost/AddPost"
 import { HiSearch } from "react-icons/hi"
 import { IoCloseSharp } from "react-icons/io5"
+import { setSearchValue } from "../../store/slices/postsSlice/postsSlice"
 
 const Home: FC = () => {
   const [activeNewPost, setActiveNewPost] = useState<Boolean>(true)
@@ -20,10 +21,11 @@ const Home: FC = () => {
   const dispatch = useAppDispatch()
 
   const { recents } = useAppSelector((state: RootState) => state.posts)
+  const { searchValue } = useAppSelector((state: RootState) => state.posts)
 
   const { openMenu } = useAppSelector((state: RootState) => state.posts)
 
-  const { isLoading, isError, data: popularPosts } = useFetchPopularPostsQuery()
+  // const { isLoading, isError, data: popularPosts } = useFetchPopularPostsQuery()
   const onClickNew = () => {
     setActiveNewPost(true)
     setActivePolularPost(false)
@@ -34,27 +36,27 @@ const Home: FC = () => {
     setActiveNewPost(false)
   }
   const onChangeHanlder = (value: string) => {
-    setSearchPosts(value)
+    // setSearchPosts(value)
+    dispatch(setSearchValue(value))
   }
 
   return (
     <>
       <section>
-        <AddPost />
         <div className="mx-auto w-[400px]">
           <div className="text-center mb-2">Search Post</div>
           <div className="relative">
             <HiSearch className="absolute top-1 left-3" size={"28px"} />
-            {searchPosts && (
-              <button onClick={() => setSearchPosts("")}>
+            {searchValue && (
+              <button onClick={() => dispatch(setSearchValue(""))}>
                 <IoCloseSharp
-                  className="absolute top-1 right-3"
+                  className="absolute top-[6px] right-3"
                   size={"28px"}
                 />
               </button>
             )}
             <input
-              value={searchPosts}
+              value={searchValue}
               onChange={(event) => onChangeHanlder(event.target.value)}
               className="w-full h-10 pl-14 rounded-md outline-none bg-[#ccc]"
               type="text"
@@ -85,7 +87,7 @@ const Home: FC = () => {
         </div>
       </section>
       <main className="flex justify-between flex-wrap">
-        {activeNewPost && <Posts searchPosts={searchPosts} />}
+        {activeNewPost && <Posts />}
         {activePopularPost && <PopularPosts />}
       </main>
     </>

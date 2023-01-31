@@ -30,6 +30,7 @@ export const postsApi = createApi({
       query: (_id) => ({
         url: `/posts/${_id}`,
       }),
+      providesTags: ["Posts"],
     }),
 
     fetchPopularPosts: build.query<IPost[], void>({
@@ -58,7 +59,7 @@ export const postsApi = createApi({
           body: post,
         }
       },
-      invalidatesTags: [{ type: "Posts", id: "LIST" }],
+      invalidatesTags: ["Posts"],
     }),
 
     fetchDeletePost: build.mutation<IPost, string>({
@@ -68,6 +69,7 @@ export const postsApi = createApi({
           method: "DELETE",
         }
       },
+      // invalidatesTags: ["Posts"],
       invalidatesTags: [{ type: "Posts", id: "LIST" }],
     }),
   }),

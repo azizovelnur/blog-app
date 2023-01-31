@@ -10,6 +10,7 @@ const initialState: IStatePosts = {
   findedPosts: [],
   recents: getRecentsPostsFromLS(),
   openMenu: false,
+  searchValue: "",
 }
 
 const postsSlice = createSlice({
@@ -54,10 +55,19 @@ const postsSlice = createSlice({
     setOpenMenu(state, action: PayloadAction<Boolean>) {
       state.openMenu = action.payload
     },
+    setSearchValue(state, action: PayloadAction<string>) {
+      state.searchValue = action.payload
+    },
   },
 })
 
-export const { addItem, removeItem, setRecents, findPosts, setOpenMenu } =
-  postsSlice.actions
+export const {
+  addItem,
+  removeItem,
+  setRecents,
+  findPosts,
+  setOpenMenu,
+  setSearchValue,
+} = postsSlice.actions
 
 export const postsReducer = postsSlice.reducer

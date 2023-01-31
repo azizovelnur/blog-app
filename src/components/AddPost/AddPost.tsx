@@ -64,7 +64,12 @@ const AddPost: FC = () => {
     <>
       {isAuth && (
         <>
-          <button onClick={() => onClickCreatePost()}>Create Post</button>
+          <button
+            className="bg-black font-bold rounded-md text-white w-28 h-8 px-2"
+            onClick={() => onClickCreatePost()}
+          >
+            Create Post
+          </button>
           <Modal active={active} setActive={setActive}>
             <div className={"flex flex-col justify-between"}>
               <div className="text-center mb-5 font-black text-2xl">

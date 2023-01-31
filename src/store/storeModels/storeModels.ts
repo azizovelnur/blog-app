@@ -5,9 +5,11 @@ export interface IStatePosts {
   recents: IPost[]
   findedPosts: IPost[]
   openMenu: Boolean
+  searchValue: string
 }
 
 export interface IComment {
+  user: string
   _id: string
   comment: string
   createdAt: string

@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import {
   useFetchCommentsQuery,
   useFetchCreateCommentMutation,
+  useFetchDeleteCommentMutation,
 } from "../../store/rtk/comments/commentsApi"
 import {
   useFetchDeletePostMutation,
@@ -32,7 +33,7 @@ const ViewPost = () => {
     isLoading,
     isError,
     data: onePostData,
-  } = useFetchOnePostQuery(id as string)
+  } = useFetchOnePostQuery(id as string, { refetchOnMountOrArgChange: true })
   const { data: commentsData } = useFetchCommentsQuery(id as string)
   const dispatch = useAppDispatch()
   const [commentValue, setCommentValue] = useState<string>("")
@@ -40,6 +41,8 @@ const ViewPost = () => {
     useFetchCreateCommentMutation()
   const [removePost] = useFetchDeletePostMutation()
   const [updatePost, { isSuccess }] = useFetchUpdatePostMutation()
+  const [deleteComment, { isSuccess: isSuccessComment }] =
+    useFetchDeleteCommentMutation()
   const userData = useAppSelector(data)
   const [active, setActive] = useState<Boolean>(false)
   // const [id, setId] = useState<string>("")
@@ -170,6 +173,15 @@ const ViewPost = () => {
           return (
             <div key={index}>
               <div className="bg-gray-500 my-2">{obj.comment}</div>
+              {userData?._id === obj.user && (
+                <button
+                  onClick={() =>
+                    deleteComment({ postId: id as string, commentId: obj._id })
+                  }
+                >
+                  Delete
+                </button>
+              )}
               <div>{obj.createdAt}</div>
             </div>
           )

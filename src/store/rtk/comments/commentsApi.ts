@@ -1,6 +1,11 @@
 import { IComment, ICreateComment } from "./../../storeModels/storeModels"
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
+interface Iids {
+  postId: string
+  commentId: string
+}
+
 export const commentsApi = createApi({
   reducerPath: "commentsApi",
   tagTypes: ["Comments"],
@@ -36,8 +41,20 @@ export const commentsApi = createApi({
       },
       invalidatesTags: [{ type: "Comments", id: "LIST" }],
     }),
+    fetchDeleteComment: build.mutation<IComment, Iids>({
+      query: (values) => {
+        return {
+          url: `/comments/${values.postId}/${values.commentId}`,
+          method: "DELETE",
+        }
+      },
+      invalidatesTags: [{ type: "Comments", id: "LIST" }],
+    }),
   }),
 })
 
-export const { useFetchCommentsQuery, useFetchCreateCommentMutation } =
-  commentsApi
+export const {
+  useFetchCommentsQuery,
+  useFetchCreateCommentMutation,
+  useFetchDeleteCommentMutation,
+} = commentsApi

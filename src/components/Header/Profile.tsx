@@ -4,6 +4,7 @@ import { HiArrowDown, HiArrowUp, HiOutlineUserCircle } from "react-icons/hi"
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks"
 import { data, logout } from "../../store/slices/async/auth/authSlice"
 import { MdOutlineMail } from "react-icons/md"
+import { setOpenMenu } from "../../store/slices/postsSlice/postsSlice"
 
 const Profile: FC = () => {
   const [open, setOpen] = useState<Boolean>(false)
@@ -33,7 +34,11 @@ const Profile: FC = () => {
   }, [])
 
   return (
-    <div ref={profileRef} className={"relative"}>
+    <div
+      onClick={() => dispatch(setOpenMenu(false))}
+      ref={profileRef}
+      className={"relative max-md:mr-3"}
+    >
       <div
         onClick={() => setOpen(!open)}
         className="flex justify-between w-[40px] h-[30px]  items-center rounded-[4px] p-[2px] cursor-pointer"

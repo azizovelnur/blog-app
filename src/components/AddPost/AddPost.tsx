@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react"
+import React, { FC, useRef, useState } from "react"
 import { useAppSelector } from "../../hooks/hooks"
 import { Modal } from "../Modal/Modal"
 import { TPost } from "../../models/models"
@@ -11,8 +11,10 @@ import {
   ModalTextArea,
 } from "../StyledComponents/StyledComponents"
 import axios from "../../axios/axiosConf"
+import { BsDownload } from "react-icons/bs"
 
 const AddPost: FC = () => {
+  const inputFileRef = useRef<HTMLInputElement>(null)
   const [addPost, { isSuccess }] = useFetchCreatePostMutation()
   const isAuth = useAppSelector(data)
   const [imageUrl, setImageUrl] = useState<string>("")
@@ -94,14 +96,24 @@ const AddPost: FC = () => {
                   placeholder={"text..."}
                 />
               </div>
-
               <input
-                className="cursor-pointer"
+                ref={inputFileRef}
+                className="cursor-pointer hidden"
                 onChange={handlerChangeFile}
                 type="file"
               />
+              <button
+                onClick={() => inputFileRef.current?.click()}
+                className="bg-black text-white w-full mx-auto mb-2 px-3 flex justify-between items-center  rounded-md p-1"
+              >
+                <div>Download Image</div> <BsDownload size={"40px"} />
+              </button>
               {imageUrl && (
-                <img src={`http://localhost:5000${imageUrl}`} alt="postImage" />
+                <img
+                  className="mb-2 h-36"
+                  src={`http://localhost:5000${imageUrl}`}
+                  alt="postImage"
+                />
               )}
               <ModalButton onClick={() => createPost()}>
                 Create Post

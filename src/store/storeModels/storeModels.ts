@@ -1,3 +1,4 @@
+import { IUser } from "./../../models/models"
 import { IPost } from "../../models/models"
 
 export interface IStatePosts {
@@ -9,7 +10,7 @@ export interface IStatePosts {
 }
 
 export interface IComment {
-  user: string
+  user: IUser
   _id: string
   comment: string
   createdAt: string

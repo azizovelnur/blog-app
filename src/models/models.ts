@@ -15,6 +15,7 @@ export interface IPost {
   viewsCount: number
   user: IUser
   imageUrl?: string
+  createdAt: string
 }
 
 export interface IPostMutation {
@@ -51,4 +52,8 @@ export interface IRegistration {
   name: string
   email: string
   password: string
+}
+export interface Iids {
+  postId: string
+  commentId: string
 }

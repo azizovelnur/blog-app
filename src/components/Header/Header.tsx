@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react"
-import { Link, NavLink } from "react-router-dom"
+import { Link, NavLink, useLocation } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks"
 import { data } from "../../store/slices/async/auth/authSlice"
 import { Profile } from "./Profile"
@@ -13,6 +13,7 @@ import { IoCloseSharp } from "react-icons/io5"
 import { GiHamburgerMenu } from "react-icons/gi"
 import { setOpenMenu } from "../../store/slices/postsSlice/postsSlice"
 import { RootState } from "../../store/store"
+import { ReactComponent as Moon } from "../../assets/images/moon.svg"
 
 const Header: FC = () => {
   const isAuth = useAppSelector(data)
@@ -37,21 +38,27 @@ const Header: FC = () => {
   }
 
   return (
-    <header className={"z-50 fixed w-full text-[16px] bg-[#fff]"}>
+    <header
+      className={
+        openMenu
+          ? "z-30 fixed w-full text-[16px] bg-[#fff] border-b-0 border-[#d0cdcd50]"
+          : "z-30 fixed w-full text-[16px] bg-[#fff] border-b-2"
+      }
+    >
       <div className={"container mx-auto max-w-5xl"}>
         <div className={"flex justify-between items-center h-[50px]"}>
           <div className="flex">
             <button
               onClick={() => dispatch(setOpenMenu(!openMenu))}
-              className={"md:hidden block w-[30px] h-[30px]"}
+              className={"md:hidden block w-[30px] h-[30px] max-md:ml-3"}
             >
               {openMenu ? (
                 <IoCloseSharp className={"fill-black h-[30px] w-[30px]"} />
               ) : (
-                <GiHamburgerMenu className={"fill-black"} />
+                <GiHamburgerMenu className={"fill-black h-[30px] w-[30px]"} />
               )}
             </button>
-            <Link to={"/"}>
+            <Link to={"/"} className="max-md:hidden">
               <div className={"flex items-center"}>
                 <h2
                   className={
@@ -64,27 +71,53 @@ const Header: FC = () => {
             </Link>
           </div>
 
-          <nav>
-            <ul className="flex justify-between w-[200px]">
+          <nav
+            className={
+              openMenu
+                ? "md:hidden absolute w-full z-30 top-[50px] bg-white text-black text-[24px] border-b-2 border-[#d0cdcd50]"
+                : "md:block hidden"
+            }
+          >
+            <ul
+              className={
+                openMenu
+                  ? "flex flex-col items-center justify-between"
+                  : "flex justify-between w-[200px]"
+              }
+            >
               <li>
-                <NavLink to={"/"}>Home</NavLink>
+                <NavLink onClick={() => dispatch(setOpenMenu(false))} to={"/"}>
+                  Home
+                </NavLink>
               </li>
               <li>
-                <NavLink to={"/saved"}>Saved</NavLink>
+                <NavLink
+                  onClick={() => dispatch(setOpenMenu(false))}
+                  to={"/saved"}
+                >
+                  Saved
+                </NavLink>
               </li>
               <li>
-                <NavLink to={"/recents"}>Recents</NavLink>
+                <NavLink
+                  onClick={() => dispatch(setOpenMenu(false))}
+                  to={"/recents"}
+                >
+                  Recents
+                </NavLink>
               </li>
             </ul>
           </nav>
 
+          <div className="text-[30px] w-8">
+            <Moon />
+          </div>
           {isAuth ? (
-            <div className="flex justify-between w-[180px] items-center">
-              <AddPost />
+            <div className="flex justify-between  items-center">
               <Profile />
             </div>
           ) : (
-            <div className="flex justify-between w-[140px] items-center">
+            <div className="flex justify-between w-[120px] items-center">
               <div
                 onClick={() => onClickLogin()}
                 className={

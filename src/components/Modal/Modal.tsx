@@ -17,9 +17,9 @@ const Modal: FC<IProps> = ({ active, setActive, children }) => {
       <ModalContentStyle isActive={active} onClick={(e) => e.stopPropagation()}>
         <button
           onClick={() => setActive(false)}
-          className="absolute right-[-50px] top-[-30px]"
+          className="absolute right-[-50px] top-[-30px] max-md:top-3 max-md:right-3"
         >
-          <MdClose color="white" fill="white" size={"30px"} />
+          <MdClose size={"30px"} />
         </button>
         {children}
       </ModalContentStyle>

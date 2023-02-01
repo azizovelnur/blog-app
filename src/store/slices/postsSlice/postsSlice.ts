@@ -23,7 +23,6 @@ const postsSlice = createSlice({
         (obj) => obj._id !== action.payload._id
       )
       state.posts = [...postsArr, action.payload]
-      console.log(state.posts)
       addPostToLS(state.posts)
     },
     removeItem(state, action: PayloadAction<string>) {

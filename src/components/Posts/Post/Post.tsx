@@ -7,7 +7,7 @@ import {
   useFetchUpdatePostMutation,
 } from "../../../store/rtk/posts/postsApi"
 import { IPost, TPost } from "../../../models/models"
-import { HiEye } from "react-icons/hi"
+import { HiEye, HiOutlineUserCircle } from "react-icons/hi"
 import { TbTrash } from "react-icons/tb"
 import { FiEdit2 } from "react-icons/fi"
 import { BsFillBookmarkHeartFill } from "react-icons/bs"
@@ -104,7 +104,7 @@ const Post: FC<IPostProps> = ({ obj, postsData }) => {
       <div
         key={obj._id}
         className={
-          "relative w-[500px] h-[480px] mb-[70px] rounded-[10px] bg-white hover:scale-[102%] duration-300 origin-bottom"
+          "lg:h-[480px] lg:w-[500px] md:h-[400px] md:w-[380px] xl:hover:scale-[102%] relative w-full h-[400px] mb-[70px] rounded-[10px] bg-white hover:scale-[100%] duration-300 origin-bottom"
         }
       >
         {obj.imageUrl ? (
@@ -124,12 +124,12 @@ const Post: FC<IPostProps> = ({ obj, postsData }) => {
             />
           </Link>
         )}
-        <div>
-          <div>
-            <h2 className="text-[30px] font-bold my-2">{obj.title}</h2>
+        <div className="mt-3">
+          <div className="mx-2">
+            <h2 className="text-[30px] font-bold">{obj.title}</h2>
           </div>
 
-          <p className="h-[140px] overflow-hidden overflow-ellipsis">
+          <p className="h-[140px] mx-3 overflow-hidden overflow-ellipsis">
             {obj.text}
           </p>
         </div>
@@ -145,7 +145,7 @@ const Post: FC<IPostProps> = ({ obj, postsData }) => {
               <FaComments />
             </Link>
             <button onClick={() => removeItemFromPostsSaved(obj._id)}>
-              <BsFillBookmarkHeartFill color="purple" />
+              <BsFillBookmarkHeartFill color="red" />
             </button>
           </div>
         ) : (
@@ -155,65 +155,13 @@ const Post: FC<IPostProps> = ({ obj, postsData }) => {
             </Link>
 
             <button onClick={() => addItemToPostsSaved(obj)}>
-              <BsFillBookmarkHeartFill color="white" />
+              <BsFillBookmarkHeartFill color="black" />
             </button>
           </div>
         )}
-        {/* {obj.user._id === userData?._id && (
-          <>
-            <div className="absolute flex justify-between top-5 right-4 w-16 h-10 rounded-md">
-              <button onClick={() => onCLickEdit(obj._id)}>
-                <FiEdit2 color="white" size={"30px"} />
-              </button>
-              <button onClick={() => deletePost(obj._id)}>
-                <TbTrash color="purple" size={"30px"} />
-              </button>
-            </div>
-
-            <Modal active={active} setActive={setActive}>
-              <div className={"flex flex-col justify-between"}>
-                <div className="text-center mb-5 font-black text-2xl">
-                  Update Post
-                </div>
-                <div>
-                  <div className="font-bold text-base">Title</div>
-                  <ModalInput
-                    value={newPost.title}
-                    name={"title"}
-                    onChange={changeHandler}
-                    placeholder={"title"}
-                    type="text"
-                  />
-                </div>
-                <div>
-                  <div className="font-bold text-base">Text</div>
-                  <ModalTextArea
-                    value={newPost.text}
-                    name={"text"}
-                    onChange={changeHandler}
-                    placeholder={"text..."}
-                  />
-                </div>
-                <input
-                  className="cursor-pointer"
-                  onChange={handlerChangeFile}
-                  type="file"
-                />
-                {imageUrl && (
-                  <img
-                    src={`http://localhost:5000${imageUrl}`}
-                    alt="postImage"
-                  />
-                )}
-                <ModalButton onClick={() => onClickUpdatePost(id)}>
-                  Update
-                </ModalButton>
-              </div>
-            </Modal>
-          </>
-        )} */}
-        <div className="text-lg font-bold absolute left-2 bottom-2">
-          @{obj.user.userName}
+        <div className="text-lg font-bold absolute left-2 bottom-2 flex items-center">
+          <HiOutlineUserCircle size={"22px"} />
+          {obj.user.userName}
         </div>
       </div>
     </>

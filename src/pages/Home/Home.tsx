@@ -11,11 +11,13 @@ import { AddPost } from "../../components/AddPost/AddPost"
 import { HiSearch } from "react-icons/hi"
 import { IoCloseSharp } from "react-icons/io5"
 import { setSearchValue } from "../../store/slices/postsSlice/postsSlice"
+import { useLocation } from "react-router-dom"
 
 const Home: FC = () => {
   const [activeNewPost, setActiveNewPost] = useState<Boolean>(true)
   const [activePopularPost, setActivePolularPost] = useState<Boolean>(false)
 
+  const location = useLocation()
   const [searchPostsSaved, setSearchPostsSaved] = useState<string>("")
   const [searchPosts, setSearchPosts] = useState<string>("")
   const dispatch = useAppDispatch()
@@ -43,7 +45,7 @@ const Home: FC = () => {
   return (
     <>
       <section>
-        <div className="mx-auto w-[400px]">
+        <div className="md:w-[400px] mx-auto w-full mt-8 mb-7">
           <div className="text-center mb-2">Search Post</div>
           <div className="relative">
             <HiSearch className="absolute top-1 left-3" size={"28px"} />
@@ -63,27 +65,31 @@ const Home: FC = () => {
             />
           </div>
         </div>
-        <div className="flex justify-around items-center backdrop-blur-[10px] rounded-lg bg-[#fffee5cc] w-[120px] h-[44px]">
-          <button
-            className={`${
-              activeNewPost
-                ? "bg-purple-500 h-[22px] rounded-md px-1"
-                : "bg-purple-900 h-[22px] rounded-md px-1"
-            }`}
-            onClick={() => onClickNew()}
-          >
-            New
-          </button>
-          <button
-            className={`${
-              activePopularPost
-                ? "bg-purple-500 h-[22px] rounded-md px-1"
-                : "bg-purple-900 h-[22px] rounded-md px-1"
-            }`}
-            onClick={() => onClickPopular()}
-          >
-            Popular
-          </button>
+        <div className="flex justify-between">
+          <div className="flex justify-around items-center rounded-lg mb-4 w-[120px] h-[44px] font-bold">
+            <button
+              className={`${
+                activeNewPost
+                  ? "bg-black h-[22px] rounded-md px-1 text-white hover:bg-black duration-300"
+                  : "bg-gray-500 h-[22px] rounded-md px-1 text-white hover:bg-black duration-300"
+              }`}
+              onClick={() => onClickNew()}
+            >
+              New
+            </button>
+            <button
+              className={`${
+                activePopularPost
+                  ? "bg-black h-[22px] rounded-md px-1 text-white hover:bg-black duration-300"
+                  : "bg-gray-500 h-[22px] rounded-md px-1 text-white hover:bg-black duration-300"
+              }`}
+              onClick={() => onClickPopular()}
+            >
+              Popular
+            </button>
+          </div>
+
+          <div>{location.pathname === "/" && <AddPost />}</div>
         </div>
       </section>
       <main className="flex justify-between flex-wrap">

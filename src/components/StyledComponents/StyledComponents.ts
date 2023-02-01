@@ -5,16 +5,15 @@ interface IModalProps {
 }
 export const ModalButton = styled.button`
   color: white;
-  background-color: purple;
+  background-color: black;
   border-radius: 10px;
   height: 40px;
   width: 66%;
   margin: 0 auto;
 `
 export const ModalInput = styled.input`
-  color: white;
-  border: 4px solid purple;
-  background-color: #000;
+  color: black;
+  background-color: #ccc;
   border-radius: 4px;
   height: 40px;
   width: 100%;
@@ -23,12 +22,11 @@ export const ModalInput = styled.input`
   outline: none;
 `
 export const ModalTextArea = styled.textarea`
-  color: white;
+  color: black;
   min-height: 100px;
-  max-height: 400px;
-  background-color: #000;
+  max-height: 100px;
   border-radius: 4px;
-  border solid purple;
+  background-color: #ccc;
   width: 100%;
   padding: 8px;
   margin-bottom: 40px;
@@ -58,5 +56,10 @@ export const ModalContentStyle = styled.div<IModalProps>`
   padding: 20px;
   width: 25vw;
   border-radius: 10px;
-  box-shadow: 0px 4px 20px 4px rgba(119, 53, 136, 0.459);
+  @media (max-width: 1024px) {
+    width: 50vh;
+  }
+  @media (max-width: 768px) {
+    width: 45vh;
+  }
 `

@@ -10,3 +10,9 @@ export const getRecentsPostsFromLS = () => {
   const recentsPosts = posts ? JSON.parse(posts) : []
   return recentsPosts as IPost[]
 }
+
+export const getThemeFromLS = () => {
+  const themeLS = localStorage.getItem("theme")
+  const theme = themeLS ? JSON.parse(themeLS) : true
+  return theme as boolean
+}

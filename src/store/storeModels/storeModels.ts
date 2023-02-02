@@ -5,7 +5,6 @@ export interface IStatePosts {
   posts: IPost[]
   recents: IPost[]
   findedPosts: IPost[]
-  openMenu: Boolean
   searchValue: string
 }
 

@@ -4,9 +4,15 @@ import { HiArrowDown, HiArrowUp, HiOutlineUserCircle } from "react-icons/hi"
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks"
 import { data, logout } from "../../store/slices/async/auth/authSlice"
 import { MdOutlineMail } from "react-icons/md"
-import { setOpenMenu } from "../../store/slices/postsSlice/postsSlice"
+import { RootState } from "../../store/store"
 
-const Profile: FC = () => {
+interface IProfileProps {
+  openMenu: Boolean
+  setOpenMenu: (openMenu: Boolean) => void
+}
+
+const Profile: FC<IProfileProps> = ({ openMenu, setOpenMenu }) => {
+  // const { theme } = useAppSelector((state: RootState) => state.posts)
   const [open, setOpen] = useState<Boolean>(false)
   const profileRef = useRef<HTMLDivElement>(null)
   const userData = useAppSelector(data)
@@ -35,7 +41,7 @@ const Profile: FC = () => {
 
   return (
     <div
-      onClick={() => dispatch(setOpenMenu(false))}
+      onClick={() => setOpenMenu(false)}
       ref={profileRef}
       className={"relative max-md:mr-3"}
     >
@@ -48,7 +54,7 @@ const Profile: FC = () => {
       </div>
 
       {open && (
-        <div className="absolute rounded-[10px] p-2 bg-black backdrop-blur-md top-[32px] right-[0px] w-[200px] h-[200px] text-white">
+        <div className="absolute rounded-[10px] p-2 bg-[#fff] text-black top-[32px] right-[0px] w-[200px] h-[200px] border-[#ccc] dark:border-[#201f1f50] border-[2px] dark:bg-[#292a2d] dark:text-[#999999]">
           <div className="flex justify-between flex-col h-full">
             <div>
               <div className="flex items-center">
@@ -71,7 +77,7 @@ const Profile: FC = () => {
 
             <button
               onClick={() => onClicklogOut()}
-              className="bg-[#501c529f] rounded-lg w-full h-10"
+              className="bg-black text-white rounded-lg w-full h-10"
             >
               Log Out
             </button>

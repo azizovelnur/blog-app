@@ -28,6 +28,7 @@ import axios from "../../axios/axiosConf"
 import { HiOutlineUserCircle } from "react-icons/hi"
 import { BsDownload } from "react-icons/bs"
 import { IoArrowBack } from "react-icons/io5"
+import { RootState } from "../../store/store"
 
 const ViewPost = () => {
   const inputFileRef = useRef<HTMLInputElement>(null)
@@ -122,7 +123,11 @@ const ViewPost = () => {
     }
   }, [onePostData])
   return (
-    <div className="relative bg-white min-h-[600px] w-full mt-[40px] rounded-3xl p-20 max-md:p-2">
+    <div
+      className={
+        "relative bg-white dark:bg-[#292a2d] min-h-[600px] w-full mt-[40px] rounded-3xl p-20 max-md:p-2"
+      }
+    >
       <div className="flex justify-between items-center">
         <button
           onClick={() => navigate("/")}
@@ -161,7 +166,7 @@ const ViewPost = () => {
           <div>
             <div className="font-bold text-base">Title</div>
             <input
-              className="text-black bg-[#ccc] rounded h-10 w-full p-2 mb-10 outline-none"
+              className="dark:bg-black dark:text-white text-black bg-[#ccc] rounded h-10 w-full p-2 mb-10 outline-none"
               value={newPost.title}
               name={"title"}
               onChange={changeHandler}
@@ -172,7 +177,7 @@ const ViewPost = () => {
           <div>
             <div className="font-bold text-base">Text</div>
             <textarea
-              className="text-blakc bg-[#ccc] rounded w-full p-2 mb-10 min-h-[100px] max-h-[200px] outline-none"
+              className="dark:bg-black dark:text-white text-black bg-[#ccc] rounded w-full p-2 mb-10 min-h-[100px] max-h-[200px] outline-none"
               value={newPost.text}
               name={"text"}
               onChange={changeHandler}
@@ -211,7 +216,9 @@ const ViewPost = () => {
         </div>
       )}
 
-      <h1 className="text-[34px] font-bold mt-8">{onePostData?.title}</h1>
+      <h1 className="dark:text-[#999999] text-[36px] font-bold mt-8">
+        {onePostData?.title}
+      </h1>
       <div className="text-[12px] text-gray-400 mb-9">
         {onePostData?.createdAt}
       </div>
@@ -230,11 +237,14 @@ const ViewPost = () => {
           />
         )}
       </div>
-      <p className="text-[18px] mb-7">{onePostData?.text}</p>
+      <p className="dark:text-[#999] text-[20px] mb-7">{onePostData?.text}</p>
       <div className="mb-14">
         {commentsData?.map((obj: IComment, index: number) => {
           return (
-            <div key={index} className="relative bg-[#e4e3e3] mb-7 rounded-md">
+            <div
+              key={index}
+              className="relative bg-[#e4e3e3] dark:bg-[#333633] dark:text-[#999999] mb-7 rounded-md"
+            >
               <div className="flex items-center">
                 <div>
                   <HiOutlineUserCircle size={"20px"} />
@@ -264,7 +274,7 @@ const ViewPost = () => {
       {userData && (
         <div className="flex justify-between max-sm:flex-col">
           <input
-            className="w-[75%] pl-4 border-[#000] border-[1px] h-11 outline-none max-sm:w-full mb-4"
+            className="w-[75%] pl-4 rounded-md dark:bg-black dark: text-white border-[#000] border-[1px] h-11 outline-none max-sm:w-full mb-4"
             value={commentValue}
             onChange={(event) => setCommentValue(event?.target.value)}
             type="text"

@@ -1,65 +1,56 @@
-import styled from "styled-components"
-
+import tw from "tailwind-styled-components"
 interface IModalProps {
   isActive: Boolean
 }
-export const ModalButton = styled.button`
-  color: white;
-  background-color: black;
-  border-radius: 10px;
-  height: 40px;
-  width: 66%;
-  margin: 0 auto;
+export const ModalButton = tw.button`
+  text-white
+  bg-black
+  dark:bg-gray-500
+  h-[40px]
+  w-[66%]
+  rounded-md
+  mx-auto
 `
-export const ModalInput = styled.input`
-  color: black;
-  background-color: #ccc;
-  border-radius: 4px;
-  height: 40px;
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 40px;
-  outline: none;
+export const ModalInput = tw.input`
+  text-black 
+  dark:bg-gray-500
+  bg-[#ccc]
+  outline-none
+  rounded
+  h-10
+  w-full
+  p-2 
+  mb-10  
 `
-export const ModalTextArea = styled.textarea`
-  color: black;
-  min-height: 100px;
-  max-height: 100px;
-  border-radius: 4px;
-  background-color: #ccc;
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 40px;
-  outline: none;
+export const ModalTextArea = tw.textarea`
+  text-black rounded w-full p-2 mb-10 bg-[#ccc] max-h-[100px] min-h-[100px] outline-none
 `
-export const ModalStyle = styled.section<IModalProps>`
-  z-index: 50;
-  display: flex;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: ${(props) =>
-    props.isActive ? "#4747478d" : "transperent"};
-  transition-duration: 200ms;
-  justify-content: center;
-  align-items: center;
-  pointer-events: ${(props) => (props.isActive ? "auto" : "none")};
-  opacity: ${(props) => (props.isActive ? "1" : "0")};
-  height: 100vh;
-  width: 100vw;
+export const ModalStyle = tw.section<IModalProps>`
+ z-50
+ flex
+ fixed
+ top-0
+ left-0
+ duration-200 
+ justify-center
+ items-center
+ h-screen
+ w-screen
+ ${(props) => (props.isActive ? "bg-[#4747478d]" : "bg-transparent")}
+ ${(props) => (props.isActive ? "opacity-1" : "opacity-0")}
+ ${(props) => (props.isActive ? "pointer-events-auto" : "pointer-events-none")}
 `
-export const ModalContentStyle = styled.div<IModalProps>`
-  background-color: white;
-  position: relative;
-  transform: ${(props) => (props.isActive ? "scale(1)" : "scale(0.5)")};
-  transition: 0.4s all;
-  padding: 20px;
-  width: 25vw;
-  border-radius: 10px;
-  @media (max-width: 1024px) {
-    width: 50vh;
-  }
-  @media (max-width: 768px) {
-    width: 45vh;
-  }
+export const ModalContentStyle = tw.div<IModalProps>`
+  relative
+  bg-white
+  text-black
+  dark:text-[#999999]
+  dark:bg-[#292a2d]
+  ${(props) => (props.isActive ? "scale-100" : "scale-50")};
+  duration-300
+  p-[20px]
+  w-[25vw]
+  rounded-lg
+  max-lg:w-[50vh]
+  max-md:w-[45vh]
 `

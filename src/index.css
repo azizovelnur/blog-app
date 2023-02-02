@@ -5,8 +5,7 @@
 
 body {
   font-family: "Poppins", sans-serif;
-  color: black;
-  background-color: #f7f8f8;
+  background-color: rgb(29, 29, 29);
 }
 
 /* .blogGridContainer {
@@ -47,11 +46,6 @@ body {
 }
 ::-webkit-scrollbar-thumb {
   background: rgb(125, 124, 124);
-  border-radius: 12px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #fffdca;
   border-radius: 12px;
 }
 

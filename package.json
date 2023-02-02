@@ -26,6 +26,7 @@
     "react-simplemde-editor": "^5.2.0",
     "react-tsparticles": "^1.43.1",
     "styled-components": "^5.3.6",
+    "tailwind-styled-components": "^2.2.0",
     "typescript": "^4.9.4",
     "web-vitals": "^2.1.4"
   },

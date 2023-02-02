@@ -32,6 +32,7 @@ interface IPostProps {
 }
 
 const Post: FC<IPostProps> = ({ obj, postsData }) => {
+  // const { theme } = useAppSelector((state: RootState) => state.posts)
   const location = useLocation()
   const { posts } = useAppSelector((state: RootState) => state.posts)
   const dispatch = useAppDispatch()
@@ -100,71 +101,69 @@ const Post: FC<IPostProps> = ({ obj, postsData }) => {
     dispatch(removeItem(id))
   }
   return (
-    <>
-      <div
-        key={obj._id}
-        className={
-          "lg:h-[480px] lg:w-[500px] md:h-[400px] md:w-[380px] xl:hover:scale-[102%] relative w-full h-[400px] mb-[70px] rounded-[10px] bg-white hover:scale-[100%] duration-300 origin-bottom"
-        }
-      >
-        {obj.imageUrl ? (
-          <Link to={`/blog/${obj._id}`}>
-            <img
-              className="w-full h-[50%] rounded-t-md object-cover object-top"
-              src={`http://localhost:5000${obj.imageUrl}`}
-              alt="img"
-            />
-          </Link>
-        ) : (
-          <Link to={`/blog/${obj._id}`}>
-            <img
-              className="w-full h-[50%] rounded-t-md object-cover object-top"
-              src={`https://via.placeholder.com/800x400.jpg?text=No+Image`}
-              alt="img"
-            />
-          </Link>
-        )}
-        <div className="mt-3">
-          <div className="mx-2">
-            <h2 className="text-[30px] font-bold">{obj.title}</h2>
-          </div>
-
-          <p className="h-[140px] mx-3 overflow-hidden overflow-ellipsis">
-            {obj.text}
-          </p>
+    <div
+      key={obj._id}
+      className={
+        "lg:h-[480px] lg:w-[500px] md:h-[400px] md:w-[380px] xl:hover:scale-[102%] relative w-full h-[400px] mb-[70px] rounded-[10px] bg-white dark:bg-[#292a2d] hover:scale-[100%] duration-300 origin-bottom"
+      }
+    >
+      {obj.imageUrl ? (
+        <Link to={`/blog/${obj._id}`}>
+          <img
+            className="w-full h-[50%] rounded-t-md object-cover object-top"
+            src={`http://localhost:5000${obj.imageUrl}`}
+            alt="img"
+          />
+        </Link>
+      ) : (
+        <Link to={`/blog/${obj._id}`}>
+          <img
+            className="w-full h-[50%] rounded-t-md object-cover object-top"
+            src={`https://via.placeholder.com/800x400.jpg?text=No+Image`}
+            alt="img"
+          />
+        </Link>
+      )}
+      <div className="mt-3 dark:text-[#999999]">
+        <div className="mx-2">
+          <h2 className="text-[30px] font-bold">{obj.title}</h2>
         </div>
-        {location.pathname !== "/saved" && (
-          <div className="absolute text-lg top-4 right-4 flex items-center bg-white rounded-md p-1">
-            <HiEye color="black" />
-            <div className="ml-1">{obj.viewsCount}</div>
-          </div>
-        )}
-        {posts.find((post: IPost) => post._id === obj._id) ? (
-          <div className="absolute bottom-2 right-2 flex items-center justify-between w-[70px] text-[30px]">
-            <Link to={`/blog/${obj._id}`}>
-              <FaComments />
-            </Link>
-            <button onClick={() => removeItemFromPostsSaved(obj._id)}>
-              <BsFillBookmarkHeartFill color="red" />
-            </button>
-          </div>
-        ) : (
-          <div className="absolute bottom-2 right-2 flex items-center justify-between w-[70px] text-[30px]">
-            <Link to={`/blog/${obj._id}`}>
-              <FaComments />
-            </Link>
 
-            <button onClick={() => addItemToPostsSaved(obj)}>
-              <BsFillBookmarkHeartFill color="black" />
-            </button>
-          </div>
-        )}
-        <div className="text-lg font-bold absolute left-2 bottom-2 flex items-center">
-          <HiOutlineUserCircle size={"22px"} />
-          {obj.user.userName}
-        </div>
+        <p className="h-[140px] mx-3 overflow-hidden overflow-ellipsis">
+          {obj.text}
+        </p>
       </div>
-    </>
+      {location.pathname !== "/saved" && (
+        <div className="absolute text-lg top-4 right-4 flex items-center bg-white rounded-md p-1 dark:text-[#999999] dark:bg-[#292a2d]">
+          <HiEye color={"green dark:gold"} />
+          <div className="ml-1">{obj.viewsCount}</div>
+        </div>
+      )}
+      {posts.find((post: IPost) => post._id === obj._id) ? (
+        <div className="absolute bottom-2 right-2 flex items-center justify-between w-[70px] text-[30px]">
+          <Link to={`/blog/${obj._id}`}>
+            <FaComments color={"gold"} />
+          </Link>
+          <button onClick={() => removeItemFromPostsSaved(obj._id)}>
+            <BsFillBookmarkHeartFill color={"gold dark:green"} />
+          </button>
+        </div>
+      ) : (
+        <div className="absolute bottom-2 right-2 flex items-center justify-between w-[70px] text-[30px]">
+          <Link to={`/blog/${obj._id}`}>
+            <FaComments color={"gold dark:green"} />
+          </Link>
+
+          <button onClick={() => addItemToPostsSaved(obj)}>
+            <BsFillBookmarkHeartFill color="black" />
+          </button>
+        </div>
+      )}
+      <div className="text-lg font-bold absolute left-2 bottom-2 flex items-center dark:text-[#999999]">
+        <HiOutlineUserCircle size={"22px"} />
+        {obj.user.userName}
+      </div>
+    </div>
   )
 }
 

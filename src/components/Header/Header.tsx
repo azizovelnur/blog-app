@@ -11,15 +11,17 @@ import { FaBlog } from "react-icons/fa"
 import { AddPost } from "../AddPost/AddPost"
 import { IoCloseSharp } from "react-icons/io5"
 import { GiHamburgerMenu } from "react-icons/gi"
-import { setOpenMenu } from "../../store/slices/postsSlice/postsSlice"
 import { RootState } from "../../store/store"
 import { ReactComponent as Moon } from "../../assets/images/moon.svg"
+import { ReactComponent as Sun } from "../../assets/images/sun.svg"
 
 const Header: FC = () => {
   const isAuth = useAppSelector(data)
   const dispatch = useAppDispatch()
 
-  const { openMenu } = useAppSelector((state: RootState) => state.posts)
+  // const { theme } = useAppSelector((state: RootState) => state.posts)
+  const [openMenu, setOpenMenu] = useState<Boolean>(false)
+  const [theme, setTheme] = useState<boolean>(false)
 
   const [modalActive, setModalActive] = useState<Boolean>(false)
   const [loginActive, setLoginActive] = useState<Boolean>(false)
@@ -37,19 +39,32 @@ const Header: FC = () => {
     setModalActive(true)
   }
 
+  const onClickLightTheme = () => {
+    setTheme(false)
+    document.documentElement.classList.add("dark")
+    document.body.style.backgroundColor = "#1D1D1D"
+    document.body.style.transition = `background-color 0.3s ease-in`
+  }
+  const onClickDarkTheme = () => {
+    setTheme(true)
+    document.documentElement.classList.remove("dark")
+    document.body.style.transition = `background-color 0.3s ease-in`
+    document.body.style.backgroundColor = "#f7f8f8"
+  }
+
   return (
     <header
       className={
         openMenu
-          ? "z-30 fixed w-full text-[16px] bg-[#fff] border-b-0 border-[#d0cdcd50]"
-          : "z-30 fixed w-full text-[16px] bg-[#fff] border-b-2"
+          ? "z-30 fixed w-full text-[16px] dark:bg-[#292a2d] bg-[#fff] border-b-0 border-[#d0cdcd50]"
+          : "z-30 fixed w-full text-[16px] dark:bg-[#292a2d] bg-[#fff] border-b-2 dark:border-[#201f1f50]"
       }
     >
       <div className={"container mx-auto max-w-5xl"}>
         <div className={"flex justify-between items-center h-[50px]"}>
           <div className="flex">
             <button
-              onClick={() => dispatch(setOpenMenu(!openMenu))}
+              onClick={() => setOpenMenu(!openMenu)}
               className={"md:hidden block w-[30px] h-[30px] max-md:ml-3"}
             >
               {openMenu ? (
@@ -62,7 +77,7 @@ const Header: FC = () => {
               <div className={"flex items-center"}>
                 <h2
                   className={
-                    "text-[#000] font-black text-[22px] rounded-[4px] px-[4px]"
+                    "text-[#000] dark:text-[#999999] font-black text-[22px] rounded-[4px] px-[4px]"
                   }
                 >
                   Blog
@@ -74,8 +89,8 @@ const Header: FC = () => {
           <nav
             className={
               openMenu
-                ? "md:hidden absolute w-full z-30 top-[50px] bg-white text-black text-[24px] border-b-2 border-[#d0cdcd50]"
-                : "md:block hidden"
+                ? "md:hidden absolute w-full z-30 top-[50px] bg-white  text-black text-[24px] border-b-2 border-[#d0cdcd50] dark:bg-[#292a2d] dark:border-[#201f1f50]"
+                : "md:block hidden dark:text-[#999999]"
             }
           >
             <ul
@@ -86,35 +101,43 @@ const Header: FC = () => {
               }
             >
               <li>
-                <NavLink onClick={() => dispatch(setOpenMenu(false))} to={"/"}>
+                <NavLink onClick={() => setOpenMenu(false)} to={"/"}>
                   Home
                 </NavLink>
               </li>
               <li>
-                <NavLink
-                  onClick={() => dispatch(setOpenMenu(false))}
-                  to={"/saved"}
-                >
+                <NavLink onClick={() => setOpenMenu(false)} to={"/saved"}>
                   Saved
                 </NavLink>
               </li>
               <li>
-                <NavLink
-                  onClick={() => dispatch(setOpenMenu(false))}
-                  to={"/recents"}
-                >
+                <NavLink onClick={() => setOpenMenu(false)} to={"/recents"}>
                   Recents
                 </NavLink>
               </li>
             </ul>
           </nav>
 
-          <div className="text-[30px] w-8">
-            <Moon />
+          <div>
+            {theme ? (
+              <button
+                onClick={() => onClickLightTheme()}
+                className="text-[30px] w-8"
+              >
+                <Moon />
+              </button>
+            ) : (
+              <button
+                onClick={() => onClickDarkTheme()}
+                className="text-[30px] w-8"
+              >
+                <Sun />
+              </button>
+            )}
           </div>
           {isAuth ? (
             <div className="flex justify-between  items-center">
-              <Profile />
+              <Profile openMenu={openMenu} setOpenMenu={setOpenMenu} />
             </div>
           ) : (
             <div className="flex justify-between w-[120px] items-center">

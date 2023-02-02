@@ -25,8 +25,6 @@ const Home: FC = () => {
   const { recents } = useAppSelector((state: RootState) => state.posts)
   const { searchValue } = useAppSelector((state: RootState) => state.posts)
 
-  const { openMenu } = useAppSelector((state: RootState) => state.posts)
-
   // const { isLoading, isError, data: popularPosts } = useFetchPopularPostsQuery()
   const onClickNew = () => {
     setActiveNewPost(true)
@@ -60,7 +58,7 @@ const Home: FC = () => {
             <input
               value={searchValue}
               onChange={(event) => onChangeHanlder(event.target.value)}
-              className="w-full h-10 pl-14 rounded-md outline-none bg-[#ccc]"
+              className="dark:bg-[#999] w-full h-10 pl-14 rounded-md outline-none bg-[#ccc]"
               type="text"
             />
           </div>

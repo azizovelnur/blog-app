@@ -1,4 +1,7 @@
-import { getRecentsPostsFromLS } from "./../../../helpers/getDataFromLS"
+import {
+  getRecentsPostsFromLS,
+  getThemeFromLS,
+} from "./../../../helpers/getDataFromLS"
 import { IPost } from "./../../../models/models"
 import { IStatePosts } from "./../../storeModels/storeModels"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
@@ -9,7 +12,6 @@ const initialState: IStatePosts = {
   posts: getDataFromLocalStorage(),
   findedPosts: [],
   recents: getRecentsPostsFromLS(),
-  openMenu: false,
   searchValue: "",
 }
 
@@ -51,22 +53,13 @@ const postsSlice = createSlice({
         }
       })
     },
-    setOpenMenu(state, action: PayloadAction<Boolean>) {
-      state.openMenu = action.payload
-    },
     setSearchValue(state, action: PayloadAction<string>) {
       state.searchValue = action.payload
     },
   },
 })
 
-export const {
-  addItem,
-  removeItem,
-  setRecents,
-  findPosts,
-  setOpenMenu,
-  setSearchValue,
-} = postsSlice.actions
+export const { addItem, removeItem, setRecents, findPosts, setSearchValue } =
+  postsSlice.actions
 
 export const postsReducer = postsSlice.reducer

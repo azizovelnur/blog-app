@@ -1,6 +1,6 @@
 import tw from "tailwind-styled-components"
 interface IModalProps {
-  active: boolean
+  $active: boolean
 }
 export const ModalButton = tw.button`
   text-white
@@ -36,9 +36,9 @@ export const ModalStyle = tw.section<IModalProps>`
  items-center
  h-screen
  w-screen
- ${(props) => (props.active ? "bg-[#4747478d]" : "bg-transparent")}
- ${(props) => (props.active ? "opacity-1" : "opacity-0")}
- ${(props) => (props.active ? "pointer-events-auto" : "pointer-events-none")}
+ ${(props) => (props.$active ? "bg-[#4747478d]" : "bg-transparent")}
+ ${(props) => (props.$active ? "opacity-1" : "opacity-0")}
+ ${(props) => (props.$active ? "pointer-events-auto" : "pointer-events-none")}
 `
 export const ModalContentStyle = tw.div<IModalProps>`
   relative
@@ -46,7 +46,7 @@ export const ModalContentStyle = tw.div<IModalProps>`
   text-black
   dark:text-[#999999]
   dark:bg-[#292a2d]
-  ${(props) => (props.active ? "scale-100" : "scale-50")};
+  ${(props) => (props.$active ? "scale-100" : "scale-50")};
   duration-300
   p-[20px]
   w-[25vw]

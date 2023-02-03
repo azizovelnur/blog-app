@@ -13,8 +13,8 @@ interface IProps {
 
 const Modal: FC<IProps> = ({ active, setActive, children }) => {
   return (
-    <ModalStyle active={active}>
-      <ModalContentStyle active={active} onClick={(e) => e.stopPropagation()}>
+    <ModalStyle $active={active}>
+      <ModalContentStyle $active={active} onClick={(e) => e.stopPropagation()}>
         <button
           onClick={() => setActive(false)}
           className="absolute right-[-50px] top-[-30px] max-md:top-3 max-md:right-3"

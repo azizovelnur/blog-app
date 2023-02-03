@@ -39,7 +39,7 @@ const Post: FC<IPostProps> = ({ obj, postsData }) => {
   const [removePost] = useFetchDeletePostMutation()
   const [updatePost, { isSuccess }] = useFetchUpdatePostMutation()
   const userData = useAppSelector(data)
-  const [active, setActive] = useState<Boolean>(false)
+  const [active, setActive] = useState<boolean>(false)
   const [id, setId] = useState<string>("")
 
   const [imageUrl, setImageUrl] = useState<string>("")

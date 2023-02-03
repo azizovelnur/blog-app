@@ -18,7 +18,7 @@ const AddPost: FC = () => {
   const [addPost, { isSuccess }] = useFetchCreatePostMutation()
   const isAuth = useAppSelector(data)
   const [imageUrl, setImageUrl] = useState<string>("")
-  const [active, setActive] = useState<Boolean>(false)
+  const [active, setActive] = useState<boolean>(false)
 
   const handlerChangeFile = async (
     event: React.ChangeEvent<HTMLInputElement>

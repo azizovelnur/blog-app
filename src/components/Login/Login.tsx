@@ -8,8 +8,8 @@ import { useAppSelector } from "../../hooks/hooks"
 import { ModalButton, ModalInput } from "../StyledComponents/StyledComponents"
 
 interface IProps {
-  active: Boolean
-  setActive: Dispatch<SetStateAction<Boolean>>
+  active: boolean
+  setActive: Dispatch<SetStateAction<boolean>>
 }
 
 interface IFetchData {

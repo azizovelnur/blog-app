@@ -6,15 +6,15 @@ import {
 } from "../StyledComponents/StyledComponents"
 
 interface IProps {
-  active: Boolean
-  setActive: Dispatch<SetStateAction<Boolean>>
+  active: boolean
+  setActive: Dispatch<SetStateAction<boolean>>
   children: React.ReactNode
 }
 
 const Modal: FC<IProps> = ({ active, setActive, children }) => {
   return (
-    <ModalStyle isActive={active}>
-      <ModalContentStyle isActive={active} onClick={(e) => e.stopPropagation()}>
+    <ModalStyle active={active}>
+      <ModalContentStyle active={active} onClick={(e) => e.stopPropagation()}>
         <button
           onClick={() => setActive(false)}
           className="absolute right-[-50px] top-[-30px] max-md:top-3 max-md:right-3"

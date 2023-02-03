@@ -7,13 +7,13 @@ import { MdOutlineMail } from "react-icons/md"
 import { RootState } from "../../store/store"
 
 interface IProfileProps {
-  openMenu: Boolean
-  setOpenMenu: (openMenu: Boolean) => void
+  openMenu: boolean
+  setOpenMenu: (openMenu: boolean) => void
 }
 
 const Profile: FC<IProfileProps> = ({ openMenu, setOpenMenu }) => {
   // const { theme } = useAppSelector((state: RootState) => state.posts)
-  const [open, setOpen] = useState<Boolean>(false)
+  const [open, setOpen] = useState<boolean>(false)
   const profileRef = useRef<HTMLDivElement>(null)
   const userData = useAppSelector(data)
   const dispatch = useAppDispatch()

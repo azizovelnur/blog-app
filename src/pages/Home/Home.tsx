@@ -14,8 +14,8 @@ import { setSearchValue } from "../../store/slices/postsSlice/postsSlice"
 import { useLocation } from "react-router-dom"
 
 const Home: FC = () => {
-  const [activeNewPost, setActiveNewPost] = useState<Boolean>(true)
-  const [activePopularPost, setActivePolularPost] = useState<Boolean>(false)
+  const [activeNewPost, setActiveNewPost] = useState<boolean>(true)
+  const [activePopularPost, setActivePolularPost] = useState<boolean>(false)
 
   const location = useLocation()
   const [searchPostsSaved, setSearchPostsSaved] = useState<string>("")

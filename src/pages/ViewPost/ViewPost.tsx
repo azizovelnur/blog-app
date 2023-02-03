@@ -49,7 +49,7 @@ const ViewPost = () => {
   const [deleteComment, { isSuccess: isSuccessComment }] =
     useFetchDeleteCommentMutation()
   const userData = useAppSelector(data)
-  const [active, setActive] = useState<Boolean>(false)
+  const [active, setActive] = useState<boolean>(false)
   // const [id, setId] = useState<string>("")
   const navigate = useNavigate()
 

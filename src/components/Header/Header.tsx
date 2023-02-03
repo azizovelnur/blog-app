@@ -24,12 +24,12 @@ const Header: FC = () => {
   const dispatch = useAppDispatch()
 
   // const { theme } = useAppSelector((state: RootState) => state.posts)
-  const [openMenu, setOpenMenu] = useState<Boolean>(false)
+  const [openMenu, setOpenMenu] = useState<boolean>(false)
   const [theme, setTheme] = useState<boolean>(false)
 
-  const [modalActive, setModalActive] = useState<Boolean>(false)
-  const [loginActive, setLoginActive] = useState<Boolean>(false)
-  const [registrationActive, setRegistationActive] = useState<Boolean>(false)
+  const [modalActive, setModalActive] = useState<boolean>(false)
+  const [loginActive, setLoginActive] = useState<boolean>(false)
+  const [registrationActive, setRegistationActive] = useState<boolean>(false)
 
   const onClickRegistration = () => {
     setLoginActive(false)

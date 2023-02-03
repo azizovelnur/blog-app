@@ -23,7 +23,7 @@ export const ModalInput = tw.input`
   mb-10  
 `
 export const ModalTextArea = tw.textarea`
-  text-black rounded w-full p-2 mb-10 bg-[#ccc] max-h-[100px] min-h-[100px] outline-none
+  text-black rounded w-full  p-2 mb-4 bg-[#ccc] max-h-[100px] min-h-[100px] outline-none dark:bg-gray-500
 `
 export const ModalStyle = tw.section<IModalProps>`
  z-50

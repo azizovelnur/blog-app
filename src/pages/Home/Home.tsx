@@ -44,7 +44,9 @@ const Home: FC = () => {
     <>
       <section>
         <div className="md:w-[400px] mx-auto w-full mt-8 mb-7">
-          <div className="text-center mb-2">Search Post</div>
+          <div className="text-lg dark:text-[#999] text-black text-center mb-2">
+            Search Post
+          </div>
           <div className="relative">
             <HiSearch className="absolute top-1 left-3" size={"28px"} />
             {searchValue && (

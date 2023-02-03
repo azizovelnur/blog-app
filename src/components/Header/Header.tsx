@@ -13,7 +13,11 @@ import { IoCloseSharp } from "react-icons/io5"
 import { GiHamburgerMenu } from "react-icons/gi"
 import { RootState } from "../../store/store"
 import { ReactComponent as Moon } from "../../assets/images/moon.svg"
+import { ReactComponent as Recents } from "../../assets/images/recents.svg"
+import { ReactComponent as Saved } from "../../assets/images/saved.svg"
 import { ReactComponent as Sun } from "../../assets/images/sun.svg"
+import { HiOutlineHome } from "react-icons/hi"
+import { BsBookmark, BsBookmarks } from "react-icons/bs"
 
 const Header: FC = () => {
   const isAuth = useAppSelector(data)
@@ -68,9 +72,13 @@ const Header: FC = () => {
               className={"md:hidden block w-[30px] h-[30px] max-md:ml-3"}
             >
               {openMenu ? (
-                <IoCloseSharp className={"fill-black h-[30px] w-[30px]"} />
+                <IoCloseSharp
+                  className={"fill-black h-[30px] w-[30px] dark:fill-[#999]"}
+                />
               ) : (
-                <GiHamburgerMenu className={"fill-black h-[30px] w-[30px]"} />
+                <GiHamburgerMenu
+                  className={"fill-black h-[30px] w-[30px] dark:fill-[#999]"}
+                />
               )}
             </button>
             <Link to={"/"} className="max-md:hidden">
@@ -90,29 +98,62 @@ const Header: FC = () => {
             className={
               openMenu
                 ? "md:hidden absolute w-full z-30 top-[50px] bg-white  text-black text-[24px] border-b-2 border-[#d0cdcd50] dark:bg-[#292a2d] dark:border-[#201f1f50]"
-                : "md:block hidden dark:text-[#999999]"
+                : "md:block hidden dark:text-[#999999] text-[18px]"
             }
           >
             <ul
               className={
                 openMenu
-                  ? "flex flex-col items-center justify-between"
-                  : "flex justify-between w-[200px]"
+                  ? "flex flex-col items-center justify-between text-black dark:text-[#999] text-[18px]"
+                  : "flex justify-between w-[280px]"
               }
             >
               <li>
-                <NavLink onClick={() => setOpenMenu(false)} to={"/"}>
-                  Home
+                <NavLink
+                  className={(navData) =>
+                    navData.isActive
+                      ? "h-[30px] flex text-green-600"
+                      : "h-[30px] flex hover:text-green-600 duration-200"
+                  }
+                  onClick={() => setOpenMenu(false)}
+                  to={"/"}
+                >
+                  <div>
+                    <HiOutlineHome size={"22px"} />
+                  </div>
+                  <div>Home</div>
                 </NavLink>
               </li>
               <li>
-                <NavLink onClick={() => setOpenMenu(false)} to={"/saved"}>
-                  Saved
+                <NavLink
+                  className={(navData) =>
+                    navData.isActive
+                      ? "h-[30px] flex text-green-600"
+                      : "h-[30px] flex hover:fill-green-600 hover:text-green-600 duration-200"
+                  }
+                  onClick={() => setOpenMenu(false)}
+                  to={"/saved"}
+                >
+                  <div>
+                    <Saved />
+                  </div>
+                  <div>Saved</div>
                 </NavLink>
               </li>
               <li>
-                <NavLink onClick={() => setOpenMenu(false)} to={"/recents"}>
-                  Recents
+                <NavLink
+                  className={(navData) =>
+                    navData.isActive
+                      ? "h-[30px] flex text-green-600 fill-green-600"
+                      : "h-[30px] flex dark:fill-[#999] hover:fill-green-600 dark:hover:fill-green-600 hover:text-green-600 duration-200"
+                  }
+                  onClick={() => setOpenMenu(false)}
+                  to={"/recents"}
+                >
+                  <div className="">
+                    <Recents />
+                  </div>
+                  <div>Recents</div>
                 </NavLink>
               </li>
             </ul>
@@ -140,11 +181,11 @@ const Header: FC = () => {
               <Profile openMenu={openMenu} setOpenMenu={setOpenMenu} />
             </div>
           ) : (
-            <div className="flex justify-between w-[120px] items-center">
+            <div className="flex justify-between w-[160px] items-center">
               <div
                 onClick={() => onClickLogin()}
                 className={
-                  "text-black cursor-pointer h-[30px] rounded-[4px] p-[2px]"
+                  "dark:text-[#cacaca] text-white font-bold cursor-pointer rounded-md px-2 bg-green-700"
                 }
               >
                 <span>Login</span>
@@ -152,7 +193,7 @@ const Header: FC = () => {
               <div
                 onClick={() => onClickRegistration()}
                 className={
-                  "text-black cursor-pointer h-[30px] rounded-[4px] p-[2px]"
+                  "dark:text-[#cacaca] text-white font-bold cursor-pointer rounded-md px-2 bg-green-700"
                 }
               >
                 <span>Register</span>

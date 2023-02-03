@@ -104,7 +104,7 @@ const AddPost: FC = () => {
               />
               <button
                 onClick={() => inputFileRef.current?.click()}
-                className="bg-black text-white w-full mx-auto mb-2 px-3 flex justify-between items-center  rounded-md p-1"
+                className="bg-black text-white dark:bg-gray-500 w-full mx-auto mb-5 px-3 flex justify-between items-center  rounded-md p-1"
               >
                 <div>Download Image</div> <BsDownload size={"40px"} />
               </button>

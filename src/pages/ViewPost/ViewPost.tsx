@@ -274,13 +274,13 @@ const ViewPost = () => {
       {userData && (
         <div className="flex justify-between max-sm:flex-col">
           <input
-            className="w-[75%] pl-4 rounded-md dark:bg-black dark: text-white border-[#000] border-[1px] h-11 outline-none max-sm:w-full mb-4"
+            className="w-[75%] pl-4 rounded-md dark:bg-gray-500 dark:border-0 border-[#000] border-[1px] h-11 outline-none max-sm:w-full mb-4"
             value={commentValue}
             onChange={(event) => setCommentValue(event?.target.value)}
             type="text"
           />
           <button
-            className="w-[20%] bg-black text-white h-11 rounded-md font-bold max-sm:w-full"
+            className="w-[20%] dark:bg-gray-500 bg-black text-white h-11 rounded-md font-bold max-sm:w-full"
             onClick={() =>
               onClickCreateComment({
                 postId: id as string,

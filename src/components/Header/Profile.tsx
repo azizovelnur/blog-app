@@ -47,10 +47,10 @@ const Profile: FC<IProfileProps> = ({ openMenu, setOpenMenu }) => {
     >
       <div
         onClick={() => setOpen(!open)}
-        className="flex justify-between w-[40px] h-[30px]  items-center rounded-[4px] p-[2px] cursor-pointer"
+        className="flex justify-between w-[40px] h-[30px]  items-center rounded-[4px] p-[2px] cursor-pointer dark:text-[#999]"
       >
-        <FaUserAlt color="black" />
-        {open ? <HiArrowUp color="black" /> : <HiArrowDown color="black" />}
+        <FaUserAlt />
+        {open ? <HiArrowUp /> : <HiArrowDown />}
       </div>
 
       {open && (

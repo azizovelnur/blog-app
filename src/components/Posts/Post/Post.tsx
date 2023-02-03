@@ -135,27 +135,27 @@ const Post: FC<IPostProps> = ({ obj, postsData }) => {
       </div>
       {location.pathname !== "/saved" && (
         <div className="absolute text-lg top-4 right-4 flex items-center bg-white rounded-md p-1 dark:text-[#999999] dark:bg-[#292a2d]">
-          <HiEye color={"green dark:gold"} />
+          <HiEye />
           <div className="ml-1">{obj.viewsCount}</div>
         </div>
       )}
       {posts.find((post: IPost) => post._id === obj._id) ? (
-        <div className="absolute bottom-2 right-2 flex items-center justify-between w-[70px] text-[30px]">
+        <div className="dark:text-[#999] text-black absolute bottom-2 right-2 flex items-center justify-between w-[70px] text-[30px]">
           <Link to={`/blog/${obj._id}`}>
-            <FaComments color={"gold"} />
+            <FaComments />
           </Link>
           <button onClick={() => removeItemFromPostsSaved(obj._id)}>
-            <BsFillBookmarkHeartFill color={"gold dark:green"} />
+            <BsFillBookmarkHeartFill color={"green"} />
           </button>
         </div>
       ) : (
-        <div className="absolute bottom-2 right-2 flex items-center justify-between w-[70px] text-[30px]">
+        <div className="dark:text-[#999] absolute bottom-2 right-2 flex items-center justify-between w-[70px] text-[30px]">
           <Link to={`/blog/${obj._id}`}>
-            <FaComments color={"gold dark:green"} />
+            <FaComments />
           </Link>
 
           <button onClick={() => addItemToPostsSaved(obj)}>
-            <BsFillBookmarkHeartFill color="black" />
+            <BsFillBookmarkHeartFill />
           </button>
         </div>
       )}

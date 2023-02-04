@@ -1,4 +1,4 @@
-import { IPost, IPostMutation } from "./../../../models/models"
+import { IPost, IPostMutation } from "../../../types/types"
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
 export const postsApi = createApi({
@@ -51,7 +51,6 @@ export const postsApi = createApi({
     }),
 
     fetchUpdatePost: build.mutation<IPost, IPostMutation>({
-      //need delete id before send
       query: (post) => {
         return {
           url: `/posts/${post._id}`,
@@ -79,7 +78,6 @@ export const {
   useFetchPostsQuery,
   useFetchOnePostQuery,
   useFetchPopularPostsQuery,
-  // useFetchSearchPostsQuery,
   useFetchCreatePostMutation,
   useFetchUpdatePostMutation,
   useFetchDeletePostMutation,

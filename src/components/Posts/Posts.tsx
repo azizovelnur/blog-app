@@ -1,16 +1,13 @@
 import React, { FC } from "react"
 import { useFetchPostsQuery } from "../../store/rtk/posts/postsApi"
-import { IPost } from "../../models/models"
+import { IPost } from "../../types/types"
 import { Post } from "./Post/Post"
 import { useAppSelector } from "../../hooks/hooks"
 import { RootState } from "../../store/store"
 
 import { AnimatePresence, motion } from "framer-motion"
-// interface ISearchProps {
-//   searchPosts: string
-// }
 
-const Posts: FC = () => {
+export const Posts: FC = () => {
   const { searchValue } = useAppSelector((state: RootState) => state.posts)
   const {
     isLoading,
@@ -46,7 +43,7 @@ const Posts: FC = () => {
                 custom={index}
                 className="lg:h-[480px] lg:w-[500px] md:h-[400px] md:w-[380px] relative w-full h-[400px] mb-[70px] rounded-[10px] bg-white dark:bg-[#292a2d]"
               >
-                <Post key={index} obj={obj} postsData={postsData} />
+                <Post key={index} obj={obj} />
               </motion.div>
             </AnimatePresence>
           ))
@@ -59,11 +56,9 @@ const Posts: FC = () => {
               custom={index}
               className="lg:h-[480px] lg:w-[500px] md:h-[400px] md:w-[380px] relative w-full h-[400px] mb-[70px] rounded-[10px] bg-white dark:bg-[#292a2d]"
             >
-              <Post key={index} obj={obj} postsData={postsData} />
+              <Post key={index} obj={obj} />
             </motion.div>
           ))}
     </>
   )
 }
-
-export { Posts }

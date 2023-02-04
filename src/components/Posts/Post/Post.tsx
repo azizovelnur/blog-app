@@ -1,97 +1,23 @@
-import { Link, NavLink, useLocation } from "react-router-dom"
-import React, { FC, useState } from "react"
-import { data } from "../../../store/slices/async/auth/authSlice"
+import { Link, useLocation } from "react-router-dom"
+import React, { FC } from "react"
 import { useAppSelector, useAppDispatch } from "../../../hooks/hooks"
-import {
-  useFetchDeletePostMutation,
-  useFetchUpdatePostMutation,
-} from "../../../store/rtk/posts/postsApi"
-import { IPost, TPost } from "../../../models/models"
+import { IPost } from "../../../types/types"
 import { HiEye, HiOutlineUserCircle } from "react-icons/hi"
-import { TbTrash } from "react-icons/tb"
-import { FiEdit2 } from "react-icons/fi"
 import { BsFillBookmarkHeartFill } from "react-icons/bs"
 import {
   addItem,
   removeItem,
 } from "../../../store/slices/postsSlice/postsSlice"
-import { Modal } from "../../Modal/Modal"
-import {
-  ModalButton,
-  ModalInput,
-  ModalTextArea,
-} from "../../StyledComponents/StyledComponents"
 import { RootState } from "../../../store/store"
-import axios from "../../../axios/axiosConf"
-import { ReactComponent as NoImage } from "../../../assets/images/NoImage.svg"
 import { FaComments } from "react-icons/fa"
-import { motion } from "framer-motion"
 interface IPostProps {
   obj: IPost
-  postsData?: IPost[]
 }
 
-const Post: FC<IPostProps> = ({ obj, postsData }) => {
-  // const { theme } = useAppSelector((state: RootState) => state.posts)
+export const Post: FC<IPostProps> = ({ obj }) => {
   const location = useLocation()
-  const { posts } = useAppSelector((state: RootState) => state.posts)
+  const { saved } = useAppSelector((state: RootState) => state.posts)
   const dispatch = useAppDispatch()
-  const [removePost] = useFetchDeletePostMutation()
-  const [updatePost, { isSuccess }] = useFetchUpdatePostMutation()
-  const userData = useAppSelector(data)
-  const [active, setActive] = useState<boolean>(false)
-  const [id, setId] = useState<string>("")
-
-  const [imageUrl, setImageUrl] = useState<string>("")
-
-  const [newPost, setNewPost] = useState<TPost>({
-    title: "",
-    text: "",
-  })
-  const changeHandler = (
-    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-  ) => {
-    setNewPost({
-      ...newPost,
-      [e.target.name]: e.target.value,
-    })
-  }
-
-  const handlerChangeFile = async (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    try {
-      if (event.target.files) {
-        const formData = new FormData()
-        const file = event.target.files[0]
-        formData.append("image", file)
-        const { data } = await axios.post("/upload", formData)
-        setImageUrl(data.url)
-      }
-    } catch (error) {
-      console.log(error)
-      alert(error)
-    }
-  }
-  const onCLickEdit = (objId: string) => {
-    const post = postsData?.filter(function (obj: IPost) {
-      return obj._id === objId
-    })
-    console.log(post)
-    if (post) {
-      setNewPost({ title: post[0].title, text: post[0].text })
-    }
-    setId(objId)
-    setActive(true)
-  }
-
-  const deletePost = async (_id: string) => {
-    await removePost(_id).unwrap()
-  }
-  const onClickUpdatePost = async (_id: string) => {
-    await updatePost({ ...newPost, _id, imageUrl }).unwrap()
-    setActive(false)
-  }
 
   const addItemToPostsSaved = (obj: IPost) => {
     dispatch(addItem(obj))
@@ -100,14 +26,7 @@ const Post: FC<IPostProps> = ({ obj, postsData }) => {
   const removeItemFromPostsSaved = (id: string) => {
     dispatch(removeItem(id))
   }
-  // const postAnimantion = {
-  //   visible: (i: number) => ({
-  //     opacity: 1,
-  //     y: 0,
-  //     transition: { delay: i * 0.1 },
-  //   }),
-  //   hidden: { opacity: 0, y: 40 },
-  // }
+
   return (
     <>
       {obj.imageUrl ? (
@@ -142,7 +61,7 @@ const Post: FC<IPostProps> = ({ obj, postsData }) => {
           <div className="ml-1">{obj.viewsCount}</div>
         </div>
       )}
-      {posts.find((post: IPost) => post._id === obj._id) ? (
+      {saved.find((post: IPost) => post._id === obj._id) ? (
         <div className="dark:text-[#999] text-black absolute bottom-2 right-2 flex items-center justify-between w-[70px] text-[30px]">
           <Link to={`/blog/${obj._id}`}>
             <FaComments />
@@ -169,5 +88,3 @@ const Post: FC<IPostProps> = ({ obj, postsData }) => {
     </>
   )
 }
-
-export { Post }

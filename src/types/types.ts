@@ -27,12 +27,6 @@ export interface IPostMutation {
   imageUrl?: string
 }
 
-export type TPost = {
-  title: string
-  text: string
-  imageUrl?: string
-}
-
 export interface ILogin {
   email: string
   password: string
@@ -53,7 +47,21 @@ export interface IRegistration {
   email: string
   password: string
 }
-export interface Iids {
+
+export interface IStatePosts {
+  saved: IPost[]
+  recents: IPost[]
+  searchValue: string
+}
+
+export interface IComment {
+  user: IUser
+  _id: string
+  comment: string
+  createdAt: string
+}
+
+export interface ICreateComment {
+  comment: string
   postId: string
-  commentId: string
 }

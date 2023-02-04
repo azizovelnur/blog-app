@@ -11,7 +11,7 @@ interface IProps {
   children: React.ReactNode
 }
 
-const Modal: FC<IProps> = ({ active, setActive, children }) => {
+export const Modal: FC<IProps> = ({ active, setActive, children }) => {
   return (
     <ModalStyle $active={active}>
       <ModalContentStyle $active={active} onClick={(e) => e.stopPropagation()}>
@@ -26,5 +26,3 @@ const Modal: FC<IProps> = ({ active, setActive, children }) => {
     </ModalStyle>
   )
 }
-
-export { Modal }

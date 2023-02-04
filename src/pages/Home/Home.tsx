@@ -1,11 +1,7 @@
-import React, { FC, useEffect, useRef, useState } from "react"
+import React, { FC, useState } from "react"
 import { Posts } from "../../components/Posts/Posts"
-import { SavedPosts } from "../../components/Posts/SavedPosts"
-import { findPosts } from "../../store/slices/postsSlice/postsSlice"
-import { useFetchPopularPostsQuery } from "../../store/rtk/posts/postsApi"
 import { RootState } from "../../store/store"
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks"
-import { IPost } from "../../models/models"
 import { PopularPosts } from "../../components/Posts/PopularPosts"
 import { AddPost } from "../../components/AddPost/AddPost"
 import { HiSearch } from "react-icons/hi"
@@ -13,19 +9,14 @@ import { IoCloseSharp } from "react-icons/io5"
 import { setSearchValue } from "../../store/slices/postsSlice/postsSlice"
 import { useLocation } from "react-router-dom"
 
-const Home: FC = () => {
+export const Home: FC = () => {
   const [activeNewPost, setActiveNewPost] = useState<boolean>(true)
   const [activePopularPost, setActivePolularPost] = useState<boolean>(false)
 
   const location = useLocation()
-  const [searchPostsSaved, setSearchPostsSaved] = useState<string>("")
-  const [searchPosts, setSearchPosts] = useState<string>("")
   const dispatch = useAppDispatch()
-
-  const { recents } = useAppSelector((state: RootState) => state.posts)
   const { searchValue } = useAppSelector((state: RootState) => state.posts)
 
-  // const { isLoading, isError, data: popularPosts } = useFetchPopularPostsQuery()
   const onClickNew = () => {
     setActiveNewPost(true)
     setActivePolularPost(false)
@@ -36,7 +27,6 @@ const Home: FC = () => {
     setActiveNewPost(false)
   }
   const onChangeHanlder = (value: string) => {
-    // setSearchPosts(value)
     dispatch(setSearchValue(value))
   }
 
@@ -99,5 +89,3 @@ const Home: FC = () => {
     </>
   )
 }
-
-export { Home }

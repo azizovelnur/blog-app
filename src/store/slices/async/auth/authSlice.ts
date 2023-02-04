@@ -1,7 +1,7 @@
-import { IUser } from "../../../../models/models"
-import { IRegistration } from "../../../../models/models"
+import { IUser } from "../../../../types/types"
+import { IRegistration } from "../../../../types/types"
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
-import { ILogin, IUserState, Status } from "../../../../models/models"
+import { ILogin, IUserState, Status } from "../../../../types/types"
 import axios from "../../../../axios/axiosConf"
 import { RootState } from "../../../store"
 

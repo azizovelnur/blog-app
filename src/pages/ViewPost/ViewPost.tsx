@@ -12,26 +12,17 @@ import {
 } from "../../store/rtk/posts/postsApi"
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks"
 import { setRecents } from "../../store/slices/postsSlice/postsSlice"
-import { IComment, ICreateComment } from "../../store/storeModels/storeModels"
+import { IComment, ICreateComment, IPostMutation } from "../../types/types"
 import { data } from "../../store/slices/async/auth/authSlice"
-import { Iids, TPost } from "../../models/models"
-import { Modal } from "../../components/Modal/Modal"
-import {
-  ModalButton,
-  ModalInput,
-  ModalTextArea,
-} from "../../components/StyledComponents/StyledComponents"
 import { TbTrash } from "react-icons/tb"
 import { FiEdit2 } from "react-icons/fi"
-import { Navigate } from "react-router-dom"
 import axios from "../../axios/axiosConf"
 import { HiOutlineUserCircle } from "react-icons/hi"
 import { BsDownload } from "react-icons/bs"
 import { IoArrowBack } from "react-icons/io5"
-import { RootState } from "../../store/store"
 import { motion } from "framer-motion"
 
-const ViewPost = () => {
+export const ViewPost = () => {
   const inputFileRef = useRef<HTMLInputElement>(null)
   const { id } = useParams()
 
@@ -51,12 +42,11 @@ const ViewPost = () => {
     useFetchDeleteCommentMutation()
   const userData = useAppSelector(data)
   const [active, setActive] = useState<boolean>(false)
-  // const [id, setId] = useState<string>("")
   const navigate = useNavigate()
 
   const [imageUrl, setImageUrl] = useState<string>("")
 
-  const [newPost, setNewPost] = useState<TPost>({
+  const [newPost, setNewPost] = useState<IPostMutation>({
     title: "",
     text: "",
   })
@@ -90,17 +80,9 @@ const ViewPost = () => {
   }
 
   const onCLickEdit = () => {
-    // const post = postsData?.filter(function (obj: IPost) {
-    //   return obj._id === objId
-    // })
-    // console.log(post)
-    // if (onePostData) {
-    //   setNewPost({ title: post[0].title, text: post[0].text })
-    // }
     if (onePostData) {
       setNewPost({ title: onePostData.title, text: onePostData.text })
     }
-    // setId(objId)
     setActive(!active)
   }
 
@@ -308,5 +290,3 @@ const ViewPost = () => {
     </div>
   )
 }
-
-export { ViewPost }

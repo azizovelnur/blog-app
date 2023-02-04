@@ -1,6 +1,9 @@
-import { IComment, ICreateComment } from "./../../storeModels/storeModels"
+import { IComment, ICreateComment } from "./../../../types/types"
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
-import { Iids } from "../../../models/models"
+interface Iids {
+  postId: string
+  commentId: string
+}
 
 export const commentsApi = createApi({
   reducerPath: "commentsApi",

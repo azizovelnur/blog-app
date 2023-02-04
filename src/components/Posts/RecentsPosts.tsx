@@ -1,11 +1,11 @@
 import React, { FC } from "react"
 import { useAppSelector } from "../../hooks/hooks"
-import { IPost } from "../../models/models"
+import { IPost } from "../../types/types"
 import { RootState } from "../../store/store"
 import { Post } from "./Post/Post"
-import { AnimatePresence, motion } from "framer-motion"
+import { motion } from "framer-motion"
 
-const RecentsPosts: FC = () => {
+export const RecentsPosts: FC = () => {
   const { recents } = useAppSelector((state: RootState) => state.posts)
   const postAnimantion = {
     visible: (i: number) => ({
@@ -34,5 +34,3 @@ const RecentsPosts: FC = () => {
     </section>
   )
 }
-
-export { RecentsPosts }

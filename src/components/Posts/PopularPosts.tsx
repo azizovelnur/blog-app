@@ -1,13 +1,12 @@
 import { AnimatePresence, motion } from "framer-motion"
-import { transform } from "lodash"
 import React, { FC } from "react"
 import { useAppSelector } from "../../hooks/hooks"
-import { IPost } from "../../models/models"
+import { IPost } from "../../types/types"
 import { useFetchPopularPostsQuery } from "../../store/rtk/posts/postsApi"
 import { RootState } from "../../store/store"
 import { Post } from "./Post/Post"
 
-const PopularPosts: FC = () => {
+export const PopularPosts: FC = () => {
   const { searchValue } = useAppSelector((state: RootState) => state.posts)
   const {
     isLoading,
@@ -52,11 +51,6 @@ const PopularPosts: FC = () => {
               animate="visible"
               key={index}
               custom={index}
-              // whileHover={{
-              //   scale: 1.02,
-              //   transition: { duration: 0.2 },
-              //   translateY: "-1px",
-              // }}
               className="lg:h-[480px] lg:w-[500px] md:h-[400px] md:w-[380px] relative w-full h-[400px] mb-[70px] rounded-[10px] bg-white dark:bg-[#292a2d]"
             >
               <Post key={index} obj={obj} />
@@ -65,5 +59,3 @@ const PopularPosts: FC = () => {
     </>
   )
 }
-
-export { PopularPosts }

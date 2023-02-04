@@ -1,7 +1,6 @@
 import React, { Dispatch, FC, SetStateAction } from "react"
 import { useForm } from "react-hook-form"
-import { Navigate } from "react-router-dom"
-import { ILogin, IUser } from "../../models/models"
+import { ILogin, IUser } from "../../types/types"
 import { fetchLogin, data } from "../../store/slices/async/auth/authSlice"
 import { useAppDispatch } from "../../hooks/hooks"
 import { useAppSelector } from "../../hooks/hooks"
@@ -16,7 +15,7 @@ interface IFetchData {
   payload: IUser | any
 }
 
-const Login: FC<IProps> = ({ active, setActive }) => {
+export const Login: FC<IProps> = ({ active, setActive }) => {
   const isAuth = useAppSelector(data)
   console.log(isAuth)
 
@@ -24,8 +23,8 @@ const Login: FC<IProps> = ({ active, setActive }) => {
 
   const { register, handleSubmit } = useForm<ILogin>({
     defaultValues: {
-      email: "admin@gmail.com",
-      password: "admin",
+      email: "",
+      password: "",
     },
     mode: "onChange",
   })
@@ -36,7 +35,7 @@ const Login: FC<IProps> = ({ active, setActive }) => {
     console.log(userData)
 
     if (!userData.payload) {
-      return alert("login error")
+      return alert("auth error")
     }
 
     if (userData.payload.token) {
@@ -71,5 +70,3 @@ const Login: FC<IProps> = ({ active, setActive }) => {
     </div>
   )
 }
-
-export { Login }

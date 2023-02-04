@@ -1,16 +1,12 @@
-import {
-  getRecentsPostsFromLS,
-  getThemeFromLS,
-} from "./../../../helpers/getDataFromLS"
-import { IPost } from "./../../../models/models"
-import { IStatePosts } from "./../../storeModels/storeModels"
+import { getRecentsPostsFromLS } from "./../../../helpers/getDataFromLS"
+import { IPost } from "../../../types/types"
+import { IStatePosts } from "./../../../types/types"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { getDataFromLocalStorage } from "../../../helpers/getDataFromLS"
 import { addPostToLS, addRecentsToLS } from "../../../helpers/addPostToLS"
 
 const initialState: IStatePosts = {
-  posts: getDataFromLocalStorage(),
-  findedPosts: [],
+  saved: getDataFromLocalStorage(),
   recents: getRecentsPostsFromLS(),
   searchValue: "",
 }
@@ -21,18 +17,15 @@ const postsSlice = createSlice({
 
   reducers: {
     addItem(state, action: PayloadAction<IPost>) {
-      const postsArr = state.posts.filter(
+      const postsArr = state.saved.filter(
         (obj) => obj._id !== action.payload._id
       )
-      state.posts = [...postsArr, action.payload]
-      addPostToLS(state.posts)
+      state.saved = [...postsArr, action.payload]
+      addPostToLS(state.saved)
     },
     removeItem(state, action: PayloadAction<string>) {
-      state.posts = state.posts.filter((item) => item._id !== action.payload)
-      state.findedPosts = state.findedPosts.filter(
-        (item) => item._id !== action.payload
-      )
-      addPostToLS(state.posts)
+      state.saved = state.saved.filter((item) => item._id !== action.payload)
+      addPostToLS(state.saved)
     },
     setRecents(state, action: PayloadAction<IPost>) {
       state.recents = state.recents.filter(({ _id }) => {
@@ -42,24 +35,13 @@ const postsSlice = createSlice({
       state.recents = state.recents.slice(0, 8)
       addRecentsToLS(state.recents)
     },
-    findPosts(state, action: PayloadAction<string>) {
-      const searchValue = action.payload.toLowerCase()
-
-      state.findedPosts = state.posts.filter((obj) => {
-        if (obj.title.toLowerCase().includes(searchValue)) {
-          return true
-        } else {
-          return false
-        }
-      })
-    },
     setSearchValue(state, action: PayloadAction<string>) {
       state.searchValue = action.payload
     },
   },
 })
 
-export const { addItem, removeItem, setRecents, findPosts, setSearchValue } =
+export const { addItem, removeItem, setRecents, setSearchValue } =
   postsSlice.actions
 
 export const postsReducer = postsSlice.reducer

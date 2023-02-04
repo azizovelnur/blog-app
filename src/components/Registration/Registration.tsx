@@ -1,7 +1,7 @@
 import React, { Dispatch, FC, SetStateAction } from "react"
 import { useForm } from "react-hook-form"
 import { Navigate } from "react-router-dom"
-import { IRegistration, IUser } from "../../models/models"
+import { IRegistration, IUser } from "../../types/types"
 import { fetchRegistration } from "../../store/slices/async/auth/authSlice"
 import { useAppDispatch } from "../../hooks/hooks"
 import { ModalButton, ModalInput } from "../StyledComponents/StyledComponents"
@@ -13,14 +13,14 @@ interface IProps {
 interface IFetchData {
   payload: IUser | any
 }
-const Registration: FC<IProps> = ({ active, setActive }) => {
+export const Registration: FC<IProps> = ({ active, setActive }) => {
   const dispatch = useAppDispatch()
 
   const { register, handleSubmit } = useForm<IRegistration>({
     defaultValues: {
-      name: "admin",
-      email: "admin@gmail.com",
-      password: "admin",
+      name: "",
+      email: "",
+      password: "",
     },
     mode: "onChange",
   })
@@ -73,5 +73,3 @@ const Registration: FC<IProps> = ({ active, setActive }) => {
     </div>
   )
 }
-
-export { Registration }

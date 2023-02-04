@@ -1,33 +1,24 @@
 import React, { FC, useState } from "react"
-import { Link, NavLink, useLocation } from "react-router-dom"
-import { useAppDispatch, useAppSelector } from "../../hooks/hooks"
+import { Link, NavLink } from "react-router-dom"
+import { useAppSelector } from "../../hooks/hooks"
 import { data } from "../../store/slices/async/auth/authSlice"
 import { Profile } from "./Profile"
 import { Modal } from "../Modal/Modal"
 import { Login } from "../Login/Login"
 import { Registration } from "../Registration/Registration"
-import { BiHome } from "react-icons/bi"
-import { FaBlog } from "react-icons/fa"
-import { AddPost } from "../AddPost/AddPost"
 import { IoCloseSharp } from "react-icons/io5"
 import { GiHamburgerMenu } from "react-icons/gi"
-import { RootState } from "../../store/store"
 import { ReactComponent as Moon } from "../../assets/images/moon.svg"
 import { ReactComponent as Recents } from "../../assets/images/recents.svg"
 import { ReactComponent as Saved } from "../../assets/images/saved.svg"
 import { ReactComponent as Sun } from "../../assets/images/sun.svg"
 import { HiOutlineHome } from "react-icons/hi"
-import { BsBookmark, BsBookmarks } from "react-icons/bs"
 import { motion } from "framer-motion"
 
-const Header: FC = () => {
+export const Header: FC = () => {
   const isAuth = useAppSelector(data)
-  const dispatch = useAppDispatch()
-
-  // const { theme } = useAppSelector((state: RootState) => state.posts)
   const [openMenu, setOpenMenu] = useState<boolean>(false)
   const [theme, setTheme] = useState<boolean>(false)
-
   const [modalActive, setModalActive] = useState<boolean>(false)
   const [loginActive, setLoginActive] = useState<boolean>(false)
   const [registrationActive, setRegistationActive] = useState<boolean>(false)
@@ -219,5 +210,3 @@ const Header: FC = () => {
     </header>
   )
 }
-
-export { Header }

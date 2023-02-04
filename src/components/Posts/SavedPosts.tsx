@@ -1,12 +1,12 @@
 import React, { FC } from "react"
-import { IPost } from "../../models/models"
+import { IPost } from "../../types/types"
 import { RootState } from "../../store/store"
 import { useAppSelector } from "../../hooks/hooks"
 import { Post } from "./Post/Post"
 import { motion } from "framer-motion"
 
-const SavedPosts: FC = () => {
-  const { posts } = useAppSelector((state: RootState) => state.posts)
+export const SavedPosts: FC = () => {
+  const { saved } = useAppSelector((state: RootState) => state.posts)
   const postAnimantion = {
     visible: (i: number) => ({
       opacity: 1,
@@ -19,7 +19,7 @@ const SavedPosts: FC = () => {
   return (
     <>
       <section className="flex justify-between flex-wrap w-full">
-        {posts.map((obj: IPost, index: number) => (
+        {saved.map((obj: IPost, index: number) => (
           <motion.div
             variants={postAnimantion}
             initial={"hidden"}
@@ -35,5 +35,3 @@ const SavedPosts: FC = () => {
     </>
   )
 }
-
-export { SavedPosts }

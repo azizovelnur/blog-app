@@ -1,10 +1,9 @@
 import React, { FC, useRef, useState } from "react"
 import { useAppSelector } from "../../hooks/hooks"
 import { Modal } from "../Modal/Modal"
-import { TPost } from "../../models/models"
+import { IPostMutation } from "../../types/types"
 import { data } from "../../store/slices/async/auth/authSlice"
 import { useFetchCreatePostMutation } from "../../store/rtk/posts/postsApi"
-import { IoCreate } from "react-icons/io5"
 import {
   ModalButton,
   ModalInput,
@@ -13,7 +12,7 @@ import {
 import axios from "../../axios/axiosConf"
 import { BsDownload } from "react-icons/bs"
 
-const AddPost: FC = () => {
+export const AddPost: FC = () => {
   const inputFileRef = useRef<HTMLInputElement>(null)
   const [addPost, { isSuccess }] = useFetchCreatePostMutation()
   const isAuth = useAppSelector(data)
@@ -37,7 +36,7 @@ const AddPost: FC = () => {
     }
   }
 
-  const [newPost, setNewPost] = useState<TPost>({
+  const [newPost, setNewPost] = useState<IPostMutation>({
     title: "",
     text: "",
   })
@@ -125,5 +124,3 @@ const AddPost: FC = () => {
     </>
   )
 }
-
-export { AddPost }

@@ -22,7 +22,7 @@ import { BsDownload } from "react-icons/bs"
 import { IoArrowBack } from "react-icons/io5"
 import { motion } from "framer-motion"
 
-export const ViewPost = () => {
+const ViewPost = () => {
   const inputFileRef = useRef<HTMLInputElement>(null)
   const { id } = useParams()
 
@@ -290,3 +290,5 @@ export const ViewPost = () => {
     </div>
   )
 }
+
+export default ViewPost

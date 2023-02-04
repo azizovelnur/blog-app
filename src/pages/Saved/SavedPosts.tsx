@@ -2,7 +2,7 @@ import React, { FC } from "react"
 import { IPost } from "../../types/types"
 import { RootState } from "../../store/store"
 import { useAppSelector } from "../../hooks/hooks"
-import { Post } from "./Post/Post"
+import { Post } from "../../components/Posts/Post/Post"
 import { motion } from "framer-motion"
 
 export const SavedPosts: FC = () => {
@@ -17,8 +17,11 @@ export const SavedPosts: FC = () => {
   }
 
   return (
-    <>
-      <section className="flex justify-between flex-wrap w-full">
+    <section>
+      <h1 className="dark:text-[#999] text-black text-center text-[30px] mb-5">
+        Saved
+      </h1>
+      <div className="flex justify-between flex-wrap w-full">
         {saved.map((obj: IPost, index: number) => (
           <motion.div
             variants={postAnimantion}
@@ -31,7 +34,7 @@ export const SavedPosts: FC = () => {
             <Post key={index} obj={obj} />
           </motion.div>
         ))}
-      </section>
-    </>
+      </div>
+    </section>
   )
 }

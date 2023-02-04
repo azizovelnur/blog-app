@@ -2,11 +2,14 @@ import React, { useEffect } from "react"
 import { Route, Routes } from "react-router-dom"
 import { Layout } from "./components/Layout/Layout"
 import { Home } from "./pages/Home/Home"
-import { ViewPost } from "./pages/ViewPost/ViewPost"
 import { fetchAuthMe } from "./store/slices/async/auth/authSlice"
 import { useAppDispatch } from "./hooks/hooks"
-import { SavedPosts } from "./components/Posts/SavedPosts"
-import { RecentsPosts } from "./components/Posts/RecentsPosts"
+import { SavedPosts } from "./pages/Saved/SavedPosts"
+import { RecentsPosts } from "./pages/Recents/RecentsPosts"
+
+const ViewPost = React.lazy(
+  () => import(/* webpackChunkName: "ViewPost" */ "./pages/ViewPost/ViewPost")
+)
 
 function App() {
   const dispatch = useAppDispatch()
@@ -21,7 +24,14 @@ function App() {
         <Route index element={<Home />} />
         <Route path="/saved" element={<SavedPosts />} />
         <Route path="/recents" element={<RecentsPosts />} />
-        <Route path="/blog/:id" element={<ViewPost />} />
+        <Route
+          path="/blog/:id"
+          element={
+            <React.Suspense fallback={<div>loading...</div>}>
+              <ViewPost />
+            </React.Suspense>
+          }
+        />
       </Route>
     </Routes>
   )

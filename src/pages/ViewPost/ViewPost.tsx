@@ -29,6 +29,7 @@ import { HiOutlineUserCircle } from "react-icons/hi"
 import { BsDownload } from "react-icons/bs"
 import { IoArrowBack } from "react-icons/io5"
 import { RootState } from "../../store/store"
+import { motion } from "framer-motion"
 
 const ViewPost = () => {
   const inputFileRef = useRef<HTMLInputElement>(null)
@@ -122,6 +123,14 @@ const ViewPost = () => {
       dispatch(setRecents(onePostData))
     }
   }, [onePostData])
+  const viewPostAnimantion = {
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: { delay: i * 0.1 },
+    }),
+    hidden: { opacity: 0, y: 40 },
+  }
   return (
     <div
       className={
@@ -241,7 +250,11 @@ const ViewPost = () => {
       <div className="mb-14">
         {commentsData?.map((obj: IComment, index: number) => {
           return (
-            <div
+            <motion.div
+              variants={viewPostAnimantion}
+              initial={"hidden"}
+              animate="visible"
+              custom={index}
               key={index}
               className="relative bg-[#e4e3e3] dark:bg-[#333633] dark:text-[#999999] mb-7 rounded-md"
             >
@@ -267,7 +280,7 @@ const ViewPost = () => {
                   <TbTrash size={"30px"} />
                 </button>
               )}
-            </div>
+            </motion.div>
           )
         })}
       </div>

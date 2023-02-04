@@ -10,7 +10,7 @@ export const Layout: FC = () => {
       {/* <ParticlesBackground /> */}
       <Header />
       <div className="h-[80px]"></div>
-      <div className={"container mx-auto max-w-5xl max-md:px-4"}>
+      <div className={"container mx-auto max-w-5xl max-lg:px-4"}>
         <Outlet />
       </div>
     </>

@@ -25,7 +25,7 @@ import { RootState } from "../../../store/store"
 import axios from "../../../axios/axiosConf"
 import { ReactComponent as NoImage } from "../../../assets/images/NoImage.svg"
 import { FaComments } from "react-icons/fa"
-
+import { motion } from "framer-motion"
 interface IPostProps {
   obj: IPost
   postsData?: IPost[]
@@ -100,13 +100,16 @@ const Post: FC<IPostProps> = ({ obj, postsData }) => {
   const removeItemFromPostsSaved = (id: string) => {
     dispatch(removeItem(id))
   }
+  // const postAnimantion = {
+  //   visible: (i: number) => ({
+  //     opacity: 1,
+  //     y: 0,
+  //     transition: { delay: i * 0.1 },
+  //   }),
+  //   hidden: { opacity: 0, y: 40 },
+  // }
   return (
-    <div
-      key={obj._id}
-      className={
-        "lg:h-[480px] lg:w-[500px] md:h-[400px] md:w-[380px] xl:hover:scale-[102%] relative w-full h-[400px] mb-[70px] rounded-[10px] bg-white dark:bg-[#292a2d] hover:scale-[100%] duration-300 origin-bottom"
-      }
-    >
+    <>
       {obj.imageUrl ? (
         <Link to={`/blog/${obj._id}`}>
           <img
@@ -163,7 +166,7 @@ const Post: FC<IPostProps> = ({ obj, postsData }) => {
         <HiOutlineUserCircle size={"22px"} />
         {obj.user.userName}
       </div>
-    </div>
+    </>
   )
 }
 

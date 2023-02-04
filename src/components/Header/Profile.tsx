@@ -43,7 +43,7 @@ const Profile: FC<IProfileProps> = ({ openMenu, setOpenMenu }) => {
     <div
       onClick={() => setOpenMenu(false)}
       ref={profileRef}
-      className={"relative max-md:mr-3"}
+      className={"relative max-lg:mr-3"}
     >
       <div
         onClick={() => setOpen(!open)}

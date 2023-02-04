@@ -18,6 +18,7 @@ import { ReactComponent as Saved } from "../../assets/images/saved.svg"
 import { ReactComponent as Sun } from "../../assets/images/sun.svg"
 import { HiOutlineHome } from "react-icons/hi"
 import { BsBookmark, BsBookmarks } from "react-icons/bs"
+import { motion } from "framer-motion"
 
 const Header: FC = () => {
   const isAuth = useAppSelector(data)
@@ -82,7 +83,7 @@ const Header: FC = () => {
               )}
             </button>
             <Link to={"/"} className="max-md:hidden">
-              <div className={"flex items-center"}>
+              <div className={"flex items-center max-lg:ml-3"}>
                 <h2
                   className={
                     "text-[#000] dark:text-[#999999] font-black text-[22px] rounded-[4px] px-[4px]"
@@ -161,19 +162,23 @@ const Header: FC = () => {
 
           <div>
             {theme ? (
-              <button
-                onClick={() => onClickLightTheme()}
-                className="text-[30px] w-8"
-              >
-                <Moon />
-              </button>
+              <motion.button whileTap={{ rotate: 45 }}>
+                <div
+                  className="text-[30px] w-8"
+                  onClick={() => onClickLightTheme()}
+                >
+                  <Moon />
+                </div>
+              </motion.button>
             ) : (
-              <button
-                onClick={() => onClickDarkTheme()}
-                className="text-[30px] w-8"
-              >
-                <Sun />
-              </button>
+              <motion.button whileTap={{ rotate: 45 }}>
+                <div
+                  onClick={() => onClickDarkTheme()}
+                  className="text-[30px] w-8"
+                >
+                  <Sun />
+                </div>
+              </motion.button>
             )}
           </div>
           {isAuth ? (

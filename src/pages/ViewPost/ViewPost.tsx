@@ -26,11 +26,8 @@ const ViewPost = () => {
   const inputFileRef = useRef<HTMLInputElement>(null)
   const { id } = useParams()
 
-  const {
-    isLoading,
-    isError,
-    data: onePostData,
-  } = useFetchOnePostQuery(id as string, { refetchOnMountOrArgChange: true })
+  const { isError: isErrorOnePostData, data: onePostData } =
+    useFetchOnePostQuery(id as string, { refetchOnMountOrArgChange: true })
   const { data: commentsData } = useFetchCommentsQuery(id as string)
   const dispatch = useAppDispatch()
   const [commentValue, setCommentValue] = useState<string>("")
@@ -152,6 +149,11 @@ const ViewPost = () => {
           </div>
         )}
       </div>
+      {isErrorOnePostData && (
+        <div className="text-[40px] text-red-800 font-black">
+          the post has been deleted or the post does not exist
+        </div>
+      )}
       {userData && active && (
         <div className={"flex flex-col justify-between mb-14 mt-6"}>
           <div>
@@ -266,7 +268,7 @@ const ViewPost = () => {
           )
         })}
       </div>
-      {userData && (
+      {!isErrorOnePostData && userData && (
         <div className="flex justify-between max-sm:flex-col">
           <input
             className="w-[75%] pl-4 rounded-md dark:bg-gray-500 dark:border-0 border-[#000] border-[1px] h-11 outline-none max-sm:w-full mb-4"

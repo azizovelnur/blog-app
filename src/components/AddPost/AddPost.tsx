@@ -32,7 +32,6 @@ export const AddPost: FC = () => {
       }
     } catch (error) {
       console.log(error)
-      alert(error)
     }
   }
 
@@ -103,7 +102,7 @@ export const AddPost: FC = () => {
               />
               <button
                 onClick={() => inputFileRef.current?.click()}
-                className="bg-black text-white dark:bg-gray-500 w-full mx-auto mb-5 px-3 flex justify-between items-center  rounded-md p-1"
+                className="bg-black text-white dark:bg-[#2d2d2d] w-full mx-auto mb-5 px-3 flex justify-between items-center  rounded-md p-1"
               >
                 <div>Download Image</div> <BsDownload size={"40px"} />
               </button>
@@ -114,7 +113,12 @@ export const AddPost: FC = () => {
                   alt="postImage"
                 />
               )}
-              <ModalButton onClick={() => createPost()}>
+              <ModalButton
+                disabled={
+                  newPost.text.length === 0 || newPost.title.length === 0
+                }
+                onClick={() => createPost()}
+              >
                 Create Post
               </ModalButton>
             </div>

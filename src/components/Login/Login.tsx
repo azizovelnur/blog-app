@@ -1,10 +1,10 @@
-import React, { Dispatch, FC, SetStateAction } from "react"
+import React, { Dispatch, FC, SetStateAction, useState } from "react"
 import { useForm } from "react-hook-form"
 import { ILogin, IUser } from "../../types/types"
-import { fetchLogin, data } from "../../store/slices/async/auth/authSlice"
+import { fetchLogin } from "../../store/slices/async/auth/authSlice"
 import { useAppDispatch } from "../../hooks/hooks"
-import { useAppSelector } from "../../hooks/hooks"
 import { ModalButton, ModalInput } from "../StyledComponents/StyledComponents"
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 
 interface IProps {
   active: boolean
@@ -16,18 +16,14 @@ interface IFetchData {
 }
 
 export const Login: FC<IProps> = ({ active, setActive }) => {
-  const isAuth = useAppSelector(data)
-  console.log(isAuth)
-
   const dispatch = useAppDispatch()
 
-  const { register, handleSubmit } = useForm<ILogin>({
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-    mode: "onChange",
-  })
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isValid },
+  } = useForm<ILogin>({ mode: "onChange" })
 
   const onSubmit = async (values: ILogin) => {
     setActive(false)
@@ -41,30 +37,64 @@ export const Login: FC<IProps> = ({ active, setActive }) => {
     if (userData.payload.token) {
       localStorage.setItem("token", userData.payload.token)
     }
+    reset()
   }
+  const [isPasswordVisible, setPasswordVisible] = useState<boolean>(false)
 
   return (
     <div>
       <div className="text-center mb-5 font-black text-2xl">Login</div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col justify-between">
-          <div>
-            <div className="font-bold text-base">Email</div>
+          <label>
+            <div className="text-[12px] font-bold text-red-800">
+              {errors?.email?.message}
+            </div>
             <ModalInput
               placeholder={"email"}
               type="email"
-              {...register("email", { required: "need your email" })}
+              {...register("email", {
+                required: "Email is required",
+                pattern: {
+                  value:
+                    /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu,
+                  message: "please enter the valid email",
+                },
+              })}
             />
-          </div>
-          <div>
-            <div className="font-bold text-base">Password</div>
-            <ModalInput
-              placeholder={"password"}
-              type="text"
-              {...register("password", { required: "need your password" })}
-            />
-          </div>
-          <ModalButton type={"submit"}>Submit</ModalButton>
+          </label>
+          <label>
+            <div className="text-[12px] font-bold text-red-800">
+              {errors?.password?.message}
+            </div>
+
+            <div className="relative">
+              <div
+                onClick={() => setPasswordVisible(!isPasswordVisible)}
+                className="absolute top-[10px] right-2"
+              >
+                {isPasswordVisible ? (
+                  <AiOutlineEye size={"20px"} />
+                ) : (
+                  <AiOutlineEyeInvisible size={"20px"} />
+                )}
+              </div>
+              <ModalInput
+                placeholder={"password"}
+                type={isPasswordVisible ? "text" : "password"}
+                {...register("password", {
+                  required: "please enter the password",
+                  minLength: {
+                    value: 5,
+                    message: "min length 5 symbol",
+                  },
+                })}
+              />
+            </div>
+          </label>
+          <ModalButton disabled={!isValid} type={"submit"}>
+            Submit
+          </ModalButton>
         </div>
       </form>
     </div>

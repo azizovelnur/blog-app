@@ -7,7 +7,7 @@ import { RootState } from "../../../store"
 
 export const fetchLogin = createAsyncThunk<IUser, ILogin>(
   "auth/fetchLogin",
-  async (userData) => {
+  async (userData: ILogin) => {
     const { data } = await axios.post<IUser>("/auth/login", userData)
     return data
   }

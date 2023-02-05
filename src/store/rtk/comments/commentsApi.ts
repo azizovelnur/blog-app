@@ -10,7 +10,7 @@ export const commentsApi = createApi({
   tagTypes: ["Comments"],
 
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.REACT_APP_URL,
+    baseUrl: process.env.REACT_APP_BACKEND_URL,
     prepareHeaders: (headers) => {
       headers.set("Authorization", `${localStorage.getItem("token")}`)
     },

@@ -109,7 +109,7 @@ export const AddPost: FC = () => {
               {imageUrl && (
                 <img
                   className="mb-2 h-36"
-                  src={`http://localhost:5000${imageUrl}`}
+                  src={`${process.env.REACT_APP_BACKEND_URL}${imageUrl}`}
                   alt="postImage"
                 />
               )}

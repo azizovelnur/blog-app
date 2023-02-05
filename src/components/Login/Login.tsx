@@ -28,7 +28,6 @@ export const Login: FC<IProps> = ({ active, setActive }) => {
   const onSubmit = async (values: ILogin) => {
     setActive(false)
     const userData: IFetchData = await dispatch(fetchLogin(values))
-    console.log(userData)
 
     if (!userData.payload) {
       return alert("auth error")

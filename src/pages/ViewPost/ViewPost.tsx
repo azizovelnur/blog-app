@@ -61,13 +61,10 @@ const ViewPost = () => {
   ) => {
     try {
       if (event.target.files) {
-        console.log(event.target.files)
         const formData = new FormData()
         const file = event.target.files[0]
-        console.log(file)
         formData.append("image", file)
         const { data } = await axios.post("/upload", formData)
-        console.log(data)
         setImageUrl(data.url)
       }
     } catch (error) {
@@ -196,7 +193,7 @@ const ViewPost = () => {
           {imageUrl && (
             <img
               className="w-full rounded-xl mb-10"
-              src={`http://localhost:5000${imageUrl}`}
+              src={`${process.env.REACT_APP_BACKEND_URL}${imageUrl}`}
               alt="postImage"
             />
           )}
@@ -219,7 +216,7 @@ const ViewPost = () => {
         {onePostData?.imageUrl ? (
           <img
             className="w-full rounded-xl"
-            src={`http://localhost:5000${onePostData?.imageUrl}`}
+            src={`${process.env.REACT_APP_BACKEND_URL}${onePostData?.imageUrl}`}
             alt="postImg"
           />
         ) : (

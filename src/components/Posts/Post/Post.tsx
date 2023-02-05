@@ -33,7 +33,7 @@ export const Post: FC<IPostProps> = ({ obj }) => {
         <Link to={`/blog/${obj._id}`}>
           <img
             className="w-full h-[50%] rounded-t-md object-cover object-top"
-            src={`http://localhost:5000${obj.imageUrl}`}
+            src={`${process.env.REACT_APP_BACKEND_URL}${obj.imageUrl}`}
             alt="img"
           />
         </Link>

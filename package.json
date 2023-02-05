@@ -1,5 +1,6 @@
 {
-  "name": "https://e1nur.github.io/frontend-blog-app",
+  "homepage": "https://e1nur.github.io/frontend-blog-app",
+  "name": "blog",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

@@ -17,19 +17,17 @@ const postsSlice = createSlice({
 
   reducers: {
     addItem(state, action: PayloadAction<IPost>) {
-      const postsArr = state.saved.filter(
-        (obj) => obj._id !== action.payload._id
-      )
+      const postsArr = state.saved.filter((obj) => obj.id !== action.payload.id)
       state.saved = [...postsArr, action.payload]
       addPostToLS(state.saved)
     },
     removeItem(state, action: PayloadAction<string>) {
-      state.saved = state.saved.filter((item) => item._id !== action.payload)
+      state.saved = state.saved.filter((item) => item.id !== action.payload)
       addPostToLS(state.saved)
     },
     setRecents(state, action: PayloadAction<IPost>) {
-      state.recents = state.recents.filter(({ _id }) => {
-        return _id !== action.payload._id
+      state.recents = state.recents.filter(({ id }) => {
+        return id !== action.payload.id
       })
       state.recents.unshift(action.payload)
       state.recents = state.recents.slice(0, 8)

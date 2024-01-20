@@ -24,7 +24,7 @@ export const commentsApi = createApi({
       providesTags: (result) =>
         result
           ? [
-              ...result.map(({ _id }) => ({ type: "Comments" as const, _id })),
+              ...result.map(({ id }) => ({ type: "Comments" as const, id })),
               { type: "Comments", id: "LIST" },
             ]
           : [{ type: "Comments", id: "LIST" }],

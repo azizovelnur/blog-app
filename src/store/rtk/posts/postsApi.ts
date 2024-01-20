@@ -20,15 +20,15 @@ export const postsApi = createApi({
       providesTags: (result) =>
         result
           ? [
-              ...result.map(({ _id }) => ({ type: "Posts" as const, _id })),
+              ...result.map(({ id }) => ({ type: "Posts" as const, id })),
               { type: "Posts", id: "LIST" },
             ]
           : [{ type: "Posts", id: "LIST" }],
     }),
 
     fetchOnePost: build.query<IPost, string>({
-      query: (_id) => ({
-        url: `/posts/${_id}`,
+      query: (id) => ({
+        url: `/posts/${id}`,
       }),
       providesTags: ["Posts"],
     }),
@@ -53,7 +53,7 @@ export const postsApi = createApi({
     fetchUpdatePost: build.mutation<IPost, IPostMutation>({
       query: (post) => {
         return {
-          url: `/posts/${post._id}`,
+          url: `/posts/${post.id}`,
           method: "PATCH",
           body: post,
         }
@@ -62,9 +62,9 @@ export const postsApi = createApi({
     }),
 
     fetchDeletePost: build.mutation<IPost, string>({
-      query: (_id) => {
+      query: (id) => {
         return {
-          url: `/posts/${_id}`,
+          url: `/posts/${id}`,
           method: "DELETE",
         }
       },

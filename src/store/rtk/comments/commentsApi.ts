@@ -41,9 +41,9 @@ export const commentsApi = createApi({
       invalidatesTags: [{ type: "Comments", id: "LIST" }],
     }),
     fetchDeleteComment: build.mutation<IComment, Iids>({
-      query: (values) => {
+      query: ({ commentId }) => {
         return {
-          url: `/comments/${values.postId}/${values.commentId}`,
+          url: `/comments/${commentId}`,
           method: "DELETE",
         }
       },

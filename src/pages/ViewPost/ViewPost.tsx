@@ -80,12 +80,12 @@ const ViewPost = () => {
     setActive(!active)
   }
 
-  const deletePost = async (id: string) => {
-    await removePost(id).unwrap()
+  const deletePost = async (_id: string) => {
+    await removePost(_id).unwrap()
     navigate("/")
   }
-  const onClickUpdatePost = async (id: string) => {
-    await updatePost({ ...newPost, id, imageUrl }).unwrap()
+  const onClickUpdatePost = async (_id: string) => {
+    await updatePost({ ...newPost, _id, imageUrl }).unwrap()
     setActive(false)
   }
 
@@ -123,7 +123,7 @@ const ViewPost = () => {
             <IoArrowBack color={"white"} size={"30px"} />
           </div>
         </button>
-        {onePostData?.user.id === userData?.id && (
+        {onePostData?.user._id === userData?._id && (
           <div className="flex justify-between top-7 right-7 w-[220px] h-10 rounded-md">
             <button
               className="flex items-center justify-between bg-black text-white rounded-md p-1 w-[100px] h-10"
@@ -248,13 +248,13 @@ const ViewPost = () => {
                 </div>
               </div>
               <div className="ml-2 my-2">{obj.comment}</div>
-              {userData?.id === obj.user.id && (
+              {userData?._id === obj.user._id && (
                 <button
                   className="absolute top-3 right-2"
                   onClick={() =>
                     deleteComment({
                       postId: id as string,
-                      commentId: obj.id,
+                      commentId: obj._id,
                     })
                   }
                 >

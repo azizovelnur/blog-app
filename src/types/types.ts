@@ -1,6 +1,6 @@
 //user
 export interface IUser {
-  id: string
+  _id: string
   userName: string
   email: string
   passwordHash: string
@@ -9,20 +9,20 @@ export interface IUser {
 
 //post
 export interface IPost {
-  id: string
+  _id: string
   title: string
   text: string
-  viewCount: number
+  viewsCount: number
   user: IUser
   imageUrl?: string
   createdAt: string
 }
 
 export interface IPostMutation {
-  id?: string
+  _id?: string
   title: string
   text: string
-  viewCount?: number
+  viewsCount?: number
   user?: IUser
   imageUrl?: string
 }
@@ -56,7 +56,7 @@ export interface IStatePosts {
 
 export interface IComment {
   user: IUser
-  id: string
+  _id: string
   comment: string
   createdAt: string
 }

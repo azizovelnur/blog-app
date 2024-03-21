@@ -30,7 +30,7 @@ export const Post: FC<IPostProps> = ({ obj }) => {
   return (
     <>
       {obj.imageUrl ? (
-        <Link to={`/blog/${obj.id}`}>
+        <Link to={`/blog/${obj._id}`}>
           <img
             className="w-full h-[50%] rounded-t-md object-cover object-top"
             src={`${process.env.REACT_APP_BACKEND_URL}${obj.imageUrl}`}
@@ -38,7 +38,7 @@ export const Post: FC<IPostProps> = ({ obj }) => {
           />
         </Link>
       ) : (
-        <Link to={`/blog/${obj.id}`}>
+        <Link to={`/blog/${obj._id}`}>
           <img
             className="w-full h-[50%] rounded-t-md object-cover object-top"
             src={`https://via.placeholder.com/800x400.jpg?text=No+Image`}
@@ -58,21 +58,21 @@ export const Post: FC<IPostProps> = ({ obj }) => {
       {location.pathname !== "/saved" && (
         <div className="absolute text-lg top-4 right-4 flex items-center bg-white rounded-md p-1 dark:text-[#999999] dark:bg-[#292a2d]">
           <HiEye />
-          <div className="ml-1">{obj.viewCount}</div>
+          <div className="ml-1">{obj.viewsCount}</div>
         </div>
       )}
-      {saved.find((post: IPost) => post.id === obj.id) ? (
+      {saved.find((post: IPost) => post._id === obj._id) ? (
         <div className="dark:text-[#999] text-black absolute bottom-2 right-2 flex items-center justify-between w-[70px] text-[30px]">
-          <Link to={`/blog/${obj.id}`}>
+          <Link to={`/blog/${obj._id}`}>
             <FaComments />
           </Link>
-          <button onClick={() => removeItemFromPostsSaved(obj.id)}>
+          <button onClick={() => removeItemFromPostsSaved(obj._id)}>
             <BsFillBookmarkHeartFill color={"green"} />
           </button>
         </div>
       ) : (
         <div className="dark:text-[#999] absolute bottom-2 right-2 flex items-center justify-between w-[70px] text-[30px]">
-          <Link to={`/blog/${obj.id}`}>
+          <Link to={`/blog/${obj._id}`}>
             <FaComments />
           </Link>
 

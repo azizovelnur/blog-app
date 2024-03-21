@@ -1,4 +1,4 @@
-import { IComment, ICreateComment } from "./../../../types/types"
+import { IComment, ICreateComment } from "../../../interfaces/interfaces"
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 interface Iids {
   postId: string

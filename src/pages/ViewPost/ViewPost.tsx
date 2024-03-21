@@ -12,7 +12,7 @@ import {
 } from "../../store/rtk/posts/postsApi"
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks"
 import { setRecents } from "../../store/slices/postsSlice/postsSlice"
-import { IComment, ICreateComment, IPostMutation } from "../../types/types"
+import { IComment, ICreateComment, IPostMutation } from "../../interfaces/interfaces"
 import { data } from "../../store/slices/async/auth/authSlice"
 import { TbTrash } from "react-icons/tb"
 import { FiEdit2 } from "react-icons/fi"

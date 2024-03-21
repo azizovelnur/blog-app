@@ -1,4 +1,4 @@
-import { IPost } from "../types/types"
+import { IPost } from "../interfaces/interfaces"
 export const getDataFromLocalStorage = () => {
   const getPosts = localStorage.getItem("savedPosts")
   const savedPosts = getPosts ? JSON.parse(getPosts) : []

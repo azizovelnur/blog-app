@@ -1,4 +1,4 @@
-import { IPost } from "../types/types"
+import { IPost } from "../interfaces/interfaces"
 export const addPostToLS = function (value: IPost[]) {
   localStorage.setItem("savedPosts", JSON.stringify(value))
 }

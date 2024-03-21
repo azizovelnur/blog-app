@@ -1,4 +1,4 @@
-import { IPost, IPostMutation } from "../../../types/types"
+import { IPost, IPostMutation } from "../../../interfaces/interfaces"
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
 export const postsApi = createApi({

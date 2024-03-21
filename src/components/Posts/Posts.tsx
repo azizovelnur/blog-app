@@ -1,6 +1,6 @@
 import React, { FC } from "react"
 import { useFetchPostsQuery } from "../../store/rtk/posts/postsApi"
-import { IPost } from "../../types/types"
+import { IPost } from "../../interfaces/interfaces"
 import { Post } from "./Post/Post"
 import { useAppSelector } from "../../hooks/hooks"
 import { RootState } from "../../store/store"

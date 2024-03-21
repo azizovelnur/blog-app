@@ -1,5 +1,5 @@
 import React, { FC } from "react"
-import { IPost } from "../../types/types"
+import { IPost } from "../../interfaces/interfaces"
 import { RootState } from "../../store/store"
 import { useAppSelector } from "../../hooks/hooks"
 import { Post } from "../../components/Posts/Post/Post"

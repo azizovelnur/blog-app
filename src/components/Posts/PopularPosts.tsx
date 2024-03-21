@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion"
 import React, { FC } from "react"
 import { useAppSelector } from "../../hooks/hooks"
-import { IPost } from "../../types/types"
+import { IPost } from "../../interfaces/interfaces"
 import { useFetchPopularPostsQuery } from "../../store/rtk/posts/postsApi"
 import { RootState } from "../../store/store"
 import { Post } from "./Post/Post"

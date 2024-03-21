@@ -1,6 +1,6 @@
 import { getRecentsPostsFromLS } from "./../../../helpers/getDataFromLS"
-import { IPost } from "../../../types/types"
-import { IStatePosts } from "./../../../types/types"
+import { IPost } from "../../../interfaces/interfaces"
+import { IStatePosts } from "../../../interfaces/interfaces"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { getDataFromLocalStorage } from "../../../helpers/getDataFromLS"
 import { addPostToLS, addRecentsToLS } from "../../../helpers/addPostToLS"

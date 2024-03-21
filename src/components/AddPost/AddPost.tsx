@@ -1,7 +1,7 @@
 import React, { FC, useRef, useState } from "react"
 import { useAppSelector } from "../../hooks/hooks"
 import { Modal } from "../Modal/Modal"
-import { IPostMutation } from "../../types/types"
+import { IPostMutation } from "../../interfaces/interfaces"
 import { data } from "../../store/slices/async/auth/authSlice"
 import { useFetchCreatePostMutation } from "../../store/rtk/posts/postsApi"
 import {

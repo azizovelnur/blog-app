@@ -1,6 +1,6 @@
 import React, { FC } from "react"
 import { useAppSelector } from "../../hooks/hooks"
-import { IPost } from "../../types/types"
+import { IPost } from "../../interfaces/interfaces"
 import { RootState } from "../../store/store"
 import { Post } from "../../components/Posts/Post/Post"
 import { motion } from "framer-motion"

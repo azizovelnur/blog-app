@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom"
 import React, { FC } from "react"
 import { useAppSelector, useAppDispatch } from "../../../hooks/hooks"
-import { IPost } from "../../../types/types"
+import { IPost } from "../../../interfaces/interfaces"
 import { HiEye, HiOutlineUserCircle } from "react-icons/hi"
 import { BsFillBookmarkHeartFill } from "react-icons/bs"
 import {

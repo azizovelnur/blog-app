@@ -1,6 +1,6 @@
 import React, { Dispatch, FC, SetStateAction, useState } from "react"
 import { useForm } from "react-hook-form"
-import { ILogin, IUser } from "../../types/types"
+import { ILogin, IUser } from "../../interfaces/interfaces"
 import { fetchLogin } from "../../store/slices/async/auth/authSlice"
 import { useAppDispatch } from "../../hooks/hooks"
 import { ModalButton, ModalInput } from "../StyledComponents/StyledComponents"
